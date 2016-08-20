@@ -53,14 +53,12 @@ class Config
     {
         if (! isset($key)) return $this->config;
 
+        $config = $this->config;
         foreach (explode('.', $key) as $k) {
-
             if (! isset($config[$k])) {
                 return $default;
             }
-
             $config = $config[$k];
-
         }
 
         return $config;
@@ -75,7 +73,15 @@ class Config
      */
     public function has($key)
     {
-        return isset($this->config[$key]) ? true : false;
+        $config = $this->config;
+        foreach (explode('.', $key) as $k) {
+            if (! isset($config[$k])) {
+                return false;
+            }
+            $config = $config[$k];
+        }
+
+        return true;
     }
 
     /**

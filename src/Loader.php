@@ -6,7 +6,7 @@ use SplFileInfo;
 
 class Loader
 {
-    /** Protected constructor to prevent newing up of the class */
+    /** Protected constructor to prevent newing up the class */
     protected function __construct() {}
 
     /**
@@ -14,7 +14,7 @@ class Loader
      *
      * @param  string $path Path to configuration file or directory
      *
-     * @return Loadable      Instance of Config\Interfaces\Loadable
+     * @return Loadable     Instance of Config\Interfaces\Loadable
      */
     public static function load($path)
     {
