@@ -2,9 +2,7 @@
 
 namespace Config\Loaders;
 
-use Config\Interfaces\Loadable;
-
-class Ini extends Loader
+class IniLoader extends Loader
 {
     /**
      * Retrieve the contents of a .ini file and convert it to an array of
@@ -14,6 +12,6 @@ class Ini extends Loader
      */
     public function getArray()
     {
-        return parse_ini_file($this->path);
+        return parse_ini_file($this->context);
     }
 }

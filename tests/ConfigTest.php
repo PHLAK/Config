@@ -7,31 +7,38 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->config = new Config\Config();
+        $this->config = Config\Factory::init();
+    }
+
+    public function test_it_can_initialize_an_array()
+    {
+        $this->assertInstanceOf('Config\Config', Config\Factory::init([
+            'foo' => ['bar' => 'foobar']
+        ]));
     }
 
     public function test_it_can_initialize_a_php_file()
     {
         $path = __DIR__ . '/files/config.php';
-        $this->assertInstanceOf('Config\Config', new Config\Config($path));
+        $this->assertInstanceOf('Config\Config', Config\Factory::init($path));
     }
 
     public function test_it_can_initialize_an_ini_file()
     {
         $path = __DIR__ . '/files/config.ini';
-        $this->assertInstanceOf('Config\Config', new Config\Config($path));
+        $this->assertInstanceOf('Config\Config', Config\Factory::init($path));
     }
 
     public function test_it_can_initialize_a_json_file()
     {
         $path = __DIR__ . '/files/config.json';
-        $this->assertInstanceOf('Config\Config', new Config\Config($path));
+        $this->assertInstanceOf('Config\Config', Config\Factory::init($path));
     }
 
     public function test_it_can_initialize_a_directory()
     {
         $path = __DIR__ . '/files';
-        $this->assertInstanceOf('Config\Config', new Config\Config($path));
+        $this->assertInstanceOf('Config\Config', Config\Factory::init($path));
     }
 
     public function test_it_can_set_and_retrieve_an_item()

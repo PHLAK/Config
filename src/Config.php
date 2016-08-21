@@ -2,8 +2,8 @@
 
 namespace Config;
 
-use DirectoryIterator;
-use Exception;
+use Config\Interfaces\Loadable;
+use SplFileInfo;
 
 class Config
 {
@@ -11,13 +11,13 @@ class Config
     protected $config = [];
 
     /**
-     * Config\Config constructor, runs on object creation
+     * Class constructor, runs on object creation
      *
-     * @param string $path Path to config file
+     * @param Loadable $loader Instance of Config\Interfaces\Loadable
      */
-    public function __construct($path = null)
+    public function __construct(Loadable $loader)
     {
-        if (isset($path)) $this->load($path);
+        $this->config = $loader->getArray();
     }
 
     /**
@@ -93,7 +93,11 @@ class Config
      */
     public function load($path, $override = true)
     {
-        $loader = Loader::load($path);
+        $file = new SplFileInfo($path);
+        $className = $file->isDir() ? 'Directory' : ucfirst(strtolower($file->getExtension()));
+        $classPath = 'Config\\Loaders\\' . $className . 'Loader';
+
+        $loader = new $classPath($path);
 
         if ($override) {
             $this->config = array_merge($this->config, $loader->getArray());

@@ -2,9 +2,7 @@
 
 namespace Config\Loaders;
 
-use Config\Interfaces\Loadable;
-
-class Json extends Loader
+class ArrayLoader extends Loader
 {
     /**
      * Retrieve the contents of a .json file and convert it to an array of
@@ -14,7 +12,6 @@ class Json extends Loader
      */
     public function getArray()
     {
-        $contents = file_get_contents($this->path);
-        return json_decode($contents, true);
+        return $this->context;
     }
 }

@@ -2,11 +2,9 @@
 
 namespace Config\Loaders;
 
-use Config\Interfaces\Loadable;
 use DirectoryIterator;
-use SplFileInfo;
 
-class Directory extends Loader
+class DirectoryLoader extends Loader
 {
     /**
      * Retrieve the contents of one or more configuration files in a directory
@@ -18,18 +16,24 @@ class Directory extends Loader
     {
         $contents = [];
 
-        foreach (new DirectoryIterator($this->path) as $file) {
+        foreach (new DirectoryIterator($this->context) as $file) {
             // TODO: Load files from directories recursively
             if ($file->isDot() || $file->isDir()) continue;
 
             $className = ucfirst(strtolower($file->getExtension()));
-            $classPath = 'Config\\Loaders\\' . $className;
+            $classPath = 'Config\\Loaders\\' . $className . 'Loader';
 
             $loader = new $classPath($file->getPathname());
 
-            $contents[strtolower($file->getBasename('.' . $file->getExtension()))] = $loader->getArray();
+            $contents[$this->key($file->getBasename())] = $loader->getArray();
         }
 
         return $contents;
+    }
+
+    protected function key($fileName)
+    {
+        $baseName = strtolower(pathinfo($fileName, PATHINFO_FILENAME));
+        return implode('_', explode(' ', str_replace('  ', ' ', $baseName)));
     }
 }

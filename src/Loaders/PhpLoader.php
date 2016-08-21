@@ -2,10 +2,9 @@
 
 namespace Config\Loaders;
 
-use Config\Interfaces\Loadable;
 use Exception;
 
-class Php extends Loader
+class PhpLoader extends Loader
 {
     /**
      * Retrieve the contents of a .php configuration file and convert it to an
@@ -15,10 +14,10 @@ class Php extends Loader
      */
     public function getArray()
     {
-        $contents = include($this->path);
+        $contents = include($this->context);
 
         if (gettype($contents) != 'array') {
-            throw new Exception('File ' . $this->path . ' does not contain a valid array');
+            throw new Exception('File ' . $this->context . ' does not contain a valid array');
         }
 
         return $contents;

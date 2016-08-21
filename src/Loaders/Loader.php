@@ -6,16 +6,16 @@ use Config\Interfaces\Loadable;
 
 abstract class Loader implements Loadable
 {
-    /** @var string Path to configuration file or directory */
-    protected $path;
+    /** @var mixed Raw array of path to a configuration file or directory */
+    protected $context;
 
     /**
      * Class constructor, loads on object creation
      *
-     * @param string $path Path to configuration file or directory
+     * @param mixed $context Path to configuration file or directory
      */
-    public function __construct($path)
+    public function __construct($context)
     {
-        $this->path = $path;
+        $this->context = $context;
     }
 }
