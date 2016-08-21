@@ -18,7 +18,7 @@ class Factory
      *
      * @return Config          Concrete instance of Config
      */
-    public function init($context = null)
+    public static function init($context = null)
     {
         switch (gettype($context)) {
             case 'NULL':
@@ -33,7 +33,7 @@ class Factory
                 $classPath = 'Config\\Loaders\\' . $className . 'Loader';
                 break;
             default:
-                throw new Exception('Invalid context supplied, failed to initialize Config');
+                throw new Exception('Invalid context supplied, failed to initialize a Loader');
                 break;
         }
 
