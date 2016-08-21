@@ -17,9 +17,9 @@ configuration file formats and an expressive API.
 
 Supported file formats:
 
-  - .php
-  - .ini
-  - .json
+  - PHP
+  - INI
+  - JSON
 
 Like this project? Keep me caffeinated by [making a donation](https://paypal.me/ChrisKankiewicz).
 
@@ -49,6 +49,59 @@ Then instantiate the class:
 
 ```php
 $config = Config\Factory::init();
+```
+
+Configuration File Formats
+--------------------------
+
+#### PHP
+
+A PHP configuration file must have the `.php` file extension, be a valid PHP
+file and and return a valid PHP array.
+
+```php
+<?php
+
+return [
+    'id' => 1234567890,
+    'name' => [
+        'first' => 'Dade',
+        'last'  => 'Murphy'
+    ],
+    'date_of_birth' => new DateTime('1977-07-06 01:23:45'),
+    'married' => false
+];
+```
+
+#### INI
+
+An INI configuration file must have the `.ini` file extension and be a valid INI
+file.
+
+```ini
+id              = 1234567890
+name[first]     = Dade
+name[last]      = Murphy
+date_of_birth   = 1977-07-06 01:23:45
+married         = false
+```
+
+#### JSON
+
+A JSON configuration file must have the `.json` file extension and contain a
+valid JSON object.
+
+```json
+{
+    "id":  1234567890,
+    "name": {
+        "first": "Dade",
+        "last": "Murphy"
+    },
+    "date_of_birth": "1977-07-06 01:23:45",
+    "married": false
+}
+
 ```
 
 Usage
