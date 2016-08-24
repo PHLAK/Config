@@ -7,7 +7,7 @@ use SplFileInfo;
 
 class Config
 {
-    /** @var array Array of config options */
+    /** @var array Array of configuration options */
     protected $config = [];
 
     /**
@@ -87,9 +87,11 @@ class Config
     /**
      * Load configuration options from a file or directory
      *
-     * @param  string $path Path to configuration file or directory
+     * @param  string $path     Path to configuration file or directory
+     * @param  bool   $override Weather or not to override existing options with
+     *                          values from the loaded file
      *
-     * @return object       This Config\Config object
+     * @return object           This Config\Config object
      */
     public function load($path, $override = true)
     {
