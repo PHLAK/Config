@@ -46,10 +46,12 @@ use Config;
 
 Then instantiate the class:
 
-
 ```php
-$config = Config\Factory::init();
+$config = Config\Factory::init($pathToConfig);
 ```
+
+Where `$pathToConfig` is a path to a supported file type to a directory
+containing one or more supported file types.
 
 Configuration File Formats
 --------------------------
@@ -63,13 +65,13 @@ file and and return a valid PHP array.
 <?php
 
 return [
-    'id' => 1234567890,
-    'name' => [
-        'first' => 'Dade',
-        'last'  => 'Murphy'
-    ],
-    'date_of_birth' => new DateTime('1977-07-06 01:23:45'),
-    'married' => false
+    'driver'   => 'mysql',
+    'host'     => 'localhost',
+    'database' => 'blog',
+    'username' => 'blogger',
+    'password' => 'hunter2',
+    'charset'  => 'utf8',
+    'prefix'   => ''
 ];
 ```
 
@@ -79,11 +81,11 @@ An INI configuration file must have the `.ini` file extension and be a valid INI
 file.
 
 ```ini
-id              = 1234567890
-name[first]     = Dade
-name[last]      = Murphy
-date_of_birth   = 1977-07-06 01:23:45
-married         = false
+id            = 1234567890
+name[first]   = Dade
+name[last]    = Murphy
+alias         = Zero Cool
+date_of_birth = 1977-07-06 01:23:45
 ```
 
 #### JSON
@@ -93,15 +95,15 @@ valid JSON object.
 
 ```json
 {
-    "id":  1234567890,
-    "name": {
-        "first": "Dade",
-        "last": "Murphy"
-    },
-    "date_of_birth": "1977-07-06 01:23:45",
-    "married": false
+    "driver": "memcached",
+    "duration": 42,
+    "config": {
+        "servers": [
+            {"host": "server1", "port": 11211},
+            {"host": "server2", "port": 11211}
+        ]
+    }
 }
-
 ```
 
 Usage
@@ -119,6 +121,17 @@ Retrieve a configuration option:
 $config->get($key);
 ```
 
+Check if a configuration option exists:
+
+```php
+$config->has($key, $override = false);
+```
+
+Load an additional configuration file:
+```php
+$conifg->load($pathToConfig);
+```
+
 Troubleshooting
 ---------------
 
@@ -126,7 +139,7 @@ Please report bugs to the [GitHub Issue Tracker](https://github.com/PHLAK/Config
 
 -----
 
-MIT License
+This project is liscensed under the MIT License.
 
 **Copyright (c) 2016 Chris Kankiewicz <Chris@ChrisKankiewicz.com>**
 
