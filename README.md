@@ -118,7 +118,7 @@ $config->set($key, $value);
 Retrieve a configuration option:
 
 ```php
-$config->get($key);
+$config->get($key, $default = null);
 ```
 
 Check if a configuration option exists:
