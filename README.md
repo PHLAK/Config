@@ -128,8 +128,15 @@ $config->has($key, $override = false);
 ```
 
 Load an additional configuration file:
+
 ```php
 $conifg->load($pathToConfig);
+```
+
+Merge two Config objects into one:
+
+```php
+$config->merge($config2);
 ```
 
 Troubleshooting

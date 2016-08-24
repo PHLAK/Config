@@ -109,4 +109,17 @@ class Config
 
         return $this;
     }
+
+    /**
+     * Merge another Config object into this one
+     *
+     * @param  Config $config Instance of Config\Config
+     *
+     * @return object         This Config\Config object
+     */
+    public function merge(Config $config)
+    {
+        $this->config = array_merge($this->config, $config->get());
+        return $this;
+    }
 }

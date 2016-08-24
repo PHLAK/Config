@@ -62,6 +62,18 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('blogger', $this->config->get('drivers.mysql.username'));
     }
 
+    public function test_it_can_merge_a_config_object()
+    {
+        $config = Config\Factory::init(['foo' => 'foo', 'baz' => 'baz']);
+        $gifnoc = Config\Factory::init(['bar' => 'rab', 'baz' =>'zab']);
+
+        $config->merge($gifnoc);
+
+        $this->assertEquals('foo', $config->get('foo'));
+        $this->assertEquals('rab', $config->get('bar'));
+        $this->assertEquals('zab', $config->get('baz'));
+    }
+
     public function test_it_can_initialize_an_array()
     {
         $config = Config\Factory::init([
