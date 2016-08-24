@@ -4,7 +4,7 @@ namespace Config\Loaders;
 
 use Exception;
 
-class PhpLoader extends Loader
+class Php extends Loader
 {
     /**
      * Retrieve the contents of a .php configuration file and convert it to an

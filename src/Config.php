@@ -3,6 +3,7 @@
 namespace Config;
 
 use Config\Interfaces\Loadable;
+use Exception;
 use SplFileInfo;
 
 class Config
@@ -13,11 +14,23 @@ class Config
     /**
      * Class constructor, runs on object creation
      *
-     * @param Loadable $loader Instance of Config\Interfaces\Loadable
+     * @param  mixed $context Raw array of configuration options or path to a
+     *                        configuration file or directory
      */
-    public function __construct(Loadable $loader)
+    public function __construct($context = null)
     {
-        $this->config = $loader->getArray();
+        switch (gettype($context)) {
+            case 'NULL': break;
+            case 'array':
+                $this->config = $context;
+                break;
+            case 'string':
+                $this->load($context);
+                break;
+            default:
+                throw new Exception('Invalid context supplied, failed to initialize class');
+                break;
+        }
     }
 
     /**
@@ -97,7 +110,7 @@ class Config
     {
         $file = new SplFileInfo($path);
         $className = $file->isDir() ? 'Directory' : ucfirst(strtolower($file->getExtension()));
-        $classPath = 'Config\\Loaders\\' . $className . 'Loader';
+        $classPath = 'Config\\Loaders\\' . $className;
 
         $loader = new $classPath($path);
 
@@ -121,5 +134,13 @@ class Config
     {
         $this->config = array_merge($this->config, $config->get());
         return $this;
+    }
+
+    /**
+     * Split a sub-array of configuration options into it's own Config object
+     */
+    public function split($key)
+    {
+        return new static($this->get($key));
     }
 }

@@ -7,7 +7,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->config = Config\Factory::init();
+        $this->config = new Config\Config();
     }
 
     public function test_it_can_set_and_retrieve_an_item()
@@ -58,14 +58,14 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
     public function test_it_can_load_and_read_additional_files()
     {
-        $this->assertNotFalse($this->config->load(__DIR__ . '/files/database.php'));
+        $this->config->load(__DIR__ . '/files/database.php');
         $this->assertEquals('blogger', $this->config->get('drivers.mysql.username'));
     }
 
     public function test_it_can_merge_a_config_object()
     {
-        $config = Config\Factory::init(['foo' => 'foo', 'baz' => 'baz']);
-        $gifnoc = Config\Factory::init(['bar' => 'rab', 'baz' =>'zab']);
+        $config = new Config\Config(['foo' => 'foo', 'baz' => 'baz']);
+        $gifnoc = new Config\Config(['bar' => 'rab', 'baz' =>'zab']);
 
         $config->merge($gifnoc);
 
@@ -74,39 +74,57 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('zab', $config->get('baz'));
     }
 
+    public function test_it_can_split_into_a_sub_object()
+    {
+        $config = new Config\Config([
+            'foo' => 'foo',
+            'bar' => [
+                'baz' => 'barbaz'
+            ]
+        ]);
+
+        $bar = $config->split('bar');
+
+        $this->assertEquals('barbaz', $bar->get('baz'));
+        $this->assertNull($bar->get('foo'));
+    }
+
     public function test_it_can_initialize_an_array()
     {
-        $config = Config\Factory::init([
-            'foo' => ['bar' => 'foobar']
-        ]);
+        $config = new Config\Config(['foo' => ['bar' => 'foobar']]);
+
         $this->assertInstanceOf('Config\Config', $config);
         $this->assertEquals('foobar', $config->get('foo.bar'));
     }
 
     public function test_it_can_initialize_a_php_file()
     {
-        $config = Config\Factory::init(__DIR__ . '/files/database.php');
+        $config = new Config\Config(__DIR__ . '/files/database.php');
+
         $this->assertInstanceOf('Config\Config', $config);
         $this->assertEquals('database.sqlite', $config->get('drivers.sqlite.database'));
     }
 
     public function test_it_can_initialize_a_json_file()
     {
-        $config = Config\Factory::init(__DIR__ . '/files/cache.json');
+        $config = new Config\Config(__DIR__ . '/files/cache.json');
+
         $this->assertInstanceOf('Config\Config', $config);
         $this->assertEquals('memcached', $config->get('driver'));
     }
 
     public function test_it_can_initialize_an_ini_file()
     {
-        $config = Config\Factory::init(__DIR__ . '/files/users.ini');
+        $config = new Config\Config(__DIR__ . '/files/users.ini');
+
         $this->assertInstanceOf('Config\Config', $config);
         $this->assertEquals('Acid Burn', $config->get('kate.alias'));
     }
 
     public function test_it_can_initialize_a_directory()
     {
-        $config = Config\Factory::init(__DIR__ . '/files');
+        $config = new Config\Config(__DIR__ . '/files');
+
         $this->assertInstanceOf('Config\Config', $config);
         $this->assertEquals('mysql', $config->get('database.driver'));
         $this->assertEquals('memcached', $config->get('cache.driver'));

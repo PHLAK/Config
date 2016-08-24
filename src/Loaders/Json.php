@@ -2,7 +2,7 @@
 
 namespace Config\Loaders;
 
-class JsonLoader extends Loader
+class Json extends Loader
 {
     /**
      * Retrieve the contents of a .json file and convert it to an array of

@@ -4,7 +4,7 @@ namespace Config\Loaders;
 
 use DirectoryIterator;
 
-class DirectoryLoader extends Loader
+class Directory extends Loader
 {
     /**
      * Retrieve the contents of one or more configuration files in a directory
@@ -21,7 +21,7 @@ class DirectoryLoader extends Loader
             if ($file->isDot() || $file->isDir()) continue;
 
             $className = ucfirst(strtolower($file->getExtension()));
-            $classPath = 'Config\\Loaders\\' . $className . 'Loader';
+            $classPath = 'Config\\Loaders\\' . $className;
 
             $loader = new $classPath($file->getPathname());
 
