@@ -12,6 +12,6 @@ class IniLoader extends Loader
      */
     public function getArray()
     {
-        return parse_ini_file($this->context);
+        return parse_ini_file($this->context, true);
     }
 }
