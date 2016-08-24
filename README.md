@@ -47,10 +47,10 @@ use Config;
 Then instantiate the class:
 
 ```php
-$config = Config\Factory::init($pathToConfig);
+$config = new Config\Config($pathToConfig);
 ```
 
-Where `$pathToConfig` is a path to a supported file type to a directory
+Where `$pathToConfig` is a path to a supported file type or to a directory
 containing one or more supported file types.
 
 Configuration File Formats
@@ -130,13 +130,35 @@ $config->has($key, $override = false);
 Load an additional configuration file:
 
 ```php
-$conifg->load($pathToConfig);
+$conifg->load($pathToConfig, $override = true);
 ```
 
 Merge two Config objects into one:
 
 ```php
-$config->merge($config2);
+$config = new Config\Config(['foo' => 'foo', 'baz' => 'baz']);
+$gifnoc = new Config\Config(['bar' => 'rab', 'baz' =>'zab']);
+
+$config->merge($gifnoc);
+
+$config->get('foo'); // Returns 'foo'
+$config->get('bar'); // Returns 'rab'
+$config->get('baz'); // Returns 'zab'
+```
+
+Split a sub-array of options into it's own object:
+
+```php
+$config = new Config\Config([
+    'foo' => 'foo',
+    'bar' => [
+        'baz' => 'barbaz'
+    ]
+]);
+
+$bar = $config->split('bar');
+
+$bar->get('baz'); // Returns 'barbaz'
 ```
 
 Troubleshooting
