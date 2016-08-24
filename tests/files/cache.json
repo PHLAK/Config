@@ -1,0 +1,10 @@
+{
+    "driver": "memcached",
+    "duration": 42,
+    "config": {
+        "servers": [
+            {"host": "server1", "port": 11211},
+            {"host": "server2", "port": 11211}
+        ]
+    }
+}
