@@ -126,8 +126,8 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         $config = new Config\Config(__DIR__ . '/files');
 
         $this->assertInstanceOf('Config\Config', $config);
-        $this->assertEquals('mysql', $config->get('database.driver'));
-        $this->assertEquals('memcached', $config->get('cache.driver'));
-        $this->assertEquals('1234567890', $config->get('users.dade.id'));
+        $this->assertEquals('mysql', $config->get('driver'));
+        $this->assertEquals('database.sqlite', $config->get('drivers.sqlite.database'));
+        $this->assertEquals('1234567890', $config->get('dade.id'));
     }
 }

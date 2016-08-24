@@ -25,15 +25,9 @@ class Directory extends Loader
 
             $loader = new $classPath($file->getPathname());
 
-            $contents[$this->key($file->getBasename())] = $loader->getArray();
+            $contents = array_merge($contents, $loader->getArray());
         }
 
         return $contents;
-    }
-
-    protected function key($fileName)
-    {
-        $baseName = strtolower(pathinfo($fileName, PATHINFO_FILENAME));
-        return implode('_', explode(' ', str_replace('  ', ' ', $baseName)));
     }
 }
