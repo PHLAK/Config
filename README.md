@@ -20,6 +20,7 @@ Supported file formats:
   - PHP
   - INI
   - JSON
+  - YAML
 
 Like this project? Keep me caffeinated by [making a donation](https://paypal.me/ChrisKankiewicz).
 
@@ -104,6 +105,33 @@ valid JSON object.
         ]
     }
 }
+```
+
+#### YAML
+
+A YAML configuration file must have the `.yaml` file extension, be a valid YAML
+file.
+
+```yaml
+driver: mysql
+
+drivers:
+
+  mysql:
+    host: localhost
+    database: blog
+    username: blogger
+    password: hunter2
+    charset: utf8
+    prefix:
+
+  pgsql:
+    host: localhost
+    database: blog
+    username: blogger
+    password: hunter2
+    charset: utf8
+    prefix:
 ```
 
 Usage
