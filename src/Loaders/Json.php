@@ -13,6 +13,7 @@ class Json extends Loader
     public function getArray()
     {
         $contents = file_get_contents($this->context);
+
         return json_decode($contents, true);
     }
 }

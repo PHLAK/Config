@@ -66,6 +66,7 @@ class Config
         if (! isset($key)) return $this->config;
 
         $config = $this->config;
+
         foreach (explode('.', $key) as $k) {
             if (! isset($config[$k])) {
                 return $default;
@@ -86,6 +87,7 @@ class Config
     public function has($key)
     {
         $config = $this->config;
+
         foreach (explode('.', $key) as $k) {
             if (! isset($config[$k])) {
                 return false;
@@ -103,11 +105,12 @@ class Config
      * @param  bool   $override Weather or not to override existing options with
      *                          values from the loaded file
      *
-     * @return object           This Config\Config object
+     * @return object           This Config object
      */
     public function load($path, $override = true)
     {
         $file = new SplFileInfo($path);
+
         $className = $file->isDir() ? 'Directory' : ucfirst(strtolower($file->getExtension()));
         $classPath = 'Config\\Loaders\\' . $className;
 
@@ -125,18 +128,23 @@ class Config
     /**
      * Merge another Config object into this one
      *
-     * @param  Config $config Instance of Config\Config
+     * @param  Config $config Instance of Config
      *
-     * @return object         This Config\Config object
+     * @return object         This Config object
      */
     public function merge(Config $config)
     {
         $this->config = array_merge($this->config, $config->get());
+
         return $this;
     }
 
     /**
      * Split a sub-array of configuration options into it's own Config object
+     *
+     * @param  string $key   Unique configuration option key
+     *
+     * @return Config        A new Config object
      */
     public function split($key)
     {
