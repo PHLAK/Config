@@ -3,7 +3,7 @@
 namespace Config\Loaders;
 
 use DirectoryIterator;
-use Exception;
+use RuntimeException;
 
 class Directory extends Loader
 {
@@ -28,7 +28,7 @@ class Directory extends Loader
 
             try {
                 $contents = array_merge($contents, $loader->getArray());
-            } catch (Exception $e) { /* void */ }
+            } catch (RuntimeException $e) { /* void */ }
         }
 
         return $contents;

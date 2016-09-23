@@ -2,7 +2,7 @@
 
 namespace Config\Loaders;
 
-use Exception;
+use RuntimeException;
 
 class Php extends Loader
 {
@@ -17,7 +17,7 @@ class Php extends Loader
         $contents = include($this->context);
 
         if (gettype($contents) != 'array') {
-            throw new Exception('File ' . $this->context . ' does not contain a valid array');
+            throw new RuntimeException('File ' . $this->context . ' does not return a valid array');
         }
 
         return $contents;
