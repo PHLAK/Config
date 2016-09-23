@@ -105,6 +105,13 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('database.sqlite', $config->get('drivers.sqlite.database'));
     }
 
+    public function test_it_throws_an_error_when_initializing_an_invalid_php_file()
+    {
+        $this->setExpectedException('Exception');
+
+        $config = new Config\Config(__DIR__ . '/files/invalid.php');
+    }
+
     public function test_it_can_initialize_a_json_file()
     {
         $config = new Config\Config(__DIR__ . '/files/cache.json');

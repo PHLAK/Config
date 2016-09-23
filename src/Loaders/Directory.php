@@ -3,6 +3,7 @@
 namespace Config\Loaders;
 
 use DirectoryIterator;
+use Exception;
 
 class Directory extends Loader
 {
@@ -25,7 +26,9 @@ class Directory extends Loader
 
             $loader = new $classPath($file->getPathname());
 
-            $contents = array_merge($contents, $loader->getArray());
+            try {
+                $contents = array_merge($contents, $loader->getArray());
+            } catch (Exception $e) { /* void */ }
         }
 
         return $contents;
