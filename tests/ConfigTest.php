@@ -137,4 +137,11 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('database.sqlite', $config->get('drivers.sqlite.database'));
         $this->assertEquals('1234567890', $config->get('dade.id'));
     }
+
+    public function test_it_throws_an_exception_when_initialized_with_an_invalid_context()
+    {
+        $this->setExpectedException('Exception');
+
+        new Config\Config(123);
+    }
 }

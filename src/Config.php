@@ -29,7 +29,6 @@ class Config
                 break;
             default:
                 throw new Exception('Invalid context supplied, failed to initialize class');
-                break;
         }
     }
 
