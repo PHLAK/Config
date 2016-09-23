@@ -134,6 +134,14 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Acid Burn', $config->get('kate.alias'));
     }
 
+    public function test_it_can_initialize_a_yaml_file()
+    {
+        $config = new Config(__DIR__ . '/files/config.yaml');
+
+        $this->assertInstanceOf('Config\Config', $config);
+        $this->assertEquals('hunter2', $config->get('drivers.pgsql.password'));
+    }
+
     public function test_it_can_initialize_a_directory()
     {
         $config = new Config(__DIR__ . '/files');
