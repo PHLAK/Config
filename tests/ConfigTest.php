@@ -152,7 +152,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('1234567890', $config->get('dade.id'));
     }
 
-    public function test_it_throws_an_error_when_initializing_an_invalid_php_file()
+    public function test_it_throws_an_exception_when_initializing_an_invalid_php_file()
     {
         $this->setExpectedException('Exception');
 
