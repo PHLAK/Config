@@ -1,5 +1,7 @@
 <?php
 
+use Config\Config;
+
 class ConfigTest extends PHPUnit_Framework_TestCase
 {
     /** @var Config\Config Instance of Config\Config */
@@ -7,7 +9,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->config = new Config\Config();
+        $this->config = new Config();
     }
 
     public function test_it_can_set_and_retrieve_an_item()
@@ -36,12 +38,14 @@ class ConfigTest extends PHPUnit_Framework_TestCase
     public function test_it_returns_true_if_it_has_an_item()
     {
         $this->config->set('has', 'some-item');
+
         $this->assertTrue($this->config->has('has'));
     }
 
     public function test_it_returns_true_if_it_has_a_boolean_false()
     {
         $this->config->set('false', false);
+
         $this->assertTrue($this->config->has('false'));
     }
 
@@ -73,8 +77,8 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
     public function test_it_can_merge_a_config_object()
     {
-        $config = new Config\Config(['foo' => 'foo', 'baz' => 'baz']);
-        $gifnoc = new Config\Config(['bar' => 'rab', 'baz' =>'zab']);
+        $config = new Config(['foo' => 'foo', 'baz' => 'baz']);
+        $gifnoc = new Config(['bar' => 'rab', 'baz' =>'zab']);
 
         $config->merge($gifnoc);
 
@@ -85,7 +89,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
     public function test_it_can_split_into_a_sub_object()
     {
-        $config = new Config\Config([
+        $config = new Config([
             'foo' => 'foo',
             'bar' => [
                 'baz' => 'barbaz'
@@ -100,7 +104,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
     public function test_it_can_initialize_an_array()
     {
-        $config = new Config\Config(['foo' => ['bar' => 'foobar']]);
+        $config = new Config(['foo' => ['bar' => 'foobar']]);
 
         $this->assertInstanceOf('Config\Config', $config);
         $this->assertEquals('foobar', $config->get('foo.bar'));
@@ -108,22 +112,15 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
     public function test_it_can_initialize_a_php_file()
     {
-        $config = new Config\Config(__DIR__ . '/files/database.php');
+        $config = new Config(__DIR__ . '/files/database.php');
 
         $this->assertInstanceOf('Config\Config', $config);
         $this->assertEquals('database.sqlite', $config->get('drivers.sqlite.database'));
     }
 
-    public function test_it_throws_an_error_when_initializing_an_invalid_php_file()
-    {
-        $this->setExpectedException('Exception');
-
-        $config = new Config\Config(__DIR__ . '/files/invalid.php');
-    }
-
     public function test_it_can_initialize_a_json_file()
     {
-        $config = new Config\Config(__DIR__ . '/files/cache.json');
+        $config = new Config(__DIR__ . '/files/cache.json');
 
         $this->assertInstanceOf('Config\Config', $config);
         $this->assertEquals('memcached', $config->get('driver'));
@@ -131,7 +128,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
     public function test_it_can_initialize_an_ini_file()
     {
-        $config = new Config\Config(__DIR__ . '/files/users.ini');
+        $config = new Config(__DIR__ . '/files/users.ini');
 
         $this->assertInstanceOf('Config\Config', $config);
         $this->assertEquals('Acid Burn', $config->get('kate.alias'));
@@ -139,7 +136,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
     public function test_it_can_initialize_a_directory()
     {
-        $config = new Config\Config(__DIR__ . '/files');
+        $config = new Config(__DIR__ . '/files');
 
         $this->assertInstanceOf('Config\Config', $config);
         $this->assertEquals('mysql', $config->get('driver'));
@@ -147,10 +144,17 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('1234567890', $config->get('dade.id'));
     }
 
+    public function test_it_throws_an_error_when_initializing_an_invalid_php_file()
+    {
+        $this->setExpectedException('Exception');
+
+        new Config(__DIR__ . '/files/invalid.php');
+    }
+
     public function test_it_throws_an_exception_when_initialized_with_an_invalid_context()
     {
         $this->setExpectedException('Exception');
 
-        new Config\Config(123);
+        new Config(123);
     }
 }
