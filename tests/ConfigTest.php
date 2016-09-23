@@ -53,12 +53,21 @@ class ConfigTest extends PHPUnit_Framework_TestCase
     public function test_it_returns_true_if_it_has_an_item_by_dot_notation()
     {
         $this->config->set('foo.bar', 'foobar');
+
         $this->assertTrue($this->config->has('foo.bar'));
     }
 
     public function test_it_can_load_and_read_additional_files()
     {
         $this->config->load(__DIR__ . '/files/database.php');
+
+        $this->assertEquals('blogger', $this->config->get('drivers.mysql.username'));
+    }
+
+    public function test_it_can_load_additional_files_without_overriding_existing_options()
+    {
+        $this->config->load(__DIR__ . '/files/database.php', false);
+
         $this->assertEquals('blogger', $this->config->get('drivers.mysql.username'));
     }
 
