@@ -49,11 +49,11 @@ use Config;
 Then instantiate the class:
 
 ```php
-$config = new Config\Config($pathToConfig);
+$config = new Config\Config($context);
 ```
 
-Where `$pathToConfig` is a path to a supported file type or to a directory
-containing one or more supported file types.
+Where `$context` is a path to a supported file type, a directory containing one
+or more supported file types or an array of configuration options.
 
 Configuration File Formats
 --------------------------
@@ -67,14 +67,23 @@ file and and return a valid PHP array.
 <?php
 
 return [
-    'driver'   => 'mysql',
-    'host'     => 'localhost',
-    'database' => 'blog',
-    'username' => 'blogger',
-    'password' => 'hunter2',
-    'charset'  => 'utf8',
-    'prefix'   => ''
+    'driver' => 'mysql',
+    'drivers' => [
+        'sqlite' => [
+            'database' => 'database.sqlite',
+            'prefix' => ''
+        ],
+        'mysql' => [
+            'host' => 'localhost',
+            'database' => 'blog',
+            'username' => 'blogger',
+            'password' => 'hunter2',
+            'charset' => 'utf8',
+            'prefix' => ''
+        ]
+    ]
 ];
+
 ```
 
 #### INI
@@ -83,11 +92,19 @@ An INI configuration file must have the `.ini` file extension and be a valid INI
 file.
 
 ```ini
-id            = 1234567890
-name[first]   = Dade
-name[last]    = Murphy
-alias         = Zero Cool
-date_of_birth = 1977-07-06 01:23:45
+driver = mysql
+
+[drivers]
+
+sqlite[database] =  database.sqlite
+sqlite[prefix] =
+
+mysql[host] = localhost
+mysql[database] = blog
+mysql[username] = blogger
+mysql[password] = hunter2
+mysql[charset] = utf8
+mysql[prefix] =
 ```
 
 #### JSON
@@ -97,15 +114,23 @@ valid JSON object.
 
 ```json
 {
-    "driver": "memcached",
-    "duration": 42,
-    "config": {
-        "servers": [
-            {"host": "server1", "port": 11211},
-            {"host": "server2", "port": 11211}
-        ]
+    "driver": "mysql",
+    "drivers": {
+        "sqlite": {
+            "database": "database.sqlite",
+            "prefix": ""
+        },
+        "mysql": {
+            "host": "localhost",
+            "database": "blog",
+            "username": "blogger",
+            "password": "hunter2",
+            "charset": "utf8",
+            "prefix": ""
+        }
     }
 }
+
 ```
 
 #### YAML
@@ -118,15 +143,11 @@ driver: mysql
 
 drivers:
 
-  mysql:
-    host: localhost
-    database: blog
-    username: blogger
-    password: hunter2
-    charset: utf8
+  sqlite:
+    database: database.sqlite
     prefix:
 
-  pgsql:
+  mysql:
     host: localhost
     database: blog
     username: blogger
@@ -146,6 +167,10 @@ XML.
 <database>
     <driver>mysql</driver>
     <drivers>
+        <sqlite>
+            <database>database.sqlite</database>
+            <prefix></prefix>
+        </sqlite>
         <mysql>
             <host>localhost</host>
             <database>blog</database>
@@ -154,14 +179,6 @@ XML.
             <charset>utf8</charset>
             <prefix></prefix>
         </mysql>
-        <pgsql>
-            <host>localhost</host>
-            <database>blog</database>
-            <username>blogger</username>
-            <password>hunter2</password>
-            <charset>utf8</charset>
-            <prefix></prefix>
-        </pgsql>
     </drivers>
 </database>
 ```
