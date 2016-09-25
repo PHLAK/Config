@@ -3,6 +3,7 @@
 namespace Config\Loaders;
 
 use Config\Interfaces\Loadable;
+use Config\Exceptions\InvalidFileException;
 
 abstract class Loader implements Loadable
 {

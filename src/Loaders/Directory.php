@@ -2,14 +2,15 @@
 
 namespace Config\Loaders;
 
+use Config\Exceptions\InvalidFileException;
 use DirectoryIterator;
-use RuntimeException;
 
 class Directory extends Loader
 {
     /**
      * Retrieve the contents of one or more configuration files in a directory
-     * and convert them to an array of configuration options
+     * and convert them to an array of configuration options. Any invalid files
+     * will be silently ignored.
      *
      * @return array Array of configuration options
      */
@@ -18,17 +19,16 @@ class Directory extends Loader
         $contents = [];
 
         foreach (new DirectoryIterator($this->context) as $file) {
-            // TODO: Load files from directories recursively
-            if ($file->isDot() || $file->isDir()) continue;
+            if ($file->isDot()) continue;
 
-            $className = ucfirst(strtolower($file->getExtension()));
+            $className = $file->isDir() ? 'Directory' : ucfirst(strtolower($file->getExtension()));
             $classPath = 'Config\\Loaders\\' . $className;
 
             $loader = new $classPath($file->getPathname());
 
             try {
                 $contents = array_merge($contents, $loader->getArray());
-            } catch (RuntimeException $e) { /* void */ }
+            } catch (InvalidFileException $e) { /* void */ }
         }
 
         return $contents;

@@ -63,16 +63,22 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
     public function test_it_can_load_and_read_additional_files()
     {
-        $this->config->load(__DIR__ . '/files/database.php');
+        $config = new Config();
 
-        $this->assertEquals('blogger', $this->config->get('drivers.mysql.username'));
+        $config->set('driver', 'sqlite');
+        $config->load(__DIR__ . '/files/php/config.php');
+
+        $this->assertEquals('mysql', $config->get('driver'));
     }
 
     public function test_it_can_load_additional_files_without_overriding_existing_options()
     {
-        $this->config->load(__DIR__ . '/files/database.php', false);
+        $config = new Config();
 
-        $this->assertEquals('blogger', $this->config->get('drivers.mysql.username'));
+        $config->set('driver', 'sqlite');
+        $config->load(__DIR__ . '/files/php/config.php', false);
+
+        $this->assertEquals('sqlite', $config->get('driver'));
     }
 
     public function test_it_can_merge_a_config_object()
@@ -100,63 +106,6 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('barbaz', $bar->get('baz'));
         $this->assertNull($bar->get('foo'));
-    }
-
-    public function test_it_can_initialize_an_array()
-    {
-        $config = new Config(['foo' => ['bar' => 'foobar']]);
-
-        $this->assertInstanceOf('Config\Config', $config);
-        $this->assertEquals('foobar', $config->get('foo.bar'));
-    }
-
-    public function test_it_can_initialize_a_php_file()
-    {
-        $config = new Config(__DIR__ . '/files/database.php');
-
-        $this->assertInstanceOf('Config\Config', $config);
-        $this->assertEquals('database.sqlite', $config->get('drivers.sqlite.database'));
-    }
-
-    public function test_it_can_initialize_a_json_file()
-    {
-        $config = new Config(__DIR__ . '/files/cache.json');
-
-        $this->assertInstanceOf('Config\Config', $config);
-        $this->assertEquals('memcached', $config->get('driver'));
-    }
-
-    public function test_it_can_initialize_an_ini_file()
-    {
-        $config = new Config(__DIR__ . '/files/users.ini');
-
-        $this->assertInstanceOf('Config\Config', $config);
-        $this->assertEquals('Acid Burn', $config->get('kate.alias'));
-    }
-
-    public function test_it_can_initialize_a_yaml_file()
-    {
-        $config = new Config(__DIR__ . '/files/database.yaml');
-
-        $this->assertInstanceOf('Config\Config', $config);
-        $this->assertEquals('hunter2', $config->get('drivers.pgsql.password'));
-    }
-
-    public function test_it_can_initialize_a_directory()
-    {
-        $config = new Config(__DIR__ . '/files');
-
-        $this->assertInstanceOf('Config\Config', $config);
-        $this->assertEquals('mysql', $config->get('driver'));
-        $this->assertEquals('database.sqlite', $config->get('drivers.sqlite.database'));
-        $this->assertEquals('1234567890', $config->get('dade.id'));
-    }
-
-    public function test_it_throws_an_exception_when_initializing_an_invalid_php_file()
-    {
-        $this->setExpectedException('Exception');
-
-        new Config(__DIR__ . '/files/invalid.php');
     }
 
     public function test_it_throws_an_exception_when_initialized_with_an_invalid_context()

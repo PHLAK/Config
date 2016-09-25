@@ -1,34 +1,27 @@
 <?php
 
 return [
-
-    'driver'   => 'mysql',
-
+    'driver' => 'mysql',
     'drivers' => [
-
         'sqlite' => [
             'database' => 'database.sqlite',
             'prefix' => ''
         ],
-
         'mysql' => [
-            'host'     => 'localhost',
+            'host' => 'localhost',
             'database' => 'blog',
             'username' => 'blogger',
             'password' => 'hunter2',
-            'charset'  => 'utf8',
-            'prefix'   => ''
+            'charset' => 'utf8',
+            'prefix' => ''
         ],
-
         'pgsql' => [
-            'host'     => 'localhost',
+            'host' => 'localhost',
             'database' => 'blog',
             'username' => 'blogger',
             'password' => 'hunter2',
-            'charset'  => 'utf8',
-            'prefix'   => ''
+            'charset' => 'utf8',
+            'prefix' => ''
         ]
-
     ]
-
 ];

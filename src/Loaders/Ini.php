@@ -2,6 +2,8 @@
 
 namespace Config\Loaders;
 
+use Config\Exceptions\InvalidFileException;
+
 class Ini extends Loader
 {
     /**
@@ -12,6 +14,12 @@ class Ini extends Loader
      */
     public function getArray()
     {
-        return parse_ini_file($this->context, true);
+        $parsed = @parse_ini_file($this->context, true);
+
+        if (! $parsed) {
+            throw new InvalidFileException;
+        }
+
+        return $parsed;
     }
 }

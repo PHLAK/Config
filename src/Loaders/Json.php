@@ -2,6 +2,8 @@
 
 namespace Config\Loaders;
 
+use Config\Exceptions\InvalidFileException;
+
 class Json extends Loader
 {
     /**
@@ -14,6 +16,12 @@ class Json extends Loader
     {
         $contents = file_get_contents($this->context);
 
-        return json_decode($contents, true);
+        $parsed = json_decode($contents, true);
+
+        if (is_null($parsed)) {
+            throw new InvalidFileException;
+        }
+
+        return $parsed;
     }
 }

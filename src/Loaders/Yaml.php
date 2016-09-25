@@ -2,6 +2,10 @@
 
 namespace Config\Loaders;
 
+use Config\Exceptions\InvalidFileException;
+use Symfony\Component\Yaml\Yaml as YamlParser;
+use Symfony\Component\Yaml\Exception\ParseException;
+
 class Yaml extends Loader
 {
     /**
@@ -12,8 +16,16 @@ class Yaml extends Loader
      */
     public function getArray()
     {
-        $contents = file_get_contents($this->context);
+        try {
+            $parsed = YamlParser::parse(file_get_contents($this->context));
+        } catch (ParseException $e) {
+            throw new InvalidFileException($e->getMessage());
+        }
 
-        return \Symfony\Component\Yaml\Yaml::parse($contents);
+        if (! is_array($parsed)) {
+            throw new InvalidFileException($this->context . ' does not contain a valid array');
+        }
+
+        return $parsed;
     }
 }
