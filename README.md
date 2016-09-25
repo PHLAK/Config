@@ -21,6 +21,7 @@ Supported file formats:
   - INI
   - JSON
   - YAML
+  - XML
 
 Like this project? Keep me caffeinated by [making a donation](https://paypal.me/ChrisKankiewicz).
 
@@ -132,6 +133,37 @@ drivers:
     password: hunter2
     charset: utf8
     prefix:
+```
+
+#### XML
+
+A XML configuration file must have the `.xml` file extension and contain valid
+XML.
+
+```xml
+<?xml version='1.0'?>
+
+<database>
+    <driver>mysql</driver>
+    <drivers>
+        <mysql>
+            <host>localhost</host>
+            <database>blog</database>
+            <username>blogger</username>
+            <password>hunter2</password>
+            <charset>utf8</charset>
+            <prefix></prefix>
+        </mysql>
+        <pgsql>
+            <host>localhost</host>
+            <database>blog</database>
+            <username>blogger</username>
+            <password>hunter2</password>
+            <charset>utf8</charset>
+            <prefix></prefix>
+        </pgsql>
+    </drivers>
+</database>
 ```
 
 Usage
