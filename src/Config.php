@@ -2,7 +2,6 @@
 
 namespace Config;
 
-use Config\Interfaces\Loadable;
 use Config\Exceptions\InvalidContextException;
 use SplFileInfo;
 
