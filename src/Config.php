@@ -3,7 +3,7 @@
 namespace Config;
 
 use Config\Interfaces\Loadable;
-use InvalidArgumentException;
+use Config\Exceptions\InvalidContextException;
 use SplFileInfo;
 
 class Config
@@ -28,7 +28,7 @@ class Config
                 $this->load($context);
                 break;
             default:
-                throw new InvalidArgumentException('Invalid context supplied, failed to initialize config');
+                throw new InvalidContextException('Failed to initialize config');
         }
     }
 

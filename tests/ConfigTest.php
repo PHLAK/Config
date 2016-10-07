@@ -110,7 +110,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
     public function test_it_throws_an_exception_when_initialized_with_an_invalid_context()
     {
-        $this->setExpectedException('Exception');
+        $this->setExpectedException('Config\Exceptions\InvalidContextException');
 
         new Config(123);
     }
