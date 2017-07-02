@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Config\\": "src/"
+            "Config\\": "src/Config/"
         }
     },
     "autoload-dev": {
