@@ -2,11 +2,14 @@
 
 namespace Config;
 
+use Config\Traits\ArrayAccess;
 use Config\Exceptions\InvalidContextException;
 use SplFileInfo;
 
-class Config
+class Config implements \ArrayAccess
 {
+    use ArrayAccess;
+
     /** @var array Array of configuration options */
     protected $config = [];
 

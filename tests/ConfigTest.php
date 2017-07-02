@@ -115,6 +115,18 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         new Config(123);
     }
 
+    public function test_it_can_be_handled_like_an_array()
+    {
+        $config = new Config(['foo' => 'foo', 'bar' => 'bar']);
+        $config['baz'] = 'baz';
+        unset($config['bar']);
+
+        $this->assertTrue(isset($config['foo']));
+        $this->assertFalse(isset($config['bar']));
+        $this->assertEquals('foo', $config['foo']);
+        $this->assertEquals('baz', $config['baz']);
+    }
+
     public function test_it_can_get_an_option_via_object_notation()
     {
         $config = new Config([
@@ -124,8 +136,9 @@ class ConfigTest extends PHPUnit_Framework_TestCase
             ]
         ]);
 
-        $this->assertNull($config->baz);
         $this->assertEquals('foo', $config->foo);
         $this->assertEquals('barbaz', $config->bar->baz);
+        $this->assertEquals('barbaz', $config->bar['baz']);
+        $this->assertNull($config->qux);
     }
 }
