@@ -114,4 +114,18 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
         new Config(123);
     }
+
+    public function test_it_can_get_an_option_via_object_notation()
+    {
+        $config = new Config([
+            'foo' => 'foo',
+            'bar' => [
+                'baz' => 'barbaz'
+            ]
+        ]);
+
+        $this->assertNull($config->baz);
+        $this->assertEquals('foo', $config->foo);
+        $this->assertEquals('barbaz', $config->bar->baz);
+    }
 }

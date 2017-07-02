@@ -32,6 +32,24 @@ class Config
     }
 
     /**
+     * Magic get method; allows accessing config items via object notation.
+     *
+     * @param string $property Unique configuration option key
+     *
+     * @return mixed New config object or config item value
+     */
+    public function __get($property)
+    {
+        $item = $this->get($property);
+
+        if (is_array($item)) {
+            return new static($item);
+        }
+
+        return $item;
+    }
+
+    /**
      * Store a config value with a specified key.
      *
      * @param string $key   Unique configuration option key
