@@ -11,10 +11,10 @@ class Config
     protected $config = [];
 
     /**
-     * Class constructor, runs on object creation
+     * Class constructor, runs on object creation.
      *
-     * @param  mixed $context Raw array of configuration options or path to a
-     *                        configuration file or directory
+     * @param mixed $context Raw array of configuration options or path to a
+     *                       configuration file or directory
      */
     public function __construct($context = null)
     {
@@ -32,12 +32,12 @@ class Config
     }
 
     /**
-     * Store a config value with a specified key
+     * Store a config value with a specified key.
      *
-     * @param  string $key   Unique configuration option key
-     * @param  mixed  $value Config item value
+     * @param string $key   Unique configuration option key
+     * @param mixed  $value Config item value
      *
-     * @return object        This Config object
+     * @return object This Config object
      */
     public function set($key, $value)
     {
@@ -53,16 +53,18 @@ class Config
     }
 
     /**
-     * Retrieve a configuration option via a provided key
+     * Retrieve a configuration option via a provided key.
      *
-     * @param  string $key     Unique configuration option key
-     * @param  mixed  $default Default value to return if option does not exist
+     * @param string $key     Unique configuration option key
+     * @param mixed  $default Default value to return if option does not exist
      *
-     * @return mixed           Stored config item or $default value
+     * @return mixed Stored config item or $default value
      */
     public function get($key = null, $default = null)
     {
-        if (! isset($key)) return $this->config;
+        if (! isset($key)) {
+            return $this->config;
+        }
 
         $config = $this->config;
 
@@ -77,11 +79,11 @@ class Config
     }
 
     /**
-     * Check for the existance of a config item
+     * Check for the existance of a config item.
      *
-     * @param  string  $key Unique configuration option key
+     * @param string $key Unique configuration option key
      *
-     * @return boolean      True if item existst, otherwise false
+     * @return bool True if item existst, otherwise false
      */
     public function has($key)
     {
@@ -98,13 +100,13 @@ class Config
     }
 
     /**
-     * Load configuration options from a file or directory
+     * Load configuration options from a file or directory.
      *
-     * @param  string $path     Path to configuration file or directory
-     * @param  bool   $override Weather or not to override existing options with
-     *                          values from the loaded file
+     * @param string $path     Path to configuration file or directory
+     * @param bool   $override Weather or not to override existing options with
+     *                         values from the loaded file
      *
-     * @return object           This Config object
+     * @return object This Config object
      */
     public function load($path, $override = true)
     {
@@ -125,11 +127,11 @@ class Config
     }
 
     /**
-     * Merge another Config object into this one
+     * Merge another Config object into this one.
      *
-     * @param  Config $config Instance of Config
+     * @param Config $config Instance of Config
      *
-     * @return object         This Config object
+     * @return object This Config object
      */
     public function merge(Config $config)
     {
@@ -139,11 +141,11 @@ class Config
     }
 
     /**
-     * Split a sub-array of configuration options into it's own Config object
+     * Split a sub-array of configuration options into it's own Config object.
      *
-     * @param  string $key   Unique configuration option key
+     * @param string $key Unique configuration option key
      *
-     * @return Config        A new Config object
+     * @return Config A new Config object
      */
     public function split($key)
     {

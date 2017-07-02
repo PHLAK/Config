@@ -19,7 +19,9 @@ class Directory extends Loader
         $contents = [];
 
         foreach (new DirectoryIterator($this->context) as $file) {
-            if ($file->isDot()) continue;
+            if ($file->isDot()) {
+                continue;
+            }
 
             $className = $file->isDir() ? 'Directory' : ucfirst(strtolower($file->getExtension()));
             $classPath = 'Config\\Loaders\\' . $className;
@@ -28,7 +30,9 @@ class Directory extends Loader
 
             try {
                 $contents = array_merge($contents, $loader->getArray());
-            } catch (InvalidFileException $e) { /* void */ }
+            } catch (InvalidFileException $e) {
+                // Ignore it and continue
+            }
         }
 
         return $contents;

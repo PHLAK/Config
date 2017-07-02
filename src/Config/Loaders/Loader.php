@@ -10,7 +10,7 @@ abstract class Loader implements Loadable
     protected $context;
 
     /**
-     * Class constructor, loads on object creation
+     * Class constructor, loads on object creation.
      *
      * @param mixed $context Path to configuration file or directory
      */

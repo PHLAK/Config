@@ -84,7 +84,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase
     public function test_it_can_merge_a_config_object()
     {
         $config = new Config(['foo' => 'foo', 'baz' => 'baz']);
-        $gifnoc = new Config(['bar' => 'rab', 'baz' =>'zab']);
+        $gifnoc = new Config(['bar' => 'rab', 'baz' => 'zab']);
 
         $config->merge($gifnoc);
 

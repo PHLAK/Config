@@ -10,7 +10,7 @@ class Yaml extends Loader
 {
     /**
      * Retrieve the contents of a .yaml file and convert it to an array of
-     * configuration options
+     * configuration options.
      *
      * @return array Array of configuration options
      */
