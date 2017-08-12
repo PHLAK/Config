@@ -8,7 +8,7 @@ class DirectoryTest extends PHPUnit_Framework_TestCase
     {
         $config = new Config(__DIR__ . '/files');
 
-        $this->assertInstanceOf('Config\Config', $config);
+        $this->assertInstanceOf(Config::class, $config);
         $this->assertEquals('mysql', $config->get('driver'));
     }
 }

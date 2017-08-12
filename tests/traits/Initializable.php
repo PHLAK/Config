@@ -14,7 +14,7 @@ trait Initializable
     {
         $config = new Config($this->validConfig);
 
-        $this->assertInstanceOf('Config\Config', $config);
+        $this->assertInstanceOf(Config::class, $config);
         $this->assertEquals('database.sqlite', $config->get('drivers.sqlite.database'));
     }
 

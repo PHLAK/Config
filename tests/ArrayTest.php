@@ -8,7 +8,7 @@ class ArrayTest extends PHPUnit_Framework_TestCase
     {
         $config = new Config(['foo' => ['bar' => 'foobar']]);
 
-        $this->assertInstanceOf('Config\Config', $config);
+        $this->assertInstanceOf(Config::class, $config);
         $this->assertEquals('foobar', $config->get('foo.bar'));
     }
 }
