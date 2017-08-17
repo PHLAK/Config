@@ -17,7 +17,7 @@ class Ini extends Loader
         $parsed = @parse_ini_file($this->context, true);
 
         if (! $parsed) {
-            throw new InvalidFileException;
+            throw new InvalidFileException('Unable to parse invalid INI file at ' . $this->context);
         }
 
         return $parsed;

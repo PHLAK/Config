@@ -19,7 +19,7 @@ class Json extends Loader
         $parsed = json_decode($contents, true);
 
         if (is_null($parsed)) {
-            throw new InvalidFileException;
+            throw new InvalidFileException('Unable to parse invalid JSON file at ' . $this->context);
         }
 
         return $parsed;

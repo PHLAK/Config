@@ -23,7 +23,7 @@ class Yaml extends Loader
         }
 
         if (! is_array($parsed)) {
-            throw new InvalidFileException($this->context . ' does not contain a valid array');
+            throw new InvalidFileException('Unable to parse invalid YAML file at ' . $this->context);
         }
 
         return $parsed;

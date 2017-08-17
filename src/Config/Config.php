@@ -136,7 +136,7 @@ class Config implements \ArrayAccess
         $className = $file->isDir() ? 'Directory' : ucfirst(strtolower($file->getExtension()));
         $classPath = 'Config\\Loaders\\' . $className;
 
-        $loader = new $classPath($path);
+        $loader = new $classPath($file->getRealPath());
 
         if ($override) {
             $this->config = array_merge($this->config, $loader->getArray());

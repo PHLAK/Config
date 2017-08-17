@@ -17,7 +17,7 @@ class Xml extends Loader
         $parsed = @simplexml_load_file($this->context);
 
         if (! $parsed) {
-            throw new InvalidFileException;
+            throw new InvalidFileException('Unable to parse invalid XML file at ' . $this->context);
         }
 
         return json_decode(json_encode($parsed), true);
