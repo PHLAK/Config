@@ -22,7 +22,8 @@ class Config implements \ArrayAccess
     public function __construct($context = null)
     {
         switch (gettype($context)) {
-            case 'NULL': break;
+            case 'NULL':
+                break;
             case 'array':
                 $this->config = $context;
                 break;
