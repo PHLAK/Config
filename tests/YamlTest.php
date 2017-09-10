@@ -1,6 +1,6 @@
 <?php
 
-use Config\Config;
+use PHLAK\Config;
 
 class YamlTest extends PHPUnit_Framework_TestCase
 {
@@ -14,8 +14,8 @@ class YamlTest extends PHPUnit_Framework_TestCase
 
     public function test_it_throws_an_exception_when_initializing_a_yaml_file_without_an_array()
     {
-        $this->setExpectedException('Config\Exceptions\InvalidFileException');
+        $this->setExpectedException(Config\Exceptions\InvalidFileException::class);
 
-        new Config(__DIR__ . '/files/yaml/bad.yaml');
+        new Config\Config(__DIR__ . '/files/yaml/bad.yaml');
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Config\Loaders;
+namespace PHLAK\Config\Loaders;
 
-use Config\Exceptions\InvalidFileException;
+use PHLAK\Config\Exceptions\InvalidFileException;
 
 class Ini extends Loader
 {

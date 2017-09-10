@@ -1,6 +1,6 @@
 <?php
 
-namespace Config\Exceptions;
+namespace PHLAK\Config\Exceptions;
 
 use Exception;
 

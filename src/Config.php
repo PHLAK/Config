@@ -1,9 +1,9 @@
 <?php
 
-namespace Config;
+namespace PHLAK\Config;
 
-use Config\Traits\ArrayAccess;
-use Config\Exceptions\InvalidContextException;
+use PHLAK\Config\Traits\ArrayAccess;
+use PHLAK\Config\Exceptions\InvalidContextException;
 use SplFileInfo;
 
 class Config implements \ArrayAccess
@@ -135,7 +135,7 @@ class Config implements \ArrayAccess
         $file = new SplFileInfo($path);
 
         $className = $file->isDir() ? 'Directory' : ucfirst(strtolower($file->getExtension()));
-        $classPath = 'Config\\Loaders\\' . $className;
+        $classPath = 'PHLAK\\Config\\Loaders\\' . $className;
 
         $loader = new $classPath($file->getRealPath());
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Config\Interfaces;
+namespace PHLAK\Config\Interfaces;
 
 interface Loadable
 {

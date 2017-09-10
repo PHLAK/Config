@@ -43,7 +43,7 @@ Initializing the Client
 First, import Config:
 
 ```php
-use Config;
+use PHLAK\Config;
 ```
 
 Then instantiate the class:

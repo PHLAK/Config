@@ -1,8 +1,8 @@
 <?php
 
-namespace Config\Loaders;
+namespace PHLAK\Config\Loaders;
 
-use Config\Interfaces\Loadable;
+use PHLAK\Config\Interfaces\Loadable;
 
 abstract class Loader implements Loadable
 {

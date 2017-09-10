@@ -1,8 +1,8 @@
 <?php
 
-namespace Config\Loaders;
+namespace PHLAK\Config\Loaders;
 
-use Config\Exceptions\InvalidFileException;
+use PHLAK\Config\Exceptions\InvalidFileException;
 use DirectoryIterator;
 
 class Directory extends Loader
@@ -24,7 +24,7 @@ class Directory extends Loader
             }
 
             $className = $file->isDir() ? 'Directory' : ucfirst(strtolower($file->getExtension()));
-            $classPath = 'Config\\Loaders\\' . $className;
+            $classPath = 'PHLAK\\Config\\Loaders\\' . $className;
 
             $loader = new $classPath($file->getPathname());
 

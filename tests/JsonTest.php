@@ -1,6 +1,6 @@
 <?php
 
-use Config\Config;
+use PHLAK\Config;
 
 class JsonTest extends PHPUnit_Framework_TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Config\Traits;
+namespace PHLAK\Config\Traits;
 
 trait ArrayAccess
 {

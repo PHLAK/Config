@@ -1,6 +1,6 @@
 <?php
 
-use Config\Config;
+use PHLAK\Config;
 
 class IniTest extends PHPUnit_Framework_TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-use Config\Config;
+use PHLAK\Config;
 
 class ConfigTest extends PHPUnit_Framework_TestCase
 {
@@ -9,7 +9,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->config = new Config();
+        $this->config = new Config\Config();
     }
 
     public function test_it_can_set_and_retrieve_an_item()
@@ -63,7 +63,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
     public function test_it_can_load_and_read_additional_files()
     {
-        $config = new Config();
+        $config = new Config\Config();
 
         $config->set('driver', 'sqlite');
         $config->load(__DIR__ . '/files/php/config.php');
@@ -73,7 +73,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
     public function test_it_can_load_additional_files_without_overriding_existing_options()
     {
-        $config = new Config();
+        $config = new Config\Config();
 
         $config->set('driver', 'sqlite');
         $config->load(__DIR__ . '/files/php/config.php', false);
@@ -83,8 +83,8 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
     public function test_it_can_merge_a_config_object()
     {
-        $config = new Config(['foo' => 'foo', 'baz' => 'baz']);
-        $gifnoc = new Config(['bar' => 'rab', 'baz' => 'zab']);
+        $config = new Config\Config(['foo' => 'foo', 'baz' => 'baz']);
+        $gifnoc = new Config\Config(['bar' => 'rab', 'baz' => 'zab']);
 
         $config->merge($gifnoc);
 
@@ -95,7 +95,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
     public function test_it_can_split_into_a_sub_object()
     {
-        $config = new Config([
+        $config = new Config\Config([
             'foo' => 'foo',
             'bar' => [
                 'baz' => 'barbaz'
@@ -110,14 +110,14 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
     public function test_it_throws_an_exception_when_initialized_with_an_invalid_context()
     {
-        $this->setExpectedException('Config\Exceptions\InvalidContextException');
+        $this->setExpectedException(Config\Exceptions\InvalidContextException::class);
 
-        new Config(123);
+        new Config\Config(123);
     }
 
     public function test_it_can_be_handled_like_an_array()
     {
-        $config = new Config(['foo' => 'foo', 'bar' => 'bar']);
+        $config = new Config\Config(['foo' => 'foo', 'bar' => 'bar']);
         $config['baz'] = 'baz';
         unset($config['bar']);
 
@@ -129,7 +129,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
     public function test_it_can_get_an_option_via_object_notation()
     {
-        $config = new Config([
+        $config = new Config\Config([
             'foo' => 'foo',
             'bar' => [
                 'baz' => 'barbaz'
