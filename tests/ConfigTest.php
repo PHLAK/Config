@@ -4,61 +4,69 @@ use PHLAK\Config;
 
 class ConfigTest extends PHPUnit_Framework_TestCase
 {
-    /** @var Config\Config Instance of Config\Config */
-    protected $config;
-
-    public function setUp()
-    {
-        $this->config = new Config\Config();
-    }
-
     public function test_it_can_set_and_retrieve_an_item()
     {
-        $this->assertTrue($this->config->set('name', 'John Pinkerton'));
-        $this->assertEquals('John Pinkerton', $this->config->get('name'));
+        $config = new Config\Config();
+
+        $this->assertTrue($config->set('name', 'John Pinkerton'));
+        $this->assertEquals('John Pinkerton', $config->get('name'));
     }
 
     public function test_it_can_set_and_retrieve_an_item_by_dot_notation()
     {
-        $this->assertTrue($this->config->set('foo.bar.baz', 'foo-bar-baz'));
-        $this->assertEquals('foo-bar-baz', $this->config->get('foo.bar.baz'));
-        $this->assertEquals(['baz' => 'foo-bar-baz'], $this->config->get('foo.bar'));
+        $config = new Config\Config();
+
+        $this->assertTrue($config->set('foo.bar.baz', 'foo-bar-baz'));
+        $this->assertEquals('foo-bar-baz', $config->get('foo.bar.baz'));
+        $this->assertEquals(['baz' => 'foo-bar-baz'], $config->get('foo.bar'));
     }
 
     public function test_it_returns_null_for_nonexistant_items()
     {
-        $this->assertNull($this->config->get('nonexistant-item'));
+        $config = new Config\Config();
+
+        $this->assertNull($config->get('nonexistant-item'));
     }
 
     public function test_it_returns_a_default_value_for_nonexistant_items()
     {
-        $this->assertFalse($this->config->get('nonexistant-item', false));
+        $config = new Config\Config();
+
+        $this->assertFalse($config->get('nonexistant-item', false));
     }
 
     public function test_it_returns_true_if_it_has_an_item()
     {
-        $this->config->set('has', 'some-item');
+        $config = new Config\Config();
 
-        $this->assertTrue($this->config->has('has'));
+        $config->set('has', 'some-item');
+
+        $this->assertTrue($config->has('has'));
     }
 
     public function test_it_returns_true_if_it_has_a_boolean_false()
     {
-        $this->config->set('false', false);
+        $config = new Config\Config();
 
-        $this->assertTrue($this->config->has('false'));
+        $config->set('false', false);
+
+        $this->assertTrue($config->has('false'));
     }
 
     public function test_it_returns_false_if_it_doesnt_have_an_item()
     {
-        $this->assertFalse($this->config->has('nonexistant-item'));
+        $config = new Config\Config();
+
+        $this->assertFalse($config->has('nonexistant-item'));
     }
 
     public function test_it_returns_true_if_it_has_an_item_by_dot_notation()
     {
-        $this->config->set('foo.bar', 'foobar');
+        $config = new Config\Config();
 
-        $this->assertTrue($this->config->has('foo.bar'));
+        $config->set('foo.bar', 'foobar');
+
+        $this->assertTrue($config->has('foo.bar'));
     }
 
     public function test_it_can_load_and_read_additional_files()
