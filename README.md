@@ -7,7 +7,7 @@ Config
 [![License](https://img.shields.io/packagist/l/PHLAK/Config.svg)](https://packagist.org/packages/PHLAK/Config)
 [![Build Status](https://img.shields.io/travis/PHLAK/Config.svg)](https://travis-ci.org/PHLAK/Config)
 
-PHP library for simple configuration management -- by, [Chris Kankiewicz](https://www.ChrisKankiewicz.com)
+PHP library for simple configuration management -- by, [Chris Kankiewicz](https://www.ChrisKankiewicz.com) ([@PHLAK](https://twitter.com/PHLAK))
 
 Introduction
 ------------
