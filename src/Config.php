@@ -155,7 +155,7 @@ class Config implements \ArrayAccess
      *
      * @return object This Config object
      */
-    public function merge(Config $config)
+    public function merge(self $config)
     {
         $this->config = array_merge($this->config, $config->get());
 
