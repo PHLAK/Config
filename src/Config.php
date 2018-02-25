@@ -125,7 +125,7 @@ class Config implements \ArrayAccess
      * Load configuration options from a file or directory.
      *
      * @param string $path     Path to configuration file or directory
-     * @param bool   $override Weather or not to override existing options with
+     * @param bool   $override Whether or not to override existing options with
      *                         values from the loaded file
      *
      * @return object This Config object
