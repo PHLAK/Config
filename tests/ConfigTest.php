@@ -149,4 +149,16 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('barbaz', $config->bar['baz']);
         $this->assertNull($config->qux);
     }
+
+    public function test_it_can_set_and_retrieve_a_closure()
+    {
+        $config = new Config\Config();
+
+        $config->set('closure', function ($foo) {
+            return ucwords($foo);
+        });
+
+        $this->assertInstanceOf(\Closure::class, $config->get('closure'));
+        $this->assertEquals('John Pinkerton', $config->get('closure')('john pinkerton'));
+    }
 }
