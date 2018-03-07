@@ -158,7 +158,9 @@ class ConfigTest extends PHPUnit_Framework_TestCase
             return ucwords($foo);
         });
 
-        $this->assertInstanceOf(\Closure::class, $config->get('closure'));
-        $this->assertEquals('John Pinkerton', $config->get('closure')('john pinkerton'));
+        $closure = $config->get('closure');
+
+        $this->assertInstanceOf(\Closure::class, $closure);
+        $this->assertEquals('John Pinkerton', $closure('john pinkerton'));
     }
 }
