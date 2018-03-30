@@ -49,7 +49,7 @@ use PHLAK\Config;
 Then instantiate the class:
 
 ```php
-$config = new Config\Config($context);
+$config = new Config\Config($context, $prefix = null);
 ```
 
 Where `$context` is a path to a supported file type, a directory containing one
@@ -207,7 +207,7 @@ $config->has($key, $override = false);
 Load an additional configuration file:
 
 ```php
-$conifg->load($pathToConfig, $override = true);
+$conifg->load($pathToConfig, $prefix = null, $override = true);
 ```
 
 Merge two Config objects into one:
