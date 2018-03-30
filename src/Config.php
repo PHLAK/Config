@@ -14,21 +14,23 @@ class Config implements \ArrayAccess
     protected $config = [];
 
     /**
-     * Class constructor, runs on object creation.
+     * Create a Config object.
      *
      * @param mixed $context Raw array of configuration options or path to a
-     *                       configuration file or directory
+     *                       configuration file or directory containing one or
+     *                       more configuration files
+     * @param string $prefix A key under which the loaded config will be nested
      */
-    public function __construct($context = null)
+    public function __construct($context = null, $prefix = null)
     {
         switch (gettype($context)) {
             case 'NULL':
                 break;
             case 'array':
-                $this->config = $context;
+                $this->config = $prefix ? [$prefix => $context] : $context;
                 break;
             case 'string':
-                $this->load($context);
+                $this->load($context, $prefix);
                 break;
             default:
                 throw new InvalidContextException('Failed to initialize config');
@@ -125,12 +127,13 @@ class Config implements \ArrayAccess
      * Load configuration options from a file or directory.
      *
      * @param string $path     Path to configuration file or directory
+     * @param string $prefix   A key under which the loaded config will be nested
      * @param bool   $override Whether or not to override existing options with
      *                         values from the loaded file
      *
      * @return object This Config object
      */
-    public function load($path, $override = true)
+    public function load($path, $prefix = null, $override = true)
     {
         $file = new SplFileInfo($path);
 
@@ -139,10 +142,12 @@ class Config implements \ArrayAccess
 
         $loader = new $classPath($file->getRealPath());
 
+        $newConfig = $prefix ? [$prefix => $loader->getArray()] : $loader->getArray();
+
         if ($override) {
-            $this->config = array_replace_recursive($this->config, $loader->getArray());
+            $this->config = array_replace_recursive($this->config, $newConfig);
         } else {
-            $this->config = array_replace_recursive($loader->getArray(), $this->config);
+            $this->config = array_replace_recursive($newConfig, $this->config);
         }
 
         return $this;

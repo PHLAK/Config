@@ -72,11 +72,20 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('mysql', $config->get('driver'));
     }
 
+    public function test_it_can_load_additonal_files_with_a_prefix()
+    {
+        $config = new Config\Config();
+
+        $config->load(__DIR__ . '/files/php/config.php', 'database');
+
+        $this->assertEquals('mysql', $config->get('database.driver'));
+    }
+
     public function test_it_can_load_additional_files_without_overriding_existing_options()
     {
         $config = new Config\Config(['driver' => 'sqlite']);
 
-        $config->load(__DIR__ . '/files/php/config.php', false);
+        $config->load(__DIR__ . '/files/php/config.php', null, false);
 
         $this->assertEquals('sqlite', $config->get('driver'));
     }
