@@ -124,33 +124,6 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         new Config\Config(123);
     }
 
-    public function test_it_can_be_handled_like_an_array()
-    {
-        $config = new Config\Config(['foo' => 'foo', 'bar' => 'bar']);
-        $config['baz'] = 'baz';
-        unset($config['bar']);
-
-        $this->assertTrue(isset($config['foo']));
-        $this->assertFalse(isset($config['bar']));
-        $this->assertEquals('foo', $config['foo']);
-        $this->assertEquals('baz', $config['baz']);
-    }
-
-    public function test_it_can_get_an_option_via_object_notation()
-    {
-        $config = new Config\Config([
-            'foo' => 'foo',
-            'bar' => [
-                'baz' => 'barbaz'
-            ]
-        ]);
-
-        $this->assertEquals('foo', $config->foo);
-        $this->assertEquals('barbaz', $config->bar->baz);
-        $this->assertEquals('barbaz', $config->bar['baz']);
-        $this->assertNull($config->qux);
-    }
-
     public function test_it_can_set_and_retrieve_a_closure()
     {
         $config = new Config\Config();
@@ -163,5 +136,47 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(\Closure::class, $closure);
         $this->assertEquals('John Pinkerton', $closure('john pinkerton'));
+    }
+
+    public function test_it_can_be_handled_like_an_array()
+    {
+        $config = new Config\Config(['foo' => 'foo', 'bar' => 'bar']);
+        $config['baz'] = 'baz';
+        unset($config['bar']);
+
+        $this->assertTrue(isset($config['foo']));
+        $this->assertFalse(isset($config['bar']));
+        $this->assertEquals('foo', $config['foo']);
+        $this->assertEquals('baz', $config['baz']);
+    }
+
+    public function test_it_can_be_returned_as_an_array()
+    {
+        $config = new Config\Config([
+            'foo' => 'foo',
+            'bar' => [
+                'baz' => 'barbaz'
+            ]
+        ]);
+
+        $this->assertEquals([
+            'foo' => 'foo',
+            'bar' => [
+                'baz' => 'barbaz'
+            ]
+        ], $config->toArray());
+    }
+
+    public function test_it_is_foreachable()
+    {
+        $config = new Config\Config([
+            'foo' => true,
+            'bar' => true,
+            'baz' => true
+        ]);
+
+        foreach ($config as $item) {
+            $this->assertTrue($item);
+        }
     }
 }
