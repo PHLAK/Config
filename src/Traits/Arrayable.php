@@ -2,7 +2,7 @@
 
 namespace PHLAK\Config\Traits;
 
-trait ArrayAccess
+trait Arrayable
 {
     /**
      * Determine whether an item exists at a specific offset.

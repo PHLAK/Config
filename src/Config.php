@@ -2,13 +2,14 @@
 
 namespace PHLAK\Config;
 
-use PHLAK\Config\Traits\ArrayAccess;
+use ArrayAccess;
+use PHLAK\Config\Traits\Arrayable;
 use PHLAK\Config\Exceptions\InvalidContextException;
 use SplFileInfo;
 
-class Config implements \ArrayAccess
+class Config implements ArrayAccess
 {
-    use ArrayAccess;
+    use Arrayable;
 
     /** @var array Array of configuration options */
     protected $config = [];
