@@ -24,4 +24,12 @@ trait Initializable
 
         new Config\Config($this->invalidConfig);
     }
+
+    public function test_it_can_initialize_a_file_with_a_prefix()
+    {
+        $config = new Config\Config($this->validConfig, 'database');
+
+        $this->assertInstanceOf(Config\Config::class, $config);
+        $this->assertEquals('database.sqlite', $config->get('database.drivers.sqlite.database'));
+    }
 }
