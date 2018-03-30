@@ -17,10 +17,10 @@ class Config implements ArrayAccess
     /**
      * Create a Config object.
      *
-     * @param mixed $context Raw array of configuration options or path to a
-     *                       configuration file or directory containing one or
-     *                       more configuration files
-     * @param string $prefix A key under which the loaded config will be nested
+     * @param mixed  $context Raw array of configuration options or path to a
+     *                        configuration file or directory containing one or
+     *                        more configuration files
+     * @param string $prefix  A key under which the loaded config will be nested
      */
     public function __construct($context = null, $prefix = null)
     {
@@ -110,7 +110,7 @@ class Config implements ArrayAccess
      * @param bool   $override Whether or not to override existing options with
      *                         values from the loaded file
      *
-     * @return object This Config object
+     * @return self This Config object
      */
     public function load($path, $prefix = null, $override = true)
     {
@@ -137,7 +137,7 @@ class Config implements ArrayAccess
      *
      * @param Config $config Instance of Config
      *
-     * @return object This Config object
+     * @return self This Config object
      */
     public function merge(self $config)
     {
