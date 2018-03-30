@@ -140,9 +140,9 @@ class Config implements \ArrayAccess
         $loader = new $classPath($file->getRealPath());
 
         if ($override) {
-            $this->config = array_merge($this->config, $loader->getArray());
+            $this->config = array_replace_recursive($this->config, $loader->getArray());
         } else {
-            $this->config = array_merge($loader->getArray(), $this->config);
+            $this->config = array_replace_recursive($loader->getArray(), $this->config);
         }
 
         return $this;
