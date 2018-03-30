@@ -67,12 +67,8 @@ class Config implements ArrayAccess
      *
      * @return mixed Stored config item or $default value
      */
-    public function get($key = null, $default = null)
+    public function get($key, $default = null)
     {
-        if (! isset($key)) {
-            return $this->config;
-        }
-
         $config = $this->config;
 
         foreach (explode('.', $key) as $k) {
@@ -145,7 +141,7 @@ class Config implements ArrayAccess
      */
     public function merge(self $config)
     {
-        $this->config = array_merge($this->config, $config->get());
+        $this->config = array_merge($this->config, $config->toArray());
 
         return $this;
     }
