@@ -37,18 +37,14 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
     public function test_it_returns_true_if_it_has_an_item()
     {
-        $config = new Config\Config();
-
-        $config->set('has', 'some-item');
+        $config = new Config\Config(['has' => 'some-item']);
 
         $this->assertTrue($config->has('has'));
     }
 
     public function test_it_returns_true_if_it_has_a_boolean_false()
     {
-        $config = new Config\Config();
-
-        $config->set('false', false);
+        $config = new Config\Config(['false' => false]);
 
         $this->assertTrue($config->has('false'));
     }
@@ -62,18 +58,15 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
     public function test_it_returns_true_if_it_has_an_item_by_dot_notation()
     {
-        $config = new Config\Config();
-
-        $config->set('foo.bar', 'foobar');
+        $config = new Config\Config(['foo' => ['bar' => 'foobar']]);
 
         $this->assertTrue($config->has('foo.bar'));
     }
 
     public function test_it_can_load_and_read_additional_files()
     {
-        $config = new Config\Config();
+        $config = new Config\Config(['driver' => 'sqlite']);
 
-        $config->set('driver', 'sqlite');
         $config->load(__DIR__ . '/files/php/config.php');
 
         $this->assertEquals('mysql', $config->get('driver'));
@@ -81,9 +74,8 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 
     public function test_it_can_load_additional_files_without_overriding_existing_options()
     {
-        $config = new Config\Config();
+        $config = new Config\Config(['driver' => 'sqlite']);
 
-        $config->set('driver', 'sqlite');
         $config->load(__DIR__ . '/files/php/config.php', false);
 
         $this->assertEquals('sqlite', $config->get('driver'));
