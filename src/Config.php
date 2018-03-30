@@ -161,4 +161,14 @@ class Config implements ArrayAccess
     {
         return new static($this->get($key));
     }
+
+    /**
+     * Return the entire configuration as an array.
+     *
+     * @return array The configuration array
+     */
+    public function toArray()
+    {
+        return $this->config;
+    }
 }
