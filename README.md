@@ -201,7 +201,7 @@ $config->get($key, $default = null);
 Check if a configuration option exists:
 
 ```php
-$config->has($key, $override = false);
+$config->has($key);
 ```
 
 Load an additional configuration file:
