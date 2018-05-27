@@ -1,5 +1,7 @@
 <?php
 
+namespace PHLAK\Config\Tests;
+
 use PHLAK\Config;
 use PHPUnit\Framework\TestCase;
 

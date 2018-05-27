@@ -1,6 +1,9 @@
 <?php
 
+namespace PHLAK\Config\Tests;
+
 use PHLAK\Config;
+use PHLAK\Config\Exceptions\InvalidContextException;
 use PHPUnit\Framework\TestCase;
 
 class ConfigTest extends TestCase
@@ -118,11 +121,10 @@ class ConfigTest extends TestCase
         $this->assertNull($bar->get('foo'));
     }
 
-    /**
-     * @expectedException PHLAK\Config\Exceptions\InvalidContextException
-     */
     public function test_it_throws_an_exception_when_initialized_with_an_invalid_context()
     {
+        $this->expectException(InvalidContextException::class);
+
         new Config\Config(123);
     }
 
@@ -178,7 +180,7 @@ class ConfigTest extends TestCase
         ]);
 
         foreach ($config as $item) {
-            $this->assertTrue($value);
+            $this->assertTrue($item);
         }
     }
 }

@@ -1,6 +1,10 @@
 <?php
 
+namespace PHLAK\Config\Tests;
+
 use PHLAK\Config;
+use PHLAK\Config\Exceptions\InvalidFileException;
+use PHLAK\Config\Tests\Traits\Initializable;
 use PHPUnit\Framework\TestCase;
 
 class YamlTest extends TestCase
@@ -13,11 +17,10 @@ class YamlTest extends TestCase
         $this->invalidConfig = __DIR__ . '/files/yaml/invalid.yaml';
     }
 
-    /**
-     * @expectedException PHLAK\Config\Exceptions\InvalidFileException
-     */
     public function test_it_throws_an_exception_when_initializing_a_yaml_file_without_an_array()
     {
+        $this->expectException(InvalidFileException::class);
+
         new Config\Config(__DIR__ . '/files/yaml/bad.yaml');
     }
 }
