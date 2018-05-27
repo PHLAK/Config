@@ -1,8 +1,9 @@
 <?php
 
 use PHLAK\Config;
+use PHPUnit\Framework\TestCase;
 
-class ArrayTest extends PHPUnit_Framework_TestCase
+class ArrayTest extends TestCase
 {
     public function test_it_can_initialize_an_array()
     {

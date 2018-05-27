@@ -1,8 +1,9 @@
 <?php
 
 use PHLAK\Config;
+use PHPUnit\Framework\TestCase;
 
-class JsonTest extends PHPUnit_Framework_TestCase
+class JsonTest extends TestCase
 {
     use Initializable;
 

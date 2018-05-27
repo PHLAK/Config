@@ -1,8 +1,9 @@
 <?php
 
 use PHLAK\Config;
+use PHPUnit\Framework\TestCase;
 
-class ConfigTest extends PHPUnit_Framework_TestCase
+class ConfigTest extends TestCase
 {
     public function test_it_can_set_and_retrieve_an_item()
     {
@@ -117,10 +118,11 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         $this->assertNull($bar->get('foo'));
     }
 
+    /**
+     * @expectedException PHLAK\Config\Exceptions\InvalidContextException
+     */
     public function test_it_throws_an_exception_when_initialized_with_an_invalid_context()
     {
-        $this->setExpectedException(Config\Exceptions\InvalidContextException::class);
-
         new Config\Config(123);
     }
 
@@ -176,7 +178,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         ]);
 
         foreach ($config as $item) {
-            $this->assertTrue($item);
+            $this->assertTrue($value);
         }
     }
 }

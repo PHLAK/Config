@@ -1,8 +1,9 @@
 <?php
 
 use PHLAK\Config;
+use PHPUnit\Framework\TestCase;
 
-class DirectoryTest extends PHPUnit_Framework_TestCase
+class DirectoryTest extends TestCase
 {
     public function test_it_can_initialize_a_directory()
     {

@@ -18,10 +18,11 @@ trait Initializable
         $this->assertEquals('database.sqlite', $config->get('drivers.sqlite.database'));
     }
 
+    /**
+     * @expectedException PHLAK\Config\Exceptions\InvalidFileException
+     */
     public function test_it_throws_an_exception_when_initializing_an_invalid_file()
     {
-        $this->setExpectedException(Config\Exceptions\InvalidFileException::class);
-
         new Config\Config($this->invalidConfig);
     }
 
