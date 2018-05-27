@@ -25,5 +25,9 @@
         "psr-4": {
             "PHLAK\\Config\\Tests\\": "tests/"
         }
+    },
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true
     }
 }
