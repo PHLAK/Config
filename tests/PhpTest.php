@@ -1,8 +1,9 @@
 <?php
 
 use PHLAK\Config;
+use PHPUnit\Framework\TestCase;
 
-class PhpTest extends PHPUnit_Framework_TestCase
+class PhpTest extends TestCase
 {
     use Initializable;
 
