@@ -3,11 +3,12 @@
 namespace PHLAK\Config;
 
 use ArrayAccess;
+use IteratorAggregate;
 use PHLAK\Config\Traits\Arrayable;
 use PHLAK\Config\Exceptions\InvalidContextException;
 use SplFileInfo;
 
-class Config implements ArrayAccess
+class Config implements ArrayAccess, IteratorAggregate
 {
     use Arrayable;
 

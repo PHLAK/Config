@@ -179,6 +179,8 @@ class ConfigTest extends TestCase
             'baz' => true
         ]);
 
+        $this->assertTrue(is_iterable($config));
+
         foreach ($config as $item) {
             $this->assertTrue($item);
         }

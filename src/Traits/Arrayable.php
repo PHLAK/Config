@@ -2,8 +2,20 @@
 
 namespace PHLAK\Config\Traits;
 
+use ArrayIterator;
+
 trait Arrayable
 {
+    /**
+     * Retrieve an the config array as an iterator.
+     *
+     * @return ArrayIterator The conifg as an array iterator
+     */
+    public function getIterator()
+    {
+        return new ArrayIterator($this->config);
+    }
+
     /**
      * Determine whether an item exists at a specific offset.
      *
