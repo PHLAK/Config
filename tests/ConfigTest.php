@@ -179,7 +179,7 @@ class ConfigTest extends TestCase
             'baz' => true
         ]);
 
-        $this->assertTrue(is_iterable($config));
+        $this->assertInstanceOf(\Traversable::class, $config);
 
         foreach ($config as $item) {
             $this->assertTrue($item);
