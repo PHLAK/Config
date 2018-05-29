@@ -136,13 +136,19 @@ class Config implements ArrayAccess, IteratorAggregate
     /**
      * Merge another Config object into this one.
      *
-     * @param Config $config Instance of Config
+     * @param Config $config   Instance of Config
+     * @param bool   $override Whether or not to override existing options with
+     *                         values from the merged config object
      *
      * @return self This Config object
      */
-    public function merge(self $config)
+    public function merge(self $config, $override = true)
     {
-        $this->config = array_merge($this->config, $config->toArray());
+        if ($override) {
+            $this->config = array_replace_recursive($this->config, $config->toArray());
+        } else {
+            $this->config = array_replace_recursive($config->toArray(), $this->config);
+        }
 
         return $this;
     }

@@ -106,6 +106,18 @@ class ConfigTest extends TestCase
         $this->assertEquals('zab', $config->get('baz'));
     }
 
+    public function test_it_can_merge_a_config_object_without_overriding_existing_values()
+    {
+        $config = new Config(['foo' => 'foo', 'baz' => 'baz']);
+        $gifnoc = new Config(['bar' => 'rab', 'baz' => 'zab']);
+
+        $config->merge($gifnoc, false);
+
+        $this->assertEquals('foo', $config->get('foo'));
+        $this->assertEquals('rab', $config->get('bar'));
+        $this->assertEquals('baz', $config->get('baz'));
+    }
+
     public function test_it_can_split_into_a_sub_object()
     {
         $config = new Config([
