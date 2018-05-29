@@ -45,7 +45,7 @@ class Config implements ArrayAccess, IteratorAggregate
      * @param string $key   Unique configuration option key
      * @param mixed  $value Config item value
      *
-     * @return object This Config object
+     * @return bool True on success, otherwise false
      */
     public function set($key, $value)
     {
