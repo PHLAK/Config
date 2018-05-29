@@ -2,7 +2,7 @@
 
 namespace PHLAK\Config\Tests;
 
-use PHLAK\Config;
+use PHLAK\Config\Config;
 use PHLAK\Config\Exceptions\InvalidFileException;
 use PHLAK\Config\Tests\Traits\Initializable;
 use PHPUnit\Framework\TestCase;
@@ -21,6 +21,6 @@ class YamlTest extends TestCase
     {
         $this->expectException(InvalidFileException::class);
 
-        new Config\Config(__DIR__ . '/files/yaml/bad.yaml');
+        new Config(__DIR__ . '/files/yaml/bad.yaml');
     }
 }

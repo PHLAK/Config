@@ -2,8 +2,8 @@
 
 namespace PHLAK\Config\Tests\Traits;
 
-use PHLAK\Config;
-use  PHLAK\Config\Exceptions\InvalidFileException;
+use PHLAK\Config\Config;
+use PHLAK\Config\Exceptions\InvalidFileException;
 
 trait Initializable
 {
@@ -15,9 +15,9 @@ trait Initializable
 
     public function test_it_can_initialize_a_file()
     {
-        $config = new Config\Config($this->validConfig);
+        $config = new Config($this->validConfig);
 
-        $this->assertInstanceOf(Config\Config::class, $config);
+        $this->assertInstanceOf(Config::class, $config);
         $this->assertEquals('database.sqlite', $config->get('drivers.sqlite.database'));
     }
 
@@ -25,14 +25,14 @@ trait Initializable
     {
         $this->expectException(InvalidFileException::class);
 
-        new Config\Config($this->invalidConfig);
+        new Config($this->invalidConfig);
     }
 
     public function test_it_can_initialize_a_file_with_a_prefix()
     {
-        $config = new Config\Config($this->validConfig, 'database');
+        $config = new Config($this->validConfig, 'database');
 
-        $this->assertInstanceOf(Config\Config::class, $config);
+        $this->assertInstanceOf(Config::class, $config);
         $this->assertEquals('database.sqlite', $config->get('database.drivers.sqlite.database'));
     }
 }
