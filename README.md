@@ -12,7 +12,7 @@ PHP library for simple configuration management -- by, [Chris Kankiewicz](https:
 Introduction
 ------------
 
-Config is a simple PHP configuration management library supporting multiple,
+Config is a simple PHP configuration management library supporting multiple
 configuration file formats and an expressive API.
 
 Supported file formats:
@@ -43,17 +43,22 @@ Initializing the Client
 First, import Config:
 
 ```php
-use PHLAK\Config;
+use PHLAK\Config\Config;
 ```
 
 Then instantiate the class:
 
 ```php
-$config = new Config\Config($context, $prefix = null);
+$config = new Config($context, $prefix = null);
 ```
 
-Where `$context` is a path to a supported file type, a directory containing one
-or more supported file types or an array of configuration options.
+Where `$context` is one of the following:
+
+  - A path to a supported file type
+  - A directory path containing one or more supported file types
+  - An array of configuration options
+
+And `$prefix` is a string to be used as a key prefix for options of this Config object.
 
 Configuration File Formats
 --------------------------
@@ -186,56 +191,137 @@ XML.
 Usage
 -----
 
-Set a configuration option:
+### `Config::__construct( mixed $context [, string $prefix = null ] )`
+
+Create a new Config object.
+
+##### Example
 
 ```php
-$config->set($key, $value);
+// Create a new Config object from a YAML file
+$config = new Config('path/to/conifg.yaml');
+
+// Create a new Config object from an array
+$config = new Config([
+    'hostname' => 'localhost',
+    'port' => 12345
+]);
 ```
 
-Retrieve a configuration option:
+---
+
+### `Config::set( string $key, mixed $value ) : bool`
+
+Set a configuration option.
+
+##### Examples
 
 ```php
-$config->get($key, $default = null);
+$config->set('hostname', 'localhost');
+$config->set('port', 12345);
 ```
 
-Check if a configuration option exists:
+---
+
+### `Config::get( string $key [, mixed $default = null ] ) : mixed`
+
+Retrieve a configuration option.
+
+##### Examples
 
 ```php
-$config->has($key);
+// Returns null if 'hostname' options is not set
+$config->get('hostname');
+
+// Returns 'localhost' if 'hostname' option is not set
+$config->get('hostname', 'localhost');
 ```
+
+---
+
+### `Config::has( string $key ) : bool`
+
+Check if a configuration option exists.
+
+##### Example
+
+```php
+$config->has('hostname');
+```
+
+---
+
+### `Config::load( string $path [, string $prefix = null [, bool $override = true ]] ) : self`
 
 Load an additional configuration file:
 
+##### Examples
+
 ```php
-$conifg->load($pathToConfig, $prefix = null, $override = true);
+// Load a single additional file
+$conifg->load('path/to/config.php');
+
+// Load an additional file with a prefix
+$config->load('databaes.php', 'database');
+
+// Load an additional file without overriding exising values
+$config->load('additional-options.php', null, false);
 ```
 
-Merge two Config objects into one:
+---
+
+### `Config::merge( Config $config [, bool $override = true ] ) : self`
+
+Merge two Config objects into one.
+
+##### Examples
 
 ```php
-$config = new Config\Config(['foo' => 'foo', 'baz' => 'baz']);
-$gifnoc = new Config\Config(['bar' => 'rab', 'baz' =>'zab']);
+$anotherConfig = new Config('some/config.php');
 
-$config->merge($gifnoc);
+// Merge $anotherConfig into $config and override values
+// in $config with values from $anotherConfig.
+$config->merge($anotherConfig);
 
-$config->get('foo'); // Returns 'foo'
-$config->get('bar'); // Returns 'rab'
-$config->get('baz'); // Returns 'zab'
+// Merge $anotherConfig into $config without overriding any
+// values. Duplicate values in $anotherConfig will be lost.
+$config->merge($anotherConfig, false);
 ```
 
-Split a sub-array of options into it's own object:
+---
+
+### `Config::split( string $key ) : Config`
+
+Split a sub-array of options into it's own Config object.
+
+##### Example
 
 ```php
-$config = new Config\Config([
+$config = new Config([
     'foo' => 'foo',
     'bar' => [
         'baz' => 'barbaz'
-    ]
+    ],
 ]);
 
-$bar = $config->split('bar');
+$config->get('bar');     // Returns ['baz' => 'barbaz']
+$config->get('bar.baz'); // Returns 'barbaz'
 
-$bar->get('baz'); // Returns 'barbaz'
+$barConfig = $config->split('bar');
+
+$barConfig->get('baz');  // Returns 'barbaz'
+```
+
+---
+
+### `Config::toArray() : array`
+
+Return the entire configuration as an array.
+
+##### Example
+
+```php
+$config->toArray();
 ```
 
 Troubleshooting
