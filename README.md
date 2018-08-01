@@ -20,6 +20,7 @@ Supported file formats:
   - PHP
   - INI
   - JSON
+  - [TOML](https://github.com/toml-lang/toml)
   - YAML
   - XML
 
@@ -136,6 +137,27 @@ valid JSON object.
     }
 }
 
+```
+
+#### TOML
+
+A TOML configuration file must have the `.toml` file extension and be a valid
+TOML file.
+
+```toml
+driver = 'mysql'
+
+[drivers.sqlite]
+database = 'database.sqlite'
+prefix = ''
+
+[drivers.mysql]
+host = 'localhost'
+database = 'blog'
+username = 'blogger'
+password = 'hunter2'
+charset = 'utf8'
+prefix = ''
 ```
 
 #### YAML

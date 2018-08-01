@@ -10,7 +10,8 @@
     ],
     "require": {
         "php": ">=7.0",
-        "symfony/yaml": "^3.0 || ^4.0"
+        "symfony/yaml": "^3.0 || ^4.0",
+        "yosymfony/toml": "^1.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.3",
