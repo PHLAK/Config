@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "php": ">=7.0",
+        "php": ">=7.1",
         "symfony/yaml": "^3.0 || ^4.0",
         "yosymfony/toml": "^1.0"
     },
