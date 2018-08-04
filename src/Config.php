@@ -16,7 +16,7 @@ class Config implements ArrayAccess, IteratorAggregate
     protected $config = [];
 
     /**
-     * Create a Config object.
+     * Create a new Config object.
      *
      * @param mixed  $context Raw array of configuration options or path to a
      *                        configuration file or directory containing one or
@@ -83,7 +83,7 @@ class Config implements ArrayAccess, IteratorAggregate
     }
 
     /**
-     * Check for the existance of a config item.
+     * Check for the existence of a configuration item.
      *
      * @param string $key Unique configuration option key
      *
