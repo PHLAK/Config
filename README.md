@@ -64,7 +64,7 @@ And `$prefix` is a string to be used as a key prefix for options of this Config 
 Configuration File Formats
 --------------------------
 
-#### PHP
+### PHP
 
 A PHP configuration file must have the `.php` file extension, be a valid PHP
 file and and return a valid PHP array.
@@ -92,7 +92,7 @@ return [
 
 ```
 
-#### INI
+### INI
 
 An INI configuration file must have the `.ini` file extension and be a valid INI
 file.
@@ -113,7 +113,7 @@ mysql[charset] = utf8
 mysql[prefix] =
 ```
 
-#### JSON
+### JSON
 
 A JSON configuration file must have the `.json` file extension and contain a
 valid JSON object.
@@ -139,7 +139,7 @@ valid JSON object.
 
 ```
 
-#### TOML
+### TOML
 
 A TOML configuration file must have the `.toml` file extension and be a valid
 TOML file.
@@ -160,7 +160,7 @@ charset = 'utf8'
 prefix = ''
 ```
 
-#### YAML
+### YAML
 
 A YAML configuration file must have the `.yaml` file extension, be a valid YAML
 file.
@@ -183,7 +183,7 @@ drivers:
     prefix:
 ```
 
-#### XML
+### XML
 
 A XML configuration file must have the `.xml` file extension and contain valid
 XML.
@@ -213,17 +213,35 @@ XML.
 Usage
 -----
 
-### `Config::__construct( mixed $context [, string $prefix = null ] )`
-
-Create a new Config object.
-
-##### Example
+### __construct
+> Create a new Config object.
 
 ```php
-// Create a new Config object from a YAML file
-$config = new Config('path/to/conifg.yaml');
+Config::__construct( mixed $context [, string $prefix = null ] ) : Config
+```
 
-// Create a new Config object from an array
+| Parameter  | Description                                                                                                                 |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `$context` | Raw array of configuration options or path to a configuration file or directory containing one or more configuration files  |
+| `$prefix`  | A key under which the loaded config will be nested                                                                          |
+
+#### Examples
+
+Create a new Config object from a YAML file.
+
+```php
+$config = new Config('path/to/conifg.yaml');
+```
+
+Create a new Config object from a directory of config files.
+
+```php
+$config = new Config('path/to/conifgs/');
+```
+
+Create a new Config object from an array.
+
+```php
 $config = new Config([
     'hostname' => 'localhost',
     'port' => 12345
@@ -232,11 +250,19 @@ $config = new Config([
 
 ---
 
-### `Config::set( string $key, mixed $value ) : bool`
+### set
+> Store a config value with a specified key.
 
-Set a configuration option.
+```php
+Config::set( string $key, mixed $value ) : bool
+```
 
-##### Examples
+| Parameter | Description                      |
+| --------- | -------------------------------- |
+| `$key`    | Unique configuration option key  |
+| `$value`  | Config item value                |
+
+#### Example
 
 ```php
 $config->set('hostname', 'localhost');
@@ -245,78 +271,141 @@ $config->set('port', 12345);
 
 ---
 
-### `Config::get( string $key [, mixed $default = null ] ) : mixed`
-
-Retrieve a configuration option.
-
-##### Examples
+### get
+> Retrieve a configuration option via a provided key.
 
 ```php
-// Returns null if 'hostname' options is not set
-$config->get('hostname');
+Config::get( string $key [, mixed $default = null ] ) : mixed
+```
 
-// Returns 'localhost' if 'hostname' option is not set
+| Parameter | Description                                      |
+| --------- | ------------------------------------------------ |
+| `$key`    | Unique configuration option key                  |
+| `$value`  | Default value to return if option does not exist |
+
+#### Examples
+
+```php
+// Return the hostname option value or null if not found.
+$config->get('hostname');
+```
+
+Define a default value to return if the option is not set.
+
+```php
+// Returns 'localhost' if hostname option is not set
 $config->get('hostname', 'localhost');
 ```
 
 ---
 
-### `Config::has( string $key ) : bool`
-
-Check if a configuration option exists.
-
-##### Example
+### has
+> Check for the existence of a configuration item.
 
 ```php
-$config->has('hostname');
+Config::has( string $key ) : bool
+```
+
+| Parameter | Description                     |
+| --------- | ------------------------------- |
+| `$key`    | Unique configuration option key |
+
+#### Example
+
+```php
+$config = new Config([
+    'hostname' => 'localhost'
+]);
+
+$config->has('hostname'); // Returns true
+$config->has('port');     // Returns false
 ```
 
 ---
 
-### `Config::load( string $path [, string $prefix = null [, bool $override = true ]] ) : self`
-
-Load an additional configuration file:
-
-##### Examples
+### load
+> Load configuration options from a file or directory.
 
 ```php
-// Load a single additional file
+Config::load( string $path [, string $prefix = null [, bool $override = true ]] ) : self
+```
+
+| Parameter   | Description                                                                  |
+| ----------- | ---------------------------------------------------------------------------- |
+| `$path`     | Path to configuration file or directory                                      |
+| `$prefix`   | A key under which the loaded config will be nested                           |
+| `$override` | Whether or not to override existing options with values from the loaded file |
+
+
+#### Examples
+
+Load a single additional file.
+
+```php
 $conifg->load('path/to/config.php');
+```
 
-// Load an additional file with a prefix
+Load an additional file with a prefix.
+
+```php
 $config->load('databaes.php', 'database');
+```
 
-// Load an additional file without overriding exising values
+Load an additional file without overriding existing values.
+
+```php
 $config->load('additional-options.php', null, false);
 ```
 
 ---
 
-### `Config::merge( Config $config [, bool $override = true ] ) : self`
+### merge
+> Merge another Config object into this one.
 
-Merge two Config objects into one.
+```php
+Config::merge( Config $config [, bool $override = true ] ) : self
+```
 
-##### Examples
+| Parameter   | Description                                                                           |
+| ----------- | ------------------------------------------------------------------------------------- |
+| `$config`   | Instance of Config                                                                    |
+| `$override` | Whether or not to override existing options with values from the merged config object |
+
+#### Examples
+
+
+Merge $anotherConfig into $config and override values in `$config` with values
+from `$anotherConfig`.
 
 ```php
 $anotherConfig = new Config('some/config.php');
 
-// Merge $anotherConfig into $config and override values
-// in $config with values from $anotherConfig.
 $config->merge($anotherConfig);
+```
 
-// Merge $anotherConfig into $config without overriding any
-// values. Duplicate values in $anotherConfig will be lost.
+Merge `$anotherConfig` into `$config` without overriding any values. Duplicate
+values in `$anotherConfig` will be lost.
+
+```php
+$anotherConfig = new Config('some/config.php');
+
 $config->merge($anotherConfig, false);
 ```
 
 ---
 
-### `Config::split( string $key ) : Config`
+### split
+> Split a sub-array of configuration options into it's own Config object.
 
-Split a sub-array of options into it's own Config object.
+```php
+Config::split( string $key ) : Config
+```
 
-##### Example
+| Parameter | Description                     |
+| --------- | ------------------------------- |
+| `$key`    | Unique configuration option key |
+
+#### Example
 
 ```php
 $config = new Config([
@@ -326,9 +415,6 @@ $config = new Config([
     ],
 ]);
 
-$config->get('bar');     // Returns ['baz' => 'barbaz']
-$config->get('bar.baz'); // Returns 'barbaz'
-
 $barConfig = $config->split('bar');
 
 $barConfig->get('baz');  // Returns 'barbaz'
@@ -336,15 +422,22 @@ $barConfig->get('baz');  // Returns 'barbaz'
 
 ---
 
-### `Config::toArray() : array`
-
-Return the entire configuration as an array.
-
-##### Example
+### toArray
+> Return the entire configuration as an array.
 
 ```php
-$config->toArray();
+Config::toArray( void ) : array
 ```
+
+#### Example
+
+```php
+$config = new Config(['foo' => 'foo']);
+
+$config->toArray(); // Returns ['foo' => 'foo']
+```
+
+---
 
 Troubleshooting
 ---------------
