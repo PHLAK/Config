@@ -10,7 +10,7 @@ class XmlTest extends TestCase
 {
     use Initializable;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->validConfig = __DIR__ . '/files/xml/config.xml';
         $this->invalidConfig = __DIR__ . '/files/xml/invalid.xml';

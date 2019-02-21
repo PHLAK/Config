@@ -10,7 +10,7 @@ class JsonTest extends TestCase
 {
     use Initializable;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->validConfig = __DIR__ . '/files/json/config.json';
         $this->invalidConfig = __DIR__ . '/files/json/invalid.json';

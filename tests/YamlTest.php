@@ -11,7 +11,7 @@ class YamlTest extends TestCase
 {
     use Initializable;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->validConfig = __DIR__ . '/files/yaml/config.yaml';
         $this->invalidConfig = __DIR__ . '/files/yaml/invalid.yaml';
