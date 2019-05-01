@@ -1,21 +1,29 @@
 sudo: false
 
 language: php
+
+env:
+  - COMPOSER_PREFER=default
+  - COMPOSER_PREFER=lowest
+
 php:
-    - 7.1
-    - 7.2
-    - 7.3
-    - nightly
+  - 7.1
+  - 7.2
+  - 7.3
+  - nightly
 
 matrix:
-    allow_failures:
-        - php: nightly
+  allow_failures:
+    - php: nightly
 
 cache:
-    directories:
-        - $HOME/.composer/cache
-        - vendor
+  directories:
+    - $HOME/.composer/cache
+    - vendor
 
-before_install: phpenv config-rm xdebug.ini
+before_install:
+  - phpenv config-rm xdebug.ini || true
+  - travis_retry composer self-update
 
-install: composer install
+install:
+  - "[[ $COMPOSER_PREFER == 'lowest' ]] && composer update --prefer-lowest || composer update"
