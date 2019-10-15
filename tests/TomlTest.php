@@ -11,7 +11,7 @@ class TomlTest extends TestCase
 {
     use Initializable;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->validConfig = __DIR__ . '/files/toml/config.toml';
         $this->invalidConfig = __DIR__ . '/files/toml/invalid.toml';

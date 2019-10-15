@@ -10,7 +10,7 @@ class PhpTest extends TestCase
 {
     use Initializable;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->validConfig = __DIR__ . '/files/php/config.php';
         $this->invalidConfig = __DIR__ . '/files/php/invalid.php';
