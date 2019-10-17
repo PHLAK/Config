@@ -3,4 +3,5 @@ tests           export-ignore
 .gitignore      export-ignore
 .php_cs.dist    export-ignore
 .travis.yml     export-ignore
+config.png      export-ignore
 phpunit.xml     export-ignore
