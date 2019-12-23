@@ -5,6 +5,7 @@ namespace PHLAK\Config\Tests;
 use PHLAK\Config\Config;
 use PHLAK\Config\Exceptions\InvalidContextException;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 class ConfigTest extends TestCase
 {
@@ -196,5 +197,61 @@ class ConfigTest extends TestCase
         foreach ($config as $item) {
             $this->assertTrue($item);
         }
+    }
+
+    public function test_it_can_append_values_to_an_array_item()
+    {
+        $config = new Config([
+            'app' => [
+                'vars' => ['foo', 'bar']
+            ]
+        ]);
+
+        $config->append('app.vars', 'baz');
+
+        $this->assertEquals(['foo', 'bar', 'baz'], $config->get('app.vars'));
+
+        $config->append('app.vars', ['qux', 'quux']);
+
+        $this->assertEquals([
+            'foo', 'bar', 'baz', 'qux', 'quux'
+        ], $config->get('app.vars'));
+    }
+
+    public function test_it_throws_an_error_when_appending_to_a_non_array_item()
+    {
+        $config = new Config(['foo' => 'foo']);
+
+        $this->expectException(RuntimeException::class);
+
+        $config->append('foo', 'bar');
+    }
+
+    public function test_it_can_prepend_values_to_an_array_item()
+    {
+        $config = new Config([
+            'app' => [
+                'vars' => ['foo', 'bar']
+            ]
+        ]);
+
+        $config->prepend('app.vars', 'baz');
+
+        $this->assertEquals(['baz', 'foo', 'bar'], $config->get('app.vars'));
+
+        $config->prepend('app.vars', ['qux', 'quux']);
+
+        $this->assertEquals([
+            'qux', 'quux', 'baz', 'foo', 'bar'
+        ], $config->get('app.vars'));
+    }
+
+    public function test_it_throws_an_error_when_prepending_to_a_non_array_item()
+    {
+        $config = new Config(['foo' => 'foo']);
+
+        $this->expectException(RuntimeException::class);
+
+        $config->prepend('foo', 'bar');
     }
 }

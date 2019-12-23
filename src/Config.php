@@ -6,6 +6,7 @@ use ArrayAccess;
 use IteratorAggregate;
 use PHLAK\Config\Traits\Arrayable;
 use PHLAK\Config\Exceptions\InvalidContextException;
+use RuntimeException;
 use SplFileInfo;
 
 class Config implements ArrayAccess, IteratorAggregate
@@ -99,6 +100,52 @@ class Config implements ArrayAccess, IteratorAggregate
             }
             $config = $config[$k];
         }
+
+        return true;
+    }
+
+    /**
+     * Append a value onto an existing array configuration option.
+     *
+     * @param string $key   Unique configuration option key
+     * @param mixed  $value Config item value
+     */
+    public function append($key, $value)
+    {
+        $config = &$this->config;
+
+        foreach (explode('.', $key) as $k) {
+            $config = &$config[$k];
+        }
+
+        if (! is_array($config)) {
+            throw new RuntimeException("Config item '{$key}' is not an array");
+        }
+
+        $config = array_merge($config, (array) $value);
+
+        return true;
+    }
+
+    /**
+     * Prepend a value onto an existing array configuration option.
+     *
+     * @param string $key   Unique configuration option key
+     * @param mixed  $value Config item value
+     */
+    public function prepend($key, $value)
+    {
+        $config = &$this->config;
+
+        foreach (explode('.', $key) as $k) {
+            $config = &$config[$k];
+        }
+
+        if (! is_array($config)) {
+            throw new RuntimeException("Config item '{$key}' is not an array");
+        }
+
+        $config = array_merge((array) $value, $config);
 
         return true;
     }
