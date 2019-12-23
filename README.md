@@ -337,6 +337,52 @@ $config->has('port');     // Returns false
 
 ---
 
+### append
+> Append a value onto an existing array configuration option.
+
+```php
+Config::append( string $key, mixed $value ) : bool
+```
+
+| Parameter | Description                      |
+| --------- | -------------------------------- |
+| `$key`    | Unique configuration option key  |
+| `$value`  | Config item value                |
+
+#### Example
+
+Append `baz` to the `tags` config item array.
+
+```php
+$config->set('tags', ['foo', 'bar'])
+$config->append('tags', 'baz'); // ['foo', 'bar', 'baz']
+```
+
+---
+
+### prepend
+> Prepend a value onto an existing array configuration option.
+
+```php
+Config::append( string $key, mixed $value ) : bool
+```
+
+| Parameter | Description                      |
+| --------- | -------------------------------- |
+| `$key`    | Unique configuration option key  |
+| `$value`  | Config item value                |
+
+#### Example
+
+Prepend `baz` to the `tags` config item array.
+
+```php
+$config->set('tags', ['foo', 'bar'])
+$config->append('tags', 'baz'); // ['baz', 'foo', 'bar']
+```
+
+---
+
 ### load
 > Load configuration options from a file or directory.
 
@@ -386,7 +432,6 @@ Config::merge( Config $config [, bool $override = true ] ) : self
 | `$override` | Whether or not to override existing options with values from the merged config object |
 
 #### Examples
-
 
 Merge $anotherConfig into $config and override values in `$config` with values
 from `$anotherConfig`.
