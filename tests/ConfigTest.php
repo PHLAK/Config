@@ -254,4 +254,13 @@ class ConfigTest extends TestCase
 
         $config->prepend('foo', 'bar');
     }
+
+    public function test_it_can_be_instantiated_with_prefixes()
+    {
+        $config = Config::createFromDirectory(__DIR__ . '/prefix_test');
+
+        $this->assertEquals('mysql', $config->get('foo.driver'));
+        $this->assertEquals('postgres', $config->get('bar.driver'));
+        $this->assertEquals('sqlite', $config->get('baz.driver'));
+    }
 }

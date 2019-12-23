@@ -3,6 +3,7 @@
 namespace PHLAK\Config;
 
 use ArrayAccess;
+use DirectoryIterator;
 use IteratorAggregate;
 use PHLAK\Config\Exceptions\InvalidContextException;
 use PHLAK\Config\Traits\Arrayable;
@@ -38,6 +39,30 @@ class Config implements ArrayAccess, IteratorAggregate
             default:
                 throw new InvalidContextException('Failed to initialize config');
         }
+    }
+
+    /**
+     * Create a new Config object from a directory with prefixed entries by file.
+     *
+     * @param string $path path to a directory containing one or more
+     *                     configuration files
+     *
+     * @return static A new Config object
+     */
+    public static function createFromDirectory(string $path)
+    {
+        $config = new static();
+
+        foreach (new DirectoryIterator($path) as $file) {
+            if ($file->isFile()) {
+                $config->load(
+                    $file->getRealPath(),
+                    pathinfo($file->getBasename(), PATHINFO_FILENAME)
+                );
+            }
+        }
+
+        return $config;
     }
 
     /**
