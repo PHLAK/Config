@@ -4,8 +4,8 @@ namespace PHLAK\Config;
 
 use ArrayAccess;
 use IteratorAggregate;
-use PHLAK\Config\Traits\Arrayable;
 use PHLAK\Config\Exceptions\InvalidContextException;
+use PHLAK\Config\Traits\Arrayable;
 use RuntimeException;
 use SplFileInfo;
 
@@ -109,6 +109,10 @@ class Config implements ArrayAccess, IteratorAggregate
      *
      * @param string $key   Unique configuration option key
      * @param mixed  $value Config item value
+     *
+     * @throws RuntimeException
+     *
+     * @return true
      */
     public function append($key, $value)
     {
@@ -132,6 +136,10 @@ class Config implements ArrayAccess, IteratorAggregate
      *
      * @param string $key   Unique configuration option key
      * @param mixed  $value Config item value
+     *
+     * @throws RuntimeException
+     *
+     * @return true
      */
     public function prepend($key, $value)
     {

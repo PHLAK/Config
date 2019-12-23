@@ -3,13 +3,14 @@
 namespace PHLAK\Config\Traits;
 
 use ArrayIterator;
+use Traversable;
 
 trait Arrayable
 {
     /**
      * Retrieve an the config array as an iterator.
      *
-     * @return ArrayIterator The conifg as an array iterator
+     * @return Traversable The conifg as a traversable iterator
      */
     public function getIterator()
     {
