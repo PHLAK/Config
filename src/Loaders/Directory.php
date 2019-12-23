@@ -2,8 +2,8 @@
 
 namespace PHLAK\Config\Loaders;
 
-use PHLAK\Config\Exceptions\InvalidFileException;
 use DirectoryIterator;
+use PHLAK\Config\Exceptions\InvalidFileException;
 
 class Directory extends Loader
 {

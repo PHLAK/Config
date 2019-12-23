@@ -3,8 +3,8 @@
 namespace PHLAK\Config\Loaders;
 
 use PHLAK\Config\Exceptions\InvalidFileException;
-use Symfony\Component\Yaml\Yaml as YamlParser;
 use Symfony\Component\Yaml\Exception\ParseException;
+use Symfony\Component\Yaml\Yaml as YamlParser;
 
 class Yaml extends Loader
 {

@@ -3,8 +3,8 @@
 namespace PHLAK\Config\Loaders;
 
 use PHLAK\Config\Exceptions\InvalidFileException;
-use Yosymfony\Toml\Toml as TomlParser;
 use Yosymfony\Toml\Exception\ParseException;
+use Yosymfony\Toml\Toml as TomlParser;
 
 class Toml extends Loader
 {

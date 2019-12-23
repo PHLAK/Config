@@ -2,7 +2,6 @@
 
 namespace PHLAK\Config\Tests;
 
-use PHLAK\Config\Config;
 use PHLAK\Config\Tests\Traits\Initializable;
 use PHPUnit\Framework\TestCase;
 
