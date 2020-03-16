@@ -1,6 +1,6 @@
 <?php
 
-namespace PHLAK\Config\Contracts;
+namespace PHLAK\Config\Interfaces;
 
 interface ConfigInterface
 {
@@ -59,7 +59,7 @@ interface ConfigInterface
      * @param string $key   Unique configuration option key
      * @param mixed  $value Config item value
      *
-     * @throws RuntimeException
+     * @throws \RuntimeException
      *
      * @return true
      */
@@ -71,7 +71,7 @@ interface ConfigInterface
      * @param string $key   Unique configuration option key
      * @param mixed  $value Config item value
      *
-     * @throws RuntimeException
+     * @throws \RuntimeException
      *
      * @return true
      */

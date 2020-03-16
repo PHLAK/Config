@@ -3,8 +3,8 @@
 namespace PHLAK\Config\Tests;
 
 use PHLAK\Config\Config;
-use PHLAK\Config\Contracts\ConfigInterface;
 use PHLAK\Config\Exceptions\InvalidContextException;
+use PHLAK\Config\Interfaces\ConfigInterface;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
