@@ -22,7 +22,7 @@ interface ConfigInterface
      *
      * @return self
      */
-    public static function createFromDirectory(string $path): self;
+    public static function fromDirectory(string $path): self;
 
     /**
      * Store a config value with a specified key.

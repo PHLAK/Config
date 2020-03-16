@@ -265,7 +265,7 @@ class ConfigTest extends TestCase
 
     public function test_it_can_be_instantiated_with_prefixes()
     {
-        $config = Config::createFromDirectory(__DIR__ . '/prefix_test');
+        $config = Config::fromDirectory(__DIR__ . '/prefix_test');
 
         $this->assertEquals('mysql', $config->get('foo.driver'));
         $this->assertEquals('postgres', $config->get('bar.driver'));

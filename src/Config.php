@@ -49,7 +49,7 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
      *
      * @return \PHLAK\Config\Contracts\ConfigInterface A new Config object
      */
-    public static function createFromDirectory(string $path): ConfigInterface
+    public static function fromDirectory(string $path): ConfigInterface
     {
         $config = new static();
 
