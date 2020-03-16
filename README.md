@@ -383,6 +383,25 @@ $config->append('tags', 'baz'); // ['baz', 'foo', 'bar']
 
 ---
 
+### unset
+> Unset a configuration option via a provided key.
+
+```php
+Config::unset( string $key ) : bool
+```
+
+| Parameter | Description                      |
+| --------- | -------------------------------- |
+| `$key`    | Unique configuration option key  |
+
+#### Example
+
+```php
+$config->unset('hostname');
+```
+
+---
+
 ### load
 > Load configuration options from a file or directory.
 
