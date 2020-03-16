@@ -10,9 +10,11 @@ class Json extends Loader
      * Retrieve the contents of a .json file and convert it to an array of
      * configuration options.
      *
+     * @throws \PHLAK\Config\Exceptions\InvalidFileException
+     *
      * @return array Array of configuration options
      */
-    public function getArray()
+    public function getArray(): array
     {
         $contents = file_get_contents($this->context);
 

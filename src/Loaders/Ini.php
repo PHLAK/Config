@@ -10,9 +10,11 @@ class Ini extends Loader
      * Retrieve the contents of a .ini file and convert it to an array of
      * configuration options.
      *
+     * @throws \PHLAK\Config\Exceptions\InvalidFileException
+     *
      * @return array Array of configuration options
      */
-    public function getArray()
+    public function getArray(): array
     {
         $parsed = @parse_ini_file($this->context, true);
 

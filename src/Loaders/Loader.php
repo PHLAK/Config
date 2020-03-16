@@ -6,16 +6,23 @@ use PHLAK\Config\Interfaces\Loadable;
 
 abstract class Loader implements Loadable
 {
-    /** @var mixed Raw array of path to a configuration file or directory */
+    /** @var string Path to a configuration file or directory */
     protected $context;
 
     /**
-     * Class constructor, loads on object creation.
+     * Create a new Loader object.
      *
-     * @param mixed $context Path to configuration file or directory
+     * @param string $context Path to configuration file or directory
      */
-    public function __construct($context)
+    public function __construct(string $context)
     {
         $this->context = $context;
     }
+
+    /**
+     * Retrieve the context as an array of configuration options.
+     *
+     * @return array Array of configuration options
+     */
+    abstract public function getArray(): array;
 }

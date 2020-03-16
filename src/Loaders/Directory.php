@@ -12,9 +12,11 @@ class Directory extends Loader
      * and convert them to an array of configuration options. Any invalid files
      * will be silently ignored.
      *
+     * @throws \PHLAK\Config\Exceptions\InvalidFileException
+     *
      * @return array Array of configuration options
      */
-    public function getArray()
+    public function getArray(): array
     {
         $contents = [];
 
