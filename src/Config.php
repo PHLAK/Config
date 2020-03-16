@@ -5,12 +5,13 @@ namespace PHLAK\Config;
 use ArrayAccess;
 use DirectoryIterator;
 use IteratorAggregate;
+use PHLAK\Config\Contracts\ConfigInterface;
 use PHLAK\Config\Exceptions\InvalidContextException;
 use PHLAK\Config\Traits\Arrayable;
 use RuntimeException;
 use SplFileInfo;
 
-class Config implements ArrayAccess, IteratorAggregate
+class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
 {
     use Arrayable;
 
@@ -44,12 +45,11 @@ class Config implements ArrayAccess, IteratorAggregate
     /**
      * Create a new Config object from a directory with prefixed entries by file.
      *
-     * @param string $path path to a directory containing one or more
-     *                     configuration files
+     * @param string $path A path to a directory of configuration files
      *
-     * @return static A new Config object
+     * @return \PHLAK\Config\Contracts\ConfigInterface A new Config object
      */
-    public static function createFromDirectory(string $path): self
+    public static function createFromDirectory(string $path): ConfigInterface
     {
         $config = new static();
 
@@ -191,9 +191,9 @@ class Config implements ArrayAccess, IteratorAggregate
      * @param bool   $override Whether or not to override existing options with
      *                         values from the loaded file
      *
-     * @return self This Config object
+     * @return \PHLAK\Config\Contracts\ConfigInterface This Config object
      */
-    public function load(string $path, string $prefix = null, bool $override = true): self
+    public function load(string $path, string $prefix = null, bool $override = true): ConfigInterface
     {
         $file = new SplFileInfo($path);
 
@@ -216,13 +216,13 @@ class Config implements ArrayAccess, IteratorAggregate
     /**
      * Merge another Config object into this one.
      *
-     * @param Config $config   Instance of Config
-     * @param bool   $override Whether or not to override existing options with
-     *                         values from the merged config object
+     * @param \PHLAK\Config\Contracts\ConfigInterface $config   Instance of Config
+     * @param bool                                    $override Whether or not to override existing options with
+     *                                                          values from the merged config object
      *
-     * @return self This Config object
+     * @return \PHLAK\Config\Contracts\ConfigInterface This Config object
      */
-    public function merge(self $config, bool $override = true): self
+    public function merge(ConfigInterface $config, bool $override = true): ConfigInterface
     {
         if ($override) {
             $this->config = (array) array_replace_recursive($this->config, $config->toArray());
@@ -238,9 +238,9 @@ class Config implements ArrayAccess, IteratorAggregate
      *
      * @param string $key Unique configuration option key
      *
-     * @return \PHLAK\Config\Config A new Config object
+     * @return \PHLAK\Config\Contracts\ConfigInterface A new Config object
      */
-    public function split(string $key): Config
+    public function split(string $key): ConfigInterface
     {
         return new static($this->get($key));
     }

@@ -3,12 +3,20 @@
 namespace PHLAK\Config\Tests;
 
 use PHLAK\Config\Config;
+use PHLAK\Config\Contracts\ConfigInterface;
 use PHLAK\Config\Exceptions\InvalidContextException;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
 class ConfigTest extends TestCase
 {
+    public function test_it_is_instantiable(): void
+    {
+        $config = new Config();
+
+        $this->assertInstanceOf(ConfigInterface::class, $config);
+    }
+
     public function test_it_can_set_and_retrieve_an_item()
     {
         $config = new Config();
