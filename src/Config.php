@@ -25,7 +25,7 @@ class Config implements ArrayAccess, IteratorAggregate
      *                        more configuration files
      * @param string $prefix  A key under which the loaded config will be nested
      */
-    public function __construct($context = null, $prefix = null)
+    public function __construct($context = null, string $prefix = null)
     {
         switch (gettype($context)) {
             case 'NULL':
@@ -49,7 +49,7 @@ class Config implements ArrayAccess, IteratorAggregate
      *
      * @return static A new Config object
      */
-    public static function createFromDirectory(string $path)
+    public static function createFromDirectory(string $path): self
     {
         $config = new static();
 
@@ -73,7 +73,7 @@ class Config implements ArrayAccess, IteratorAggregate
      *
      * @return bool True on success, otherwise false
      */
-    public function set($key, $value)
+    public function set(string $key, $value): bool
     {
         $config = &$this->config;
 
@@ -94,7 +94,7 @@ class Config implements ArrayAccess, IteratorAggregate
      *
      * @return mixed Stored config item or $default value
      */
-    public function get($key, $default = null)
+    public function get(string $key, $default = null)
     {
         $config = $this->config;
 
@@ -115,7 +115,7 @@ class Config implements ArrayAccess, IteratorAggregate
      *
      * @return bool True if item existst, otherwise false
      */
-    public function has($key)
+    public function has(string $key): bool
     {
         $config = $this->config;
 
@@ -139,7 +139,7 @@ class Config implements ArrayAccess, IteratorAggregate
      *
      * @return true
      */
-    public function append($key, $value)
+    public function append(string $key, $value): bool
     {
         $config = &$this->config;
 
@@ -166,7 +166,7 @@ class Config implements ArrayAccess, IteratorAggregate
      *
      * @return true
      */
-    public function prepend($key, $value)
+    public function prepend(string $key, $value): bool
     {
         $config = &$this->config;
 
@@ -193,7 +193,7 @@ class Config implements ArrayAccess, IteratorAggregate
      *
      * @return self This Config object
      */
-    public function load($path, $prefix = null, $override = true)
+    public function load(string $path, string $prefix = null, bool $override = true): self
     {
         $file = new SplFileInfo($path);
 
@@ -222,7 +222,7 @@ class Config implements ArrayAccess, IteratorAggregate
      *
      * @return self This Config object
      */
-    public function merge(self $config, $override = true)
+    public function merge(self $config, bool $override = true): self
     {
         if ($override) {
             $this->config = (array) array_replace_recursive($this->config, $config->toArray());
@@ -238,9 +238,9 @@ class Config implements ArrayAccess, IteratorAggregate
      *
      * @param string $key Unique configuration option key
      *
-     * @return Config A new Config object
+     * @return \PHLAK\Config\Config A new Config object
      */
-    public function split($key)
+    public function split(string $key): Config
     {
         return new static($this->get($key));
     }
@@ -250,7 +250,7 @@ class Config implements ArrayAccess, IteratorAggregate
      *
      * @return array The configuration array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return $this->config;
     }
