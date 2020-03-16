@@ -205,9 +205,9 @@ class Config implements ArrayAccess, IteratorAggregate
         $newConfig = $prefix ? [$prefix => $loader->getArray()] : $loader->getArray();
 
         if ($override) {
-            $this->config = array_replace_recursive($this->config, $newConfig);
+            $this->config = (array) array_replace_recursive($this->config, $newConfig);
         } else {
-            $this->config = array_replace_recursive($newConfig, $this->config);
+            $this->config = (array) array_replace_recursive($newConfig, $this->config);
         }
 
         return $this;
@@ -225,9 +225,9 @@ class Config implements ArrayAccess, IteratorAggregate
     public function merge(self $config, $override = true)
     {
         if ($override) {
-            $this->config = array_replace_recursive($this->config, $config->toArray());
+            $this->config = (array) array_replace_recursive($this->config, $config->toArray());
         } else {
-            $this->config = array_replace_recursive($config->toArray(), $this->config);
+            $this->config = (array) array_replace_recursive($config->toArray(), $this->config);
         }
 
         return $this;
