@@ -3,12 +3,6 @@
 </p>
 
 <p align="center">
-    PHP library for simple configuration management
-    -- by, <a href="https://www.ChrisKankiewicz.com">Chris Kankiewicz</a>
-    (<a href="https://twitter.com/PHLAK">@PHLAK</a>)
-</p>
-
-<p align="center">
     <a href="https://packagist.org/packages/PHLAK/Config"><img src="https://img.shields.io/packagist/v/PHLAK/Config.svg?style=flat-square" alt="Latest Stable Version"></a>
     <a href="https://packagist.org/packages/PHLAK/Config"><img src="https://img.shields.io/packagist/dt/PHLAK/Config.svg?style=flat-square" alt="Total Downloads"></a>
     <a href="https://packagist.org/packages/PHLAK/Config"><img src="https://img.shields.io/packagist/l/PHLAK/Config.svg?style=flat-square" alt="License"></a>
@@ -19,10 +13,13 @@
     <a href="https://github.com/users/PHLAK/sponsorship"><img src="https://img.shields.io/badge/Become_a-Sponsor-cc4195.svg?style=flat-square" alt="Become a Sponsor"></a>
     <a href="https://patreon.com/PHLAK"><img src="https://img.shields.io/badge/Become_a-Patron-e7513b.svg?style=flat-square" alt="Become a Patron"></a>
     <a href="https://paypal.me/ChrisKankiewicz"><img src="https://img.shields.io/badge/Make_a-Donation-006bb6.svg?style=flat-square" alt="One-time Donation"></a>
-    <br>
-  <a href="https://www.ChrisKankiewicz.com"><img src="https://img.shields.io/badge/created_by-Chris%20Kankiewicz-319795.svg?style=for-the-badge" alt="Author"></a>
 </p>
 
+<p align="center">
+    PHP library for simple configuration management
+    -- by, <a href="https://www.ChrisKankiewicz.com">Chris Kankiewicz</a>
+    (<a href="https://twitter.com/PHLAK">@PHLAK</a>)
+</p>
 ---
 
 Introduction
