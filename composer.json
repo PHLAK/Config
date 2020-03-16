@@ -8,6 +8,16 @@
             "email": "Chris@ChrisKankiewicz.com"
         }
     ],
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/PHLAK"
+        },
+        {
+            "type": "paypal",
+            "url": "https://paypal.me/ChrisKankiewicz"
+        }
+    ],
     "require": {
         "php": ">=7.1",
         "symfony/yaml": "^3.0 || ^4.0 || ^5.0",
