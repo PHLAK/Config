@@ -3,6 +3,7 @@
 namespace PHLAK\Config\Tests\Traits;
 
 use PHLAK\Config\Config;
+use PHLAK\Config\Exceptions\ConfigException;
 use PHLAK\Config\Exceptions\InvalidFileException;
 
 trait Initializable
@@ -23,6 +24,7 @@ trait Initializable
 
     public function test_it_throws_an_exception_when_initializing_an_invalid_file()
     {
+        $this->expectException(ConfigException::class);
         $this->expectException(InvalidFileException::class);
 
         new Config($this->invalidConfig);

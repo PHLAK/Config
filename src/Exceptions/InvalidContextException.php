@@ -2,8 +2,6 @@
 
 namespace PHLAK\Config\Exceptions;
 
-use Exception;
-
-class InvalidContextException extends Exception
+class InvalidContextException extends ConfigException
 {
 }
