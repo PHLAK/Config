@@ -78,6 +78,15 @@ interface ConfigInterface
     public function prepend(string $key, $value): bool;
 
     /**
+     * Unset a configuration option via a provided key.
+     *
+     * @param string $key Unique configuration option key
+     *
+     * @return bool True on success, otherwise false
+     */
+    public function unset(string $key): bool;
+
+    /**
      * Load configuration options from a file or directory.
      *
      * @param string $path     Path to configuration file or directory

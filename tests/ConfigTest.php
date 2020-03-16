@@ -271,4 +271,20 @@ class ConfigTest extends TestCase
         $this->assertEquals('postgres', $config->get('bar.driver'));
         $this->assertEquals('sqlite', $config->get('baz.driver'));
     }
+
+    public function test_it_can_unset_an_option(): void
+    {
+        $config = new Config([
+            'foo' => [
+                'bar' => 'foobar',
+                'baz' => 'foobaz',
+            ]
+        ]);
+
+        $this->assertTrue($config->unset('foo.baz'));
+        $this->assertFalse($config->unset('foo.qux'));
+
+        $this->assertTrue($config->has('foo.bar'));
+        $this->assertFalse($config->has('foo.baz'));
+    }
 }

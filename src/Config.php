@@ -184,6 +184,22 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
     }
 
     /**
+     * Unset a configuration option via a provided key.
+     *
+     * @param string $key Unique configuration option key
+     *
+     * @return bool True on success, otherwise false
+     */
+    public function unset(string $key): bool
+    {
+        if (! $this->has($key)) {
+            return false;
+        }
+
+        return $this->set($key, null);
+    }
+
+    /**
      * Load configuration options from a file or directory.
      *
      * @param string $path     Path to configuration file or directory
