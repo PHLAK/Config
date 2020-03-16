@@ -9,17 +9,17 @@
     <a href="https://travis-ci.org/PHLAK/Config"><img src="https://img.shields.io/travis/PHLAK/Config.svg?style=flat-square" alt="Build Status"></a>
     <a href="https://github.styleci.io/repos/66168184"><img src="https://github.styleci.io/repos/66168184/shield?branch=master" alt="StyleCI"></a>
     <br>
-    <a href="https://ln.phlak.net/join-slack"><img src="https://img.shields.io/badge/Join_our-Slack-611f69.svg?style=flat-square" alt="Join our"></a>
+    <a href="https://spectrum.chat/phlaknet"><img src="https://img.shields.io/badge/Join_the-Community-7b16ff.svg?style=flat-square" alt="Join our Community"></a>
     <a href="https://github.com/users/PHLAK/sponsorship"><img src="https://img.shields.io/badge/Become_a-Sponsor-cc4195.svg?style=flat-square" alt="Become a Sponsor"></a>
-    <a href="https://patreon.com/PHLAK"><img src="https://img.shields.io/badge/Become_a-Patron-e7513b.svg?style=flat-square" alt="Become a Patron"></a>
     <a href="https://paypal.me/ChrisKankiewicz"><img src="https://img.shields.io/badge/Make_a-Donation-006bb6.svg?style=flat-square" alt="One-time Donation"></a>
 </p>
 
 <p align="center">
     PHP library for simple configuration management
-    -- by, <a href="https://www.ChrisKankiewicz.com">Chris Kankiewicz</a>
+    -- Created by <a href="https://www.ChrisKankiewicz.com">Chris Kankiewicz</a>
     (<a href="https://twitter.com/PHLAK">@PHLAK</a>)
 </p>
+
 ---
 
 Introduction
@@ -517,7 +517,11 @@ $config->toArray(); // Returns ['foo' => 'foo']
 Troubleshooting
 ---------------
 
-For general help and support join our [Slack Workspace](https://ln.phlak.net/join-slack).
+For general help and support:
+
+  - Join our [Spectrum Community](https://spectrum.chat/phlaknet)
+  - Reach out on the [Slack Workspace](https://ln.phlak.net/join-slack)
+  - Message [@PHLAK](https://twitter.com/PHLAK) on Twitter
 
 Please report bugs to the [GitHub Issue Tracker](https://github.com/PHLAK/Config/issues).
 
