@@ -80,146 +80,168 @@ Configuration File Formats
 A PHP configuration file must have the `.php` file extension, be a valid PHP
 file and and return a valid PHP array.
 
-```php
-<?php
+<details>
+  <summary>Example PHP file</summary>
 
-return [
-    'driver' => 'mysql',
-    'drivers' => [
-        'sqlite' => [
-            'database' => 'database.sqlite',
-            'prefix' => ''
-        ],
-        'mysql' => [
-            'host' => 'localhost',
-            'database' => 'blog',
-            'username' => 'blogger',
-            'password' => 'hunter2',
-            'charset' => 'utf8',
-            'prefix' => ''
-        ]
-    ]
-];
-
-```
+  ```php
+  <?php
+  
+  return [
+      'driver' => 'mysql',
+      'drivers' => [
+          'sqlite' => [
+              'database' => 'database.sqlite',
+              'prefix' => ''
+          ],
+          'mysql' => [
+              'host' => 'localhost',
+              'database' => 'blog',
+              'username' => 'blogger',
+              'password' => 'hunter2',
+              'charset' => 'utf8',
+              'prefix' => ''
+          ]
+      ]
+  ];
+  ```
+</details>
 
 ### INI
 
 An INI configuration file must have the `.ini` file extension and be a valid INI
 file.
 
-```ini
-driver = mysql
+<details>
+  <summary>Example INI file</summary>
 
-[drivers]
-
-sqlite[database] =  database.sqlite
-sqlite[prefix] =
-
-mysql[host] = localhost
-mysql[database] = blog
-mysql[username] = blogger
-mysql[password] = hunter2
-mysql[charset] = utf8
-mysql[prefix] =
-```
+  ```ini
+  driver = mysql
+  
+  [drivers]
+  
+  sqlite[database] =  database.sqlite
+  sqlite[prefix] =
+  
+  mysql[host] = localhost
+  mysql[database] = blog
+  mysql[username] = blogger
+  mysql[password] = hunter2
+  mysql[charset] = utf8
+  mysql[prefix] =
+  ```
+</details>
 
 ### JSON
 
 A JSON configuration file must have the `.json` file extension and contain a
 valid JSON object.
 
-```json
-{
-    "driver": "mysql",
-    "drivers": {
-        "sqlite": {
-            "database": "database.sqlite",
-            "prefix": ""
-        },
-        "mysql": {
-            "host": "localhost",
-            "database": "blog",
-            "username": "blogger",
-            "password": "hunter2",
-            "charset": "utf8",
-            "prefix": ""
-        }
-    }
-}
+<details>
+  <summary>Example JSON file</summary>
 
-```
+  ```json
+  {
+      "driver": "mysql",
+      "drivers": {
+          "sqlite": {
+              "database": "database.sqlite",
+              "prefix": ""
+          },
+          "mysql": {
+              "host": "localhost",
+              "database": "blog",
+              "username": "blogger",
+              "password": "hunter2",
+              "charset": "utf8",
+              "prefix": ""
+          }
+      }
+  }
+  ```
+</details>
 
 ### TOML
 
 A TOML configuration file must have the `.toml` file extension and be a valid
 TOML file.
 
-```toml
-driver = 'mysql'
+<details>
+  <summary>Example TOML file</summary>
 
-[drivers.sqlite]
-database = 'database.sqlite'
-prefix = ''
-
-[drivers.mysql]
-host = 'localhost'
-database = 'blog'
-username = 'blogger'
-password = 'hunter2'
-charset = 'utf8'
-prefix = ''
-```
+  ```toml
+  driver = 'mysql'
+  
+  [drivers.sqlite]
+  database = 'database.sqlite'
+  prefix = ''
+  
+  [drivers.mysql]
+  host = 'localhost'
+  database = 'blog'
+  username = 'blogger'
+  password = 'hunter2'
+  charset = 'utf8'
+  prefix = ''
+  ```
+</details>
 
 ### YAML
 
 A YAML configuration file must have the `.yaml` file extension, be a valid YAML
 file.
 
-```yaml
-driver: mysql
+<details>
+  <summary>Example YAML file</summary>
 
-drivers:
-
-  sqlite:
-    database: database.sqlite
-    prefix:
-
-  mysql:
-    host: localhost
-    database: blog
-    username: blogger
-    password: hunter2
-    charset: utf8
-    prefix:
-```
+  ```yaml
+  driver: mysql
+  
+  drivers:
+  
+    sqlite:
+      database: database.sqlite
+      prefix:
+  
+    mysql:
+      host: localhost
+      database: blog
+      username: blogger
+      password: hunter2
+      charset: utf8
+      prefix:
+  ```
+</details>
 
 ### XML
 
 A XML configuration file must have the `.xml` file extension and contain valid
 XML.
 
-```xml
-<?xml version='1.0'?>
+<details>
+  <summary>Example XML file</summary>
 
-<database>
-    <driver>mysql</driver>
-    <drivers>
-        <sqlite>
-            <database>database.sqlite</database>
-            <prefix></prefix>
-        </sqlite>
-        <mysql>
-            <host>localhost</host>
-            <database>blog</database>
-            <username>blogger</username>
-            <password>hunter2</password>
-            <charset>utf8</charset>
-            <prefix></prefix>
-        </mysql>
-    </drivers>
-</database>
-```
+  ```xml
+  <?xml version='1.0'?>
+  
+  <database>
+      <driver>mysql</driver>
+      <drivers>
+          <sqlite>
+              <database>database.sqlite</database>
+              <prefix></prefix>
+          </sqlite>
+          <mysql>
+              <host>localhost</host>
+              <database>blog</database>
+              <username>blogger</username>
+              <password>hunter2</password>
+              <charset>utf8</charset>
+              <prefix></prefix>
+          </mysql>
+      </drivers>
+  </database>
+  ```
+</details>
 
 Usage
 -----
