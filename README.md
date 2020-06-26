@@ -253,10 +253,13 @@ Usage
 Config::__construct( mixed $context [, string $prefix = null ] ) : Config
 ```
 
-| Parameter  | Description                                                                                                                 |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `$context` | Raw array of configuration options or path to a configuration file or directory containing one or more configuration files  |
-| `$prefix`  | A key under which the loaded config will be nested                                                                          |
+<dl>
+  <dt><code>$context</code></dt>
+  <dd>Raw array of configuration options or path to a configuration file or directory containing one or more configuration files</dd>  
+  
+  <dt><code>$prefix</code></dt>
+  <dd>A key under which the loaded config will be nested</dd>
+</dl>
 
 #### Examples
 
@@ -290,10 +293,13 @@ $config = new Config([
 Config::set( string $key, mixed $value ) : bool
 ```
 
-| Parameter | Description                      |
-| --------- | -------------------------------- |
-| `$key`    | Unique configuration option key  |
-| `$value`  | Config item value                |
+<dl>
+  <dt><code>$key</code></dt>
+  <dd>Unique configuration option key</dd>
+  
+  <dt><code>$value</code></dt>
+  <dd>Config item value</dd>
+</dl>
 
 #### Example
 
@@ -311,10 +317,13 @@ $config->set('port', 12345);
 Config::get( string $key [, mixed $default = null ] ) : mixed
 ```
 
-| Parameter | Description                                      |
-| --------- | ------------------------------------------------ |
-| `$key`    | Unique configuration option key                  |
-| `$value`  | Default value to return if option does not exist |
+<dl>
+  <dt><code>$key</code></dt>
+  <dd>Unique configuration option key</dd>
+  
+  <dt><code>$value</code></dt>
+  <dd>Config item value</dd>
+</dl>
 
 #### Examples
 
@@ -339,9 +348,10 @@ $config->get('hostname', 'localhost');
 Config::has( string $key ) : bool
 ```
 
-| Parameter | Description                     |
-| --------- | ------------------------------- |
-| `$key`    | Unique configuration option key |
+<dl>
+  <dt><code>$key</code></dt>
+  <dd>Unique configuration option key</dd>
+</dl>
 
 #### Example
 
@@ -363,10 +373,13 @@ $config->has('port');     // Returns false
 Config::append( string $key, mixed $value ) : bool
 ```
 
-| Parameter | Description                      |
-| --------- | -------------------------------- |
-| `$key`    | Unique configuration option key  |
-| `$value`  | Config item value                |
+<dl>
+  <dt><code>$key</code></dt>
+  <dd>Unique configuration option key</dd>
+  
+  <dt><code>$value</code></dt>
+  <dd>Config item value</dd>
+</dl>
 
 #### Example
 
@@ -386,10 +399,13 @@ $config->append('tags', 'baz'); // ['foo', 'bar', 'baz']
 Config::append( string $key, mixed $value ) : bool
 ```
 
-| Parameter | Description                      |
-| --------- | -------------------------------- |
-| `$key`    | Unique configuration option key  |
-| `$value`  | Config item value                |
+<dl>
+  <dt><code>$key</code></dt>
+  <dd>Unique configuration option key</dd>
+  
+  <dt><code>$value</code></dt>
+  <dd>Config item value</dd>
+</dl>
 
 #### Example
 
@@ -409,9 +425,10 @@ $config->append('tags', 'baz'); // ['baz', 'foo', 'bar']
 Config::unset( string $key ) : bool
 ```
 
-| Parameter | Description                      |
-| --------- | -------------------------------- |
-| `$key`    | Unique configuration option key  |
+<dl>
+  <dt><code>$key</code></dt>
+  <dd>Unique configuration option key</dd>
+</dl>
 
 #### Example
 
@@ -428,12 +445,16 @@ $config->unset('hostname');
 Config::load( string $path [, string $prefix = null [, bool $override = true ]] ) : self
 ```
 
-| Parameter   | Description                                                                  |
-| ----------- | ---------------------------------------------------------------------------- |
-| `$path`     | Path to configuration file or directory                                      |
-| `$prefix`   | A key under which the loaded config will be nested                           |
-| `$override` | Whether or not to override existing options with values from the loaded file |
-
+<dl>
+  <dt><code>$path</code></dt>
+  <dd>Path to configuration file or directory</dd>
+  
+  <dt><code>$prefix</code></dt>
+  <dd>A key under which the loaded config will be nested</dd>
+  
+  <dt><code>$override</code></dt>
+  <dd>Whether or not to override existing options with values from the loaded file</dd>
+</dl>
 
 #### Examples
 
@@ -464,10 +485,13 @@ $config->load('additional-options.php', null, false);
 Config::merge( Config $config [, bool $override = true ] ) : self
 ```
 
-| Parameter   | Description                                                                           |
-| ----------- | ------------------------------------------------------------------------------------- |
-| `$config`   | Instance of Config                                                                    |
-| `$override` | Whether or not to override existing options with values from the merged config object |
+<dl>
+  <dt><code>$config</code></dt>
+  <dd>Instance of Config</dd>
+  
+  <dt><code>$override</code></dt>
+  <dd>Whether or not to override existing options with values from the merged config object</dd>
+</dl>
 
 #### Examples
 
@@ -498,9 +522,10 @@ $config->merge($anotherConfig, false);
 Config::split( string $key ) : Config
 ```
 
-| Parameter | Description                     |
-| --------- | ------------------------------- |
-| `$key`    | Unique configuration option key |
+<dl>
+  <dt><code>$key</code></dt>
+  <dd>Unique configuration option key</dd>
+</dl>
 
 #### Example
 
