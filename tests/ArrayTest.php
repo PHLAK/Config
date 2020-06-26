@@ -5,6 +5,7 @@ namespace PHLAK\Config\Tests;
 use PHLAK\Config\Config;
 use PHPUnit\Framework\TestCase;
 
+/** @covers \PHLAK\Config\Traits\Arrayable */
 class ArrayTest extends TestCase
 {
     public function test_it_can_initialize_an_array()

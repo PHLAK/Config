@@ -8,6 +8,7 @@ use PHLAK\Config\Interfaces\ConfigInterface;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
+/** @covers \PHLAK\Config\Config */
 class ConfigTest extends TestCase
 {
     public function test_it_is_instantiable(): void

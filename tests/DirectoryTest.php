@@ -5,6 +5,7 @@ namespace PHLAK\Config\Tests;
 use PHLAK\Config\Config;
 use PHPUnit\Framework\TestCase;
 
+/** @covers \PHLAK\Config\Loaders\Directory */
 class DirectoryTest extends TestCase
 {
     public function test_it_can_initialize_a_directory()

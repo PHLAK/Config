@@ -7,6 +7,7 @@ use PHLAK\Config\Exceptions\InvalidFileException;
 use PHLAK\Config\Tests\Traits\Initializable;
 use PHPUnit\Framework\TestCase;
 
+/** @covers \PHLAK\Config\Loaders\Yaml */
 class YamlTest extends TestCase
 {
     use Initializable;

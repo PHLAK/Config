@@ -5,6 +5,7 @@ namespace PHLAK\Config\Tests;
 use PHLAK\Config\Tests\Traits\Initializable;
 use PHPUnit\Framework\TestCase;
 
+/** @covers \PHLAK\Config\Loaders\Xml */
 class XmlTest extends TestCase
 {
     use Initializable;
