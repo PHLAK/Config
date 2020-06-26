@@ -564,11 +564,7 @@ $config->toArray(); // Returns ['foo' => 'foo']
 Troubleshooting
 ---------------
 
-For general help and support:
-
-  - Join our [Spectrum Community](https://spectrum.chat/phlaknet)
-  - Reach out on the [Slack Workspace](https://ln.phlak.net/join-slack)
-  - Message [@PHLAK](https://twitter.com/PHLAK) on Twitter
+For general help and support join our [Spectrum Community](https://spectrum.chat/phlaknet) or reach out on [Twitter](https://twitter.com/PHLAK).
 
 Please report bugs to the [GitHub Issue Tracker](https://github.com/PHLAK/Config/issues).
 
