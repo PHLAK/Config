@@ -1,0 +1,15 @@
+version: 2
+updates:
+- package-ecosystem: composer
+  directory: "/"
+  schedule:
+    interval: monthly
+    time: "04:00"
+    timezone: US/Arizona
+  open-pull-requests-limit: 10
+  assignees:
+  - PHLAK
+  ignore:
+  - dependency-name: phpunit/phpunit
+    versions:
+    - "> 7.0"
