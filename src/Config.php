@@ -53,7 +53,7 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
      */
     public static function fromDirectory(string $path): ConfigInterface
     {
-        $config = new static();
+        $config = new self();
 
         foreach (new DirectoryIterator($path) as $file) {
             if ($file->isFile()) {
@@ -223,9 +223,9 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
         $newConfig = $prefix ? [$prefix => $loader->getArray()] : $loader->getArray();
 
         if ($override) {
-            $this->config = (array) array_replace_recursive($this->config, $newConfig);
+            $this->config = array_replace_recursive($this->config, $newConfig);
         } else {
-            $this->config = (array) array_replace_recursive($newConfig, $this->config);
+            $this->config = array_replace_recursive($newConfig, $this->config);
         }
 
         return $this;
@@ -243,9 +243,9 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
     public function merge(ConfigInterface $config, bool $override = true): ConfigInterface
     {
         if ($override) {
-            $this->config = (array) array_replace_recursive($this->config, $config->toArray());
+            $this->config = array_replace_recursive($this->config, $config->toArray());
         } else {
-            $this->config = (array) array_replace_recursive($config->toArray(), $this->config);
+            $this->config = array_replace_recursive($config->toArray(), $this->config);
         }
 
         return $this;
@@ -260,7 +260,7 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
      */
     public function split(string $key): ConfigInterface
     {
-        return new static($this->get($key));
+        return new self($this->get($key));
     }
 
     /**
