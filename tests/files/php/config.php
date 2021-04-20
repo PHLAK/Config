@@ -5,7 +5,7 @@ return [
     'drivers' => [
         'sqlite' => [
             'database' => 'database.sqlite',
-            'prefix' => ''
+            'prefix' => '',
         ],
         'mysql' => [
             'host' => 'localhost',
@@ -13,7 +13,7 @@ return [
             'username' => 'blogger',
             'password' => 'hunter2',
             'charset' => 'utf8',
-            'prefix' => ''
+            'prefix' => '',
         ],
         'pgsql' => [
             'host' => 'localhost',
@@ -21,7 +21,7 @@ return [
             'username' => 'blogger',
             'password' => 'hunter2',
             'charset' => 'utf8',
-            'prefix' => ''
-        ]
-    ]
+            'prefix' => '',
+        ],
+    ],
 ];

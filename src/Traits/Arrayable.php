@@ -45,7 +45,7 @@ trait Arrayable
      * Assign a value to the specified item at a specific offset.
      *
      * @param mixed $offset The offset to assign the value to
-     * @param mixed $value  The value to set
+     * @param mixed $value The value to set
      */
     public function offsetSet($offset, $value)
     {

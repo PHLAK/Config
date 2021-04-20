@@ -10,7 +10,7 @@ interface ConfigInterface
      * @param array|string $context Raw array of configuration options or path to a
      *                              configuration file or directory containing one or
      *                              more configuration files
-     * @param string       $prefix  A key under which the loaded config will be nested
+     * @param string $prefix A key under which the loaded config will be nested
      */
     public function __construct($context = null, string $prefix = null);
 
@@ -19,16 +19,14 @@ interface ConfigInterface
      * prefixed entries by file.
      *
      * @param string $path A path to a directory of configuration files
-     *
-     * @return self
      */
     public static function fromDirectory(string $path): self;
 
     /**
      * Store a config value with a specified key.
      *
-     * @param string $key   Unique configuration option key
-     * @param mixed  $value Config item value
+     * @param string $key Unique configuration option key
+     * @param mixed $value Config item value
      *
      * @return bool True on success, otherwise false
      */
@@ -37,8 +35,8 @@ interface ConfigInterface
     /**
      * Retrieve a configuration option via a provided key.
      *
-     * @param string $key     Unique configuration option key
-     * @param mixed  $default Default value to return if option does not exist
+     * @param string $key Unique configuration option key
+     * @param mixed $default Default value to return if option does not exist
      *
      * @return mixed Stored config item or $default value
      */
@@ -56,8 +54,8 @@ interface ConfigInterface
     /**
      * Append a value onto the end of an existing array configuration option.
      *
-     * @param string $key   Unique configuration option key
-     * @param mixed  $value Config item value
+     * @param string $key Unique configuration option key
+     * @param mixed $value Config item value
      *
      * @throws \RuntimeException
      *
@@ -68,8 +66,8 @@ interface ConfigInterface
     /**
      * Prepend a value onto the beginning of an existing array configuration option.
      *
-     * @param string $key   Unique configuration option key
-     * @param mixed  $value Config item value
+     * @param string $key Unique configuration option key
+     * @param mixed $value Config item value
      *
      * @throws \RuntimeException
      *
@@ -89,19 +87,17 @@ interface ConfigInterface
     /**
      * Load configuration options from a file or directory.
      *
-     * @param string $path     Path to configuration file or directory
-     * @param string $prefix   A key under which the loaded config will be nested
-     * @param bool   $override Whether or not to override existing options with
-     *                         values from the loaded file
-     *
-     * @return self
+     * @param string $path Path to configuration file or directory
+     * @param string $prefix A key under which the loaded config will be nested
+     * @param bool $override Whether or not to override existing options with
+     *                       values from the loaded file
      */
     public function load(string $path, string $prefix = null, bool $override = true): self;
 
     /**
      * Merge another instance of ConfigInterface into this one.
      *
-     * @param self $config   Instance of ConfigInterface
+     * @param self $config Instance of ConfigInterface
      * @param bool $override Whether or not to override existing options with
      *                       values from the merged config object
      *
@@ -114,8 +110,6 @@ interface ConfigInterface
      * ConfigInterface object.
      *
      * @param string $key Unique configuration option key
-     *
-     * @return self
      */
     public function split(string $key): self;
 

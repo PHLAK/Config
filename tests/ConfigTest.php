@@ -133,8 +133,8 @@ class ConfigTest extends TestCase
         $config = new Config([
             'foo' => 'foo',
             'bar' => [
-                'baz' => 'barbaz'
-            ]
+                'baz' => 'barbaz',
+            ],
         ]);
 
         $bar = $config->split('bar');
@@ -181,15 +181,15 @@ class ConfigTest extends TestCase
         $config = new Config([
             'foo' => 'foo',
             'bar' => [
-                'baz' => 'barbaz'
-            ]
+                'baz' => 'barbaz',
+            ],
         ]);
 
         $this->assertEquals([
             'foo' => 'foo',
             'bar' => [
-                'baz' => 'barbaz'
-            ]
+                'baz' => 'barbaz',
+            ],
         ], $config->toArray());
     }
 
@@ -198,7 +198,7 @@ class ConfigTest extends TestCase
         $config = new Config([
             'foo' => true,
             'bar' => true,
-            'baz' => true
+            'baz' => true,
         ]);
 
         $this->assertInstanceOf(\Traversable::class, $config);
@@ -212,8 +212,8 @@ class ConfigTest extends TestCase
     {
         $config = new Config([
             'app' => [
-                'vars' => ['foo', 'bar']
-            ]
+                'vars' => ['foo', 'bar'],
+            ],
         ]);
 
         $config->append('app.vars', 'baz');
@@ -223,7 +223,7 @@ class ConfigTest extends TestCase
         $config->append('app.vars', ['qux', 'quux']);
 
         $this->assertEquals([
-            'foo', 'bar', 'baz', 'qux', 'quux'
+            'foo', 'bar', 'baz', 'qux', 'quux',
         ], $config->get('app.vars'));
     }
 
@@ -240,8 +240,8 @@ class ConfigTest extends TestCase
     {
         $config = new Config([
             'app' => [
-                'vars' => ['foo', 'bar']
-            ]
+                'vars' => ['foo', 'bar'],
+            ],
         ]);
 
         $config->prepend('app.vars', 'baz');
@@ -251,7 +251,7 @@ class ConfigTest extends TestCase
         $config->prepend('app.vars', ['qux', 'quux']);
 
         $this->assertEquals([
-            'qux', 'quux', 'baz', 'foo', 'bar'
+            'qux', 'quux', 'baz', 'foo', 'bar',
         ], $config->get('app.vars'));
     }
 
@@ -279,7 +279,7 @@ class ConfigTest extends TestCase
             'foo' => [
                 'bar' => 'foobar',
                 'baz' => 'foobaz',
-            ]
+            ],
         ]);
 
         $this->assertTrue($config->unset('foo.baz'));

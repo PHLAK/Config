@@ -21,10 +21,10 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
     /**
      * Create a new Config object.
      *
-     * @param mixed  $context Raw array of configuration options or path to a
-     *                        configuration file or directory containing one or
-     *                        more configuration files
-     * @param string $prefix  A key under which the loaded config will be nested
+     * @param mixed $context Raw array of configuration options or path to a
+     *                       configuration file or directory containing one or
+     *                       more configuration files
+     * @param string $prefix A key under which the loaded config will be nested
      */
     public function __construct($context = null, string $prefix = null)
     {
@@ -33,9 +33,11 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
                 break;
             case 'array':
                 $this->config = $prefix ? [$prefix => $context] : $context;
+
                 break;
             case 'string':
                 $this->load($context, $prefix);
+
                 break;
             default:
                 throw new InvalidContextException('Failed to initialize config');
@@ -68,8 +70,8 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
     /**
      * Store a config value with a specified key.
      *
-     * @param string $key   Unique configuration option key
-     * @param mixed  $value Config item value
+     * @param string $key Unique configuration option key
+     * @param mixed $value Config item value
      *
      * @return bool True on success, otherwise false
      */
@@ -89,8 +91,8 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
     /**
      * Retrieve a configuration option via a provided key.
      *
-     * @param string $key     Unique configuration option key
-     * @param mixed  $default Default value to return if option does not exist
+     * @param string $key Unique configuration option key
+     * @param mixed $default Default value to return if option does not exist
      *
      * @return mixed Stored config item or $default value
      */
@@ -132,8 +134,8 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
     /**
      * Append a value onto an existing array configuration option.
      *
-     * @param string $key   Unique configuration option key
-     * @param mixed  $value Config item value
+     * @param string $key Unique configuration option key
+     * @param mixed $value Config item value
      *
      * @throws RuntimeException
      *
@@ -159,8 +161,8 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
     /**
      * Prepend a value onto an existing array configuration option.
      *
-     * @param string $key   Unique configuration option key
-     * @param mixed  $value Config item value
+     * @param string $key Unique configuration option key
+     * @param mixed $value Config item value
      *
      * @throws RuntimeException
      *
@@ -202,10 +204,10 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
     /**
      * Load configuration options from a file or directory.
      *
-     * @param string $path     Path to configuration file or directory
-     * @param string $prefix   A key under which the loaded config will be nested
-     * @param bool   $override Whether or not to override existing options with
-     *                         values from the loaded file
+     * @param string $path Path to configuration file or directory
+     * @param string $prefix A key under which the loaded config will be nested
+     * @param bool $override Whether or not to override existing options with
+     *                       values from the loaded file
      *
      * @return \PHLAK\Config\Interfaces\ConfigInterface This Config object
      */
@@ -232,9 +234,9 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
     /**
      * Merge another Config object into this one.
      *
-     * @param \PHLAK\Config\Interfaces\ConfigInterface $config   Instance of Config
-     * @param bool                                     $override Whether or not to override existing options with
-     *                                                           values from the merged config object
+     * @param \PHLAK\Config\Interfaces\ConfigInterface $config Instance of Config
+     * @param bool $override Whether or not to override existing options with
+     *                       values from the merged config object
      *
      * @return \PHLAK\Config\Interfaces\ConfigInterface This Config object
      */
