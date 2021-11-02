@@ -3,7 +3,7 @@
 namespace PHLAK\Config\Tests;
 
 use PHLAK\Config\Config;
-use PHPUnit\Framework\TestCase;
+use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
 /** @covers \PHLAK\Config\Loaders\Directory */
 class DirectoryTest extends TestCase
