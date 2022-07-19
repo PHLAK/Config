@@ -12,7 +12,7 @@ trait Arrayable
      *
      * @return Traversable The conifg as a traversable iterator
      */
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return new ArrayIterator($this->config);
     }
@@ -24,7 +24,7 @@ trait Arrayable
      *
      * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->config[$offset]);
     }
@@ -36,7 +36,7 @@ trait Arrayable
      *
      * @return mixed
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         return $this->config[$offset];
     }
@@ -47,7 +47,7 @@ trait Arrayable
      * @param mixed $offset The offset to assign the value to
      * @param mixed $value The value to set
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->config[$offset] = $value;
     }
@@ -57,7 +57,7 @@ trait Arrayable
      *
      * @param $offset The offset to unset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->config[$offset]);
     }
