@@ -20,7 +20,7 @@
     ],
     "require": {
         "php": ">=7.2",
-        "symfony/yaml": "^3.0 || ^4.0 || ^5.0",
+        "symfony/yaml": "^3.0 || ^4.0 || ^5.0 || ^6.0",
         "yosymfony/toml": "^1.0"
     },
     "require-dev": {
