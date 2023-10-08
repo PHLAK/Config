@@ -7,10 +7,10 @@ interface ConfigInterface
     /**
      * Create a new instance of a ConfigInterface object.
      *
-     * @param array|string $context Raw array of configuration options or path to a
+     * @param null $context Raw array of configuration options or path to a
      *                              configuration file or directory containing one or
      *                              more configuration files
-     * @param string $prefix A key under which the loaded config will be nested
+     * @param string|null $prefix A key under which the loaded config will be nested
      */
     public function __construct($context = null, string $prefix = null);
 
@@ -30,24 +30,24 @@ interface ConfigInterface
      *
      * @return bool True on success, otherwise false
      */
-    public function set(string $key, $value): bool;
+    public function set(string $key, mixed $value): bool;
 
     /**
      * Retrieve a configuration option via a provided key.
      *
      * @param string $key Unique configuration option key
-     * @param mixed $default Default value to return if option does not exist
+     * @param mixed|null $default Default value to return if option does not exist
      *
      * @return mixed Stored config item or $default value
      */
-    public function get(string $key, $default = null);
+    public function get(string $key, mixed $default = null): mixed;
 
     /**
      * Check for the existence of a configuration item.
      *
      * @param string $key Unique configuration option key
      *
-     * @return bool True if item existst, otherwise false
+     * @return bool True if item exists, otherwise false
      */
     public function has(string $key): bool;
 
@@ -61,7 +61,7 @@ interface ConfigInterface
      *
      * @return true
      */
-    public function append(string $key, $value): bool;
+    public function append(string $key, mixed $value): bool;
 
     /**
      * Prepend a value onto the beginning of an existing array configuration option.
@@ -73,7 +73,7 @@ interface ConfigInterface
      *
      * @return true
      */
-    public function prepend(string $key, $value): bool;
+    public function prepend(string $key, mixed $value): bool;
 
     /**
      * Unset a configuration option via a provided key.
@@ -88,9 +88,10 @@ interface ConfigInterface
      * Load configuration options from a file or directory.
      *
      * @param string $path Path to configuration file or directory
-     * @param string $prefix A key under which the loaded config will be nested
-     * @param bool $override Whether or not to override existing options with
+     * @param string|null $prefix A key under which the loaded config will be nested
+     * @param bool $override Whether to override existing options with
      *                       values from the loaded file
+     * @return ConfigInterface
      */
     public function load(string $path, string $prefix = null, bool $override = true): self;
 
@@ -98,7 +99,7 @@ interface ConfigInterface
      * Merge another instance of ConfigInterface into this one.
      *
      * @param self $config Instance of ConfigInterface
-     * @param bool $override Whether or not to override existing options with
+     * @param bool $override Whether to override existing options with
      *                       values from the merged config object
      *
      * @return self This ConfigInterface object

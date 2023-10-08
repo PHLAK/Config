@@ -7,7 +7,7 @@ use PHLAK\Config\Interfaces\Loadable;
 abstract class Loader implements Loadable
 {
     /** @var string Path to a configuration file or directory */
-    protected $context;
+    protected string $context;
 
     /**
      * Create a new Loader object.

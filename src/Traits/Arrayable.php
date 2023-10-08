@@ -8,9 +8,9 @@ use Traversable;
 trait Arrayable
 {
     /**
-     * Retrieve an the config array as an iterator.
+     * Retrieve the config array as an iterator.
      *
-     * @return Traversable The conifg as a traversable iterator
+     * @return Traversable The config as a traversable iterator
      */
     public function getIterator(): Traversable
     {
@@ -47,7 +47,7 @@ trait Arrayable
      * @param mixed $offset The offset to assign the value to
      * @param mixed $value The value to set
      */
-    public function offsetSet($offset, $value): void
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->config[$offset] = $value;
     }
