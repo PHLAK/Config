@@ -55,9 +55,9 @@ trait Arrayable
     /**
      * Unset an item at a specific offset.
      *
-     * @param $offset The offset to unset
+     * @param mixed $offset The offset to unset
      */
-    public function offsetUnset($offset): void
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->config[$offset]);
     }
