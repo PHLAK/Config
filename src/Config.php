@@ -167,7 +167,8 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
      * @param mixed $value Config item value
      *
      * @return true
-     *@throws RuntimeException
+     *
+     * @throws RuntimeException
      *
      */
     public function prepend(string $key, mixed $value): bool
