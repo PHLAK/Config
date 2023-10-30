@@ -208,7 +208,7 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
      * Load configuration options from a file or directory.
      *
      * @param string $path Path to configuration file or directory
-     * @param string|null $prefix A key under which the loaded config will be nested
+     * @param string $prefix A key under which the loaded config will be nested
      * @param bool $override Whether to override existing options with
      *                       values from the loaded file
      *
