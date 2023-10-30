@@ -139,7 +139,8 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
      * @param mixed $value Config item value
      *
      * @return true
-     *@throws RuntimeException
+     *
+     * @throws RuntimeException
      *
      */
     public function append(string $key, mixed $value): bool
