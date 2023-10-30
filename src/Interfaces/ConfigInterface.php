@@ -10,7 +10,7 @@ interface ConfigInterface
      * @param array|string $context Raw array of configuration options or path to a
      *                              configuration file or directory containing one or
      *                              more configuration files
-     * @param string|null $prefix A key under which the loaded config will be nested
+     * @param string $prefix A key under which the loaded config will be nested
      */
     public function __construct($context = null, string $prefix = null);
 
