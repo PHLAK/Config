@@ -10,5 +10,5 @@ interface Loadable
      *
      * @return array Array of configuration options
      */
-    public function getArray();
+    public function getArray(): array;
 }

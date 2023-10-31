@@ -24,7 +24,8 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
      * @param mixed $context Raw array of configuration options or path to a
      *                       configuration file or directory containing one or
      *                       more configuration files
-     * @param string $prefix A key under which the loaded config will be nested
+     * @param string|array $prefix A key under which the loaded config will be nested
+     * @throws InvalidContextException
      */
     public function __construct($context = null, string $prefix = null)
     {
@@ -75,7 +76,7 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
      *
      * @return bool True on success, otherwise false
      */
-    public function set(string $key, $value): bool
+    public function set(string $key, mixed $value): bool
     {
         $config = &$this->config;
 
@@ -92,11 +93,11 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
      * Retrieve a configuration option via a provided key.
      *
      * @param string $key Unique configuration option key
-     * @param mixed $default Default value to return if option does not exist
+     * @param mixed|null $default Default value to return if option does not exist
      *
      * @return mixed Stored config item or $default value
      */
-    public function get(string $key, $default = null)
+    public function get(string $key, mixed $default = null): mixed
     {
         $config = $this->config;
 
@@ -115,7 +116,7 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
      *
      * @param string $key Unique configuration option key
      *
-     * @return bool True if item existst, otherwise false
+     * @return bool True if item exists, otherwise false
      */
     public function has(string $key): bool
     {
@@ -137,11 +138,12 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
      * @param string $key Unique configuration option key
      * @param mixed $value Config item value
      *
+     * @return true
+     *
      * @throws RuntimeException
      *
-     * @return true
      */
-    public function append(string $key, $value): bool
+    public function append(string $key, mixed $value): bool
     {
         $config = &$this->config;
 
@@ -150,7 +152,7 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
         }
 
         if (! is_array($config)) {
-            throw new RuntimeException("Config item '{$key}' is not an array");
+            throw new RuntimeException("Config item '$key' is not an array");
         }
 
         $config = array_merge($config, (array) $value);
@@ -164,11 +166,12 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
      * @param string $key Unique configuration option key
      * @param mixed $value Config item value
      *
+     * @return true
+     *
      * @throws RuntimeException
      *
-     * @return true
      */
-    public function prepend(string $key, $value): bool
+    public function prepend(string $key, mixed $value): bool
     {
         $config = &$this->config;
 
@@ -177,7 +180,7 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
         }
 
         if (! is_array($config)) {
-            throw new RuntimeException("Config item '{$key}' is not an array");
+            throw new RuntimeException("Config item '$key' is not an array");
         }
 
         $config = array_merge((array) $value, $config);
@@ -206,10 +209,10 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
      *
      * @param string $path Path to configuration file or directory
      * @param string $prefix A key under which the loaded config will be nested
-     * @param bool $override Whether or not to override existing options with
+     * @param bool $override Whether to override existing options with
      *                       values from the loaded file
      *
-     * @return \PHLAK\Config\Interfaces\ConfigInterface This Config object
+     * @return ConfigInterface This Config object
      */
     public function load(string $path, string $prefix = null, bool $override = true): ConfigInterface
     {
@@ -235,7 +238,7 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
      * Merge another Config object into this one.
      *
      * @param \PHLAK\Config\Interfaces\ConfigInterface $config Instance of Config
-     * @param bool $override Whether or not to override existing options with
+     * @param bool $override Whether to override existing options with
      *                       values from the merged config object
      *
      * @return \PHLAK\Config\Interfaces\ConfigInterface This Config object
@@ -252,11 +255,12 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
     }
 
     /**
-     * Split a sub-array of configuration options into it's own config.
+     * Split a sub-array of configuration options into its own config.
      *
      * @param string $key Unique configuration option key
      *
      * @return \PHLAK\Config\Interfaces\ConfigInterface A new ConfigInterface object
+     * @throws InvalidContextException
      */
     public function split(string $key): ConfigInterface
     {
