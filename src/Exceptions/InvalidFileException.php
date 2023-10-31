@@ -2,6 +2,4 @@
 
 namespace PHLAK\Config\Exceptions;
 
-class InvalidFileException extends ConfigException
-{
-}
+class InvalidFileException extends ConfigException {}

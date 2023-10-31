@@ -12,7 +12,7 @@ interface ConfigInterface
      *                              more configuration files
      * @param string $prefix A key under which the loaded config will be nested
      */
-    public function __construct($context = null, string $prefix = null);
+    public function __construct(array|string $context = null, string $prefix = null);
 
     /**
      * Create a new instance of a ConfigInterface objet from a directory with
@@ -91,7 +91,6 @@ interface ConfigInterface
      * @param string $prefix A key under which the loaded config will be nested
      * @param bool $override Whether to override existing options with
      *                       values from the loaded file
-     * @return ConfigInterface
      */
     public function load(string $path, string $prefix = null, bool $override = true): self;
 

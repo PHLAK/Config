@@ -5,12 +5,16 @@ namespace PHLAK\Config;
 use ArrayAccess;
 use DirectoryIterator;
 use IteratorAggregate;
-use PHLAK\Config\Exceptions\InvalidContextException;
 use PHLAK\Config\Interfaces\ConfigInterface;
+use PHLAK\Config\Loaders\Loader;
 use PHLAK\Config\Traits\Arrayable;
 use RuntimeException;
 use SplFileInfo;
 
+/**
+ * @implements ArrayAccess<string, mixed>
+ * @implements IteratorAggregate<string, mixed>
+ */
 class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
 {
     use Arrayable;
@@ -21,28 +25,17 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
     /**
      * Create a new Config object.
      *
-     * @param mixed $context Raw array of configuration options or path to a
-     *                       configuration file or directory containing one or
-     *                       more configuration files
-     * @param string|array $prefix A key under which the loaded config will be nested
-     * @throws InvalidContextException
+     * @param array|string $context Raw array of configuration options or path to a configuration file
+     *                              or directory containing one or more configuration files
+     * @param string $prefix A key under which the loaded config will be nested
      */
-    public function __construct($context = null, string $prefix = null)
+    public function __construct(array|string $context = null, string $prefix = null)
     {
-        switch (gettype($context)) {
-            case 'NULL':
-                break;
-            case 'array':
-                $this->config = $prefix ? [$prefix => $context] : $context;
-
-                break;
-            case 'string':
-                $this->load($context, $prefix);
-
-                break;
-            default:
-                throw new InvalidContextException('Failed to initialize config');
-        }
+        match (gettype($context)) {
+            'array' => $this->config = $prefix ? [$prefix => $context] : $context,
+            'string' => $this->load($context, $prefix),
+            'NULL' => null,
+        };
     }
 
     /**
@@ -54,7 +47,7 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
      */
     public static function fromDirectory(string $path): ConfigInterface
     {
-        $config = new self();
+        $config = new self;
 
         foreach (new DirectoryIterator($path) as $file) {
             if ($file->isFile()) {
@@ -93,7 +86,7 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
      * Retrieve a configuration option via a provided key.
      *
      * @param string $key Unique configuration option key
-     * @param mixed|null $default Default value to return if option does not exist
+     * @param mixed $default Default value to return if option does not exist
      *
      * @return mixed Stored config item or $default value
      */
@@ -138,10 +131,9 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
      * @param string $key Unique configuration option key
      * @param mixed $value Config item value
      *
-     * @return true
-     *
      * @throws RuntimeException
      *
+     * @return true
      */
     public function append(string $key, mixed $value): bool
     {
@@ -166,10 +158,9 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
      * @param string $key Unique configuration option key
      * @param mixed $value Config item value
      *
-     * @return true
-     *
      * @throws RuntimeException
      *
+     * @return true
      */
     public function prepend(string $key, mixed $value): bool
     {
@@ -221,6 +212,7 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
         $className = $file->isDir() ? 'Directory' : ucfirst(strtolower($file->getExtension()));
         $classPath = 'PHLAK\\Config\\Loaders\\' . $className;
 
+        /** @var Loader $loader */
         $loader = new $classPath($file->getRealPath());
 
         $newConfig = $prefix ? [$prefix => $loader->getArray()] : $loader->getArray();
@@ -259,12 +251,17 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
      *
      * @param string $key Unique configuration option key
      *
-     * @return \PHLAK\Config\Interfaces\ConfigInterface A new ConfigInterface object
-     * @throws InvalidContextException
+     * @return ConfigInterface A new ConfigInterface object
      */
     public function split(string $key): ConfigInterface
     {
-        return new self($this->get($key));
+        $value = $this->get($key);
+
+        if (! is_array($value)) {
+            throw new RuntimeException(sprintf('Config item [%s] is not an array', $key));
+        }
+
+        return new self($value);
     }
 
     /**

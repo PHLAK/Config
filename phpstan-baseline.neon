@@ -1,0 +1,6 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method PHLAK\\\\Config\\\\Config\\:\\:load\\(\\) throws checked exception PHLAK\\\\Config\\\\Exceptions\\\\InvalidFileException but it's missing from the PHPDoc @throws tag\\.$#"
+			count: 2
+			path: src/Config.php

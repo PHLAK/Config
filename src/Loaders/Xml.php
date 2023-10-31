@@ -2,6 +2,7 @@
 
 namespace PHLAK\Config\Loaders;
 
+use JsonException;
 use PHLAK\Config\Exceptions\InvalidFileException;
 
 class Xml extends Loader
@@ -18,10 +19,19 @@ class Xml extends Loader
     {
         $parsed = @simplexml_load_file($this->context);
 
-        if (! $parsed) {
+        if ($parsed === false) {
             throw new InvalidFileException('Unable to parse invalid XML file at ' . $this->context);
         }
 
-        return json_decode(json_encode($parsed), true);
+        try {
+            $json = json_encode($parsed, flags: JSON_THROW_ON_ERROR);
+        } catch (JsonException $exception) {
+            throw new InvalidFileException(previous: $exception);
+        }
+
+        /** @var array $array */
+        $array = json_decode($json, true);
+
+        return $array;
     }
 }

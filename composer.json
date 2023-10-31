@@ -24,9 +24,9 @@
         "yosymfony/toml": "^1.0"
     },
     "require-dev": {
-        "phlak/coding-standards": "^2.0",
+        "phlak/coding-standards": "^2.2",
+        "phpstan/phpstan": "^1.10",
         "psy/psysh": "^0.11",
-        "vimeo/psalm": "^5.15",
         "yoast/phpunit-polyfills": "^2.0"
     },
     "autoload": {

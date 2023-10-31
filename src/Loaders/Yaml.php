@@ -18,10 +18,16 @@ class Yaml extends Loader
      */
     public function getArray(): array
     {
+        $contents = file_get_contents($this->context);
+
+        if ($contents === false) {
+            throw new InvalidFileException(sprintf('Unable to parse file [%s]', $this->context));
+        }
+
         try {
-            $parsed = YamlParser::parse(file_get_contents($this->context));
-        } catch (ParseException $e) {
-            throw new InvalidFileException($e->getMessage());
+            $parsed = YamlParser::parse($contents);
+        } catch (ParseException $exception) {
+            throw new InvalidFileException($exception->getMessage());
         }
 
         if (! is_array($parsed)) {

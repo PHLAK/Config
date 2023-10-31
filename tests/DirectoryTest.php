@@ -8,7 +8,7 @@ use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 /** @covers \PHLAK\Config\Loaders\Directory */
 class DirectoryTest extends TestCase
 {
-    public function test_it_can_initialize_a_directory()
+    public function test_it_can_initialize_a_directory(): void
     {
         $config = new Config(__DIR__ . '/files');
 
@@ -16,7 +16,7 @@ class DirectoryTest extends TestCase
         $this->assertEquals('mysql', $config->get('driver'));
     }
 
-    public function test_it_can_initialize_an_array_with_a_prefix()
+    public function test_it_can_initialize_an_array_with_a_prefix(): void
     {
         $config = new Config(__DIR__ . '/files', 'database');
 
