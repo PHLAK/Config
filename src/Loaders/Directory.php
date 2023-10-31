@@ -12,8 +12,6 @@ class Directory extends Loader
      * and convert them to an array of configuration options. Any invalid files
      * will be silently ignored.
      *
-     * @throws \PHLAK\Config\Exceptions\InvalidFileException
-     *
      * @return array Array of configuration options
      */
     public function getArray(): array
@@ -28,12 +26,13 @@ class Directory extends Loader
             $className = $file->isDir() ? 'Directory' : ucfirst(strtolower($file->getExtension()));
             $classPath = 'PHLAK\\Config\\Loaders\\' . $className;
 
+            /** @var Loader $loader */
             $loader = new $classPath($file->getPathname());
 
             try {
                 $contents = array_merge($contents, $loader->getArray());
-            } catch (InvalidFileException $e) {
-                // Ignore it and continue
+            } catch (InvalidFileException) {
+                continue;
             }
         }
 

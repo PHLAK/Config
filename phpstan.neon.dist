@@ -1,0 +1,27 @@
+parameters:
+
+  paths:
+    - src
+    - tests
+
+  level: max
+
+  checkFunctionNameCase: true
+  checkMissingIterableValueType: false
+
+  reportUnmatchedIgnoredErrors: false
+
+  exceptions:
+    implicitThrows: false
+
+    check:
+      missingCheckedExceptionInThrows: true
+      tooWideThrowType: true
+
+    uncheckedExceptionClasses:
+      - 'InvalidArgumentException'
+      - 'RuntimeException'
+      - 'PHPUnit\Framework\Exception'
+
+includes:
+  - phpstan-baseline.neon

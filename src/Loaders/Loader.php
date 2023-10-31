@@ -2,6 +2,7 @@
 
 namespace PHLAK\Config\Loaders;
 
+use PHLAK\Config\Exceptions\InvalidFileException;
 use PHLAK\Config\Interfaces\Loadable;
 
 abstract class Loader implements Loadable
@@ -21,6 +22,8 @@ abstract class Loader implements Loadable
 
     /**
      * Retrieve the context as an array of configuration options.
+     *
+     * @throws InvalidFileException
      *
      * @return array Array of configuration options
      */

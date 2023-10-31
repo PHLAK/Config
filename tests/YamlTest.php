@@ -18,7 +18,7 @@ class YamlTest extends TestCase
         $this->invalidConfig = __DIR__ . '/files/yaml/invalid.yaml';
     }
 
-    public function test_it_throws_an_exception_when_initializing_a_yaml_file_without_an_array()
+    public function test_it_throws_an_exception_when_initializing_a_yaml_file_without_an_array(): void
     {
         $this->expectException(InvalidFileException::class);
 

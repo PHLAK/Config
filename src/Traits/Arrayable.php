@@ -20,11 +20,9 @@ trait Arrayable
     /**
      * Determine whether an item exists at a specific offset.
      *
-     * @param int $offset Offset to check for existence
-     *
-     * @return bool
+     * @param mixed $offset Offset to check for existence
      */
-    public function offsetExists($offset): bool
+    public function offsetExists(mixed $offset): bool
     {
         return isset($this->config[$offset]);
     }
@@ -32,11 +30,9 @@ trait Arrayable
     /**
      * Retrieve an item at a specific offset.
      *
-     * @param int $offset Position of character to get
-     *
-     * @return mixed
+     * @param mixed $offset Position of character to get
      */
-    public function offsetGet($offset): mixed
+    public function offsetGet(mixed $offset): mixed
     {
         return $this->config[$offset];
     }

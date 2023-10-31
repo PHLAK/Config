@@ -19,6 +19,7 @@ class Toml extends Loader
     public function getArray(): array
     {
         try {
+            /** @var array $parsed */
             $parsed = TomlParser::parseFile($this->context);
         } catch (ParseException $e) {
             throw new InvalidFileException($e->getMessage());
