@@ -26,6 +26,10 @@ class Directory extends Loader
             $className = $file->isDir() ? 'Directory' : ucfirst(strtolower($file->getExtension()));
             $classPath = 'PHLAK\\Config\\Loaders\\' . $className;
 
+            if (!class_exists($classPath)) {
+                continue;
+            }
+
             /** @var Loader $loader */
             $loader = new $classPath($file->getPathname());
 
