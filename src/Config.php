@@ -25,11 +25,11 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
     /**
      * Create a new Config object.
      *
-     * @param array|string $context Raw array of configuration options or path to a configuration file
+     * @param array|string|null $context Raw array of configuration options or path to a configuration file
      *                              or directory containing one or more configuration files
      * @param string $prefix A key under which the loaded config will be nested
      */
-    public function __construct(array|string $context = null, string $prefix = null)
+    public function __construct(array|string|null $context = null, ?string $prefix = null)
     {
         match (gettype($context)) {
             'array' => $this->config = $prefix ? [$prefix => $context] : $context,
@@ -90,7 +90,7 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
      *
      * @return mixed Stored config item or $default value
      */
-    public function get(string $key, mixed $default = null): mixed
+    public function get(string $key, ?mixed $default = null): mixed
     {
         $config = $this->config;
 
@@ -205,7 +205,7 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
      *
      * @return ConfigInterface This Config object
      */
-    public function load(string $path, string $prefix = null, bool $override = true): ConfigInterface
+    public function load(string $path, ?string $prefix = null, bool $override = true): ConfigInterface
     {
         $file = new SplFileInfo($path);
 
