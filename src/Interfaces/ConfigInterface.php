@@ -40,7 +40,7 @@ interface ConfigInterface
      *
      * @return mixed Stored config item or $default value
      */
-    public function get(string $key, ?mixed $default = null): mixed;
+    public function get(string $key, mixed $default = null): mixed;
 
     /**
      * Check for the existence of a configuration item.
