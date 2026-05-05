@@ -19,8 +19,8 @@
         }
     ],
     "require": {
-        "php": "^8.0 || ^8.1 || ^8.2",
-        "symfony/yaml": "^5.0 || ^6.0",
+        "php": "^8.0 || ^8.1 || ^8.2 || ^8.4 || ^8.5",
+        "symfony/yaml": "^6.0 || ^7.0",
         "yosymfony/toml": "^1.0"
     },
     "require-dev": {
