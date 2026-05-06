@@ -280,4 +280,20 @@ class ConfigTest extends TestCase
         $this->assertTrue($config->has('foo.bar'));
         $this->assertFalse($config->has('foo.baz'));
     }
+
+    public function test_it_can_initialize_an_array(): void
+    {
+        $config = new Config(['foo' => ['bar' => 'foobar']]);
+
+        $this->assertInstanceOf(Config::class, $config);
+        $this->assertEquals('foobar', $config->get('foo.bar'));
+    }
+
+    public function test_it_can_initialize_an_array_with_a_prefix(): void
+    {
+        $config = new Config(['foo' => ['bar' => 'foobar']], 'baz');
+
+        $this->assertInstanceOf(Config::class, $config);
+        $this->assertEquals('foobar', $config->get('baz.foo.bar'));
+    }
 }
