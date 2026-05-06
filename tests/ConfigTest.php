@@ -146,7 +146,7 @@ class ConfigTest extends TestCase
     {
         $config = new Config;
 
-        $config->set('closure', function ($foo) {
+        $config->set('closure', function (string $foo) {
             return ucwords($foo);
         });
 
