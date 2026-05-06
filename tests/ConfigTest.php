@@ -7,7 +7,7 @@ use PHLAK\Config\Interfaces\ConfigInterface;
 use RuntimeException;
 use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
-/** @covers \PHLAK\Config\Config */
+#[\PHPUnit\Framework\Attributes\CoversClass(\PHLAK\Config\Config::class)]
 class ConfigTest extends TestCase
 {
     public function test_it_is_instantiable(): void

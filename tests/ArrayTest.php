@@ -5,7 +5,7 @@ namespace PHLAK\Config\Tests;
 use PHLAK\Config\Config;
 use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
-/** @covers \PHLAK\Config\Traits\Arrayable */
+#[\PHPUnit\Framework\Attributes\CoversClass(\PHLAK\Config\Traits\Arrayable::class)]
 class ArrayTest extends TestCase
 {
     public function test_it_can_initialize_an_array(): void

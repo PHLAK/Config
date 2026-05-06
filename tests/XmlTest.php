@@ -5,7 +5,7 @@ namespace PHLAK\Config\Tests;
 use PHLAK\Config\Tests\Traits\Initializable;
 use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
-/** @covers \PHLAK\Config\Loaders\Xml */
+#[\PHPUnit\Framework\Attributes\CoversClass(\PHLAK\Config\Loaders\Xml::class)]
 class XmlTest extends TestCase
 {
     use Initializable;

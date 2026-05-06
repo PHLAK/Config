@@ -7,7 +7,7 @@ use PHLAK\Config\Exceptions\InvalidFileException;
 use PHLAK\Config\Tests\Traits\Initializable;
 use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
-/** @covers \PHLAK\Config\Loaders\Toml */
+#[\PHPUnit\Framework\Attributes\CoversClass(\PHLAK\Config\Loaders\Toml::class)]
 class TomlTest extends TestCase
 {
     use Initializable;

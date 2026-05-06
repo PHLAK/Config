@@ -5,7 +5,7 @@ namespace PHLAK\Config\Tests;
 use PHLAK\Config\Tests\Traits\Initializable;
 use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
-/** @covers \PHLAK\Config\Loaders\Json */
+#[\PHPUnit\Framework\Attributes\CoversClass(\PHLAK\Config\Loaders\Json::class)]
 class JsonTest extends TestCase
 {
     use Initializable;

@@ -7,7 +7,7 @@ use PHLAK\Config\Exceptions\InvalidFileException;
 use PHLAK\Config\Tests\Traits\Initializable;
 use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
-/** @covers \PHLAK\Config\Loaders\Yaml */
+#[\PHPUnit\Framework\Attributes\CoversClass(\PHLAK\Config\Loaders\Yaml::class)]
 class YamlTest extends TestCase
 {
     use Initializable;

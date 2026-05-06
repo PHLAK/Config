@@ -5,7 +5,7 @@ namespace PHLAK\Config\Tests;
 use PHLAK\Config\Config;
 use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
-/** @covers \PHLAK\Config\Loaders\Directory */
+#[\PHPUnit\Framework\Attributes\CoversClass(\PHLAK\Config\Loaders\Directory::class)]
 class DirectoryTest extends TestCase
 {
     public function test_it_can_initialize_a_directory(): void
