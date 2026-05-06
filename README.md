@@ -39,7 +39,7 @@ Supported file formats:
 Requirements
 ------------
 
-  - [PHP](https://php.net) >= 7.1
+  - [PHP](https://php.net)
 
 Install with Composer
 ---------------------
@@ -84,7 +84,7 @@ file and and return a valid PHP array.
 
   ```php
   <?php
-  
+
   return [
       'driver' => 'mysql',
       'drivers' => [
@@ -115,12 +115,12 @@ file.
 
   ```ini
   driver = mysql
-  
+
   [drivers]
-  
+
   sqlite[database] =  database.sqlite
   sqlite[prefix] =
-  
+
   mysql[host] = localhost
   mysql[database] = blog
   mysql[username] = blogger
@@ -169,11 +169,11 @@ TOML file.
 
   ```toml
   driver = 'mysql'
-  
+
   [drivers.sqlite]
   database = 'database.sqlite'
   prefix = ''
-  
+
   [drivers.mysql]
   host = 'localhost'
   database = 'blog'
@@ -194,13 +194,13 @@ file.
 
   ```yaml
   driver: mysql
-  
+
   drivers:
-  
+
     sqlite:
       database: database.sqlite
       prefix:
-  
+
     mysql:
       host: localhost
       database: blog
@@ -221,7 +221,7 @@ XML.
 
   ```xml
   <?xml version='1.0'?>
-  
+
   <database>
       <driver>mysql</driver>
       <drivers>
@@ -254,8 +254,8 @@ Config::__construct( mixed $context [, string $prefix = null ] ) : Config
 
 <dl>
   <dt><code>$context</code></dt>
-  <dd>Raw array of configuration options or path to a configuration file or directory containing one or more configuration files</dd>  
-  
+  <dd>Raw array of configuration options or path to a configuration file or directory containing one or more configuration files</dd>
+
   <dt><code>$prefix</code></dt>
   <dd>A key under which the loaded config will be nested</dd>
 </dl>
@@ -295,7 +295,7 @@ Config::set( string $key, mixed $value ) : bool
 <dl>
   <dt><code>$key</code></dt>
   <dd>Unique configuration option key</dd>
-  
+
   <dt><code>$value</code></dt>
   <dd>Config item value</dd>
 </dl>
@@ -319,7 +319,7 @@ Config::get( string $key [, mixed $default = null ] ) : mixed
 <dl>
   <dt><code>$key</code></dt>
   <dd>Unique configuration option key</dd>
-  
+
   <dt><code>$value</code></dt>
   <dd>Config item value</dd>
 </dl>
@@ -375,7 +375,7 @@ Config::append( string $key, mixed $value ) : bool
 <dl>
   <dt><code>$key</code></dt>
   <dd>Unique configuration option key</dd>
-  
+
   <dt><code>$value</code></dt>
   <dd>Config item value</dd>
 </dl>
@@ -401,7 +401,7 @@ Config::append( string $key, mixed $value ) : bool
 <dl>
   <dt><code>$key</code></dt>
   <dd>Unique configuration option key</dd>
-  
+
   <dt><code>$value</code></dt>
   <dd>Config item value</dd>
 </dl>
@@ -447,10 +447,10 @@ Config::load( string $path [, string $prefix = null [, bool $override = true ]] 
 <dl>
   <dt><code>$path</code></dt>
   <dd>Path to configuration file or directory</dd>
-  
+
   <dt><code>$prefix</code></dt>
   <dd>A key under which the loaded config will be nested</dd>
-  
+
   <dt><code>$override</code></dt>
   <dd>Whether or not to override existing options with values from the loaded file</dd>
 </dl>
@@ -487,7 +487,7 @@ Config::merge( Config $config [, bool $override = true ] ) : self
 <dl>
   <dt><code>$config</code></dt>
   <dd>Instance of Config</dd>
-  
+
   <dt><code>$override</code></dt>
   <dd>Whether or not to override existing options with values from the merged config object</dd>
 </dl>
@@ -563,7 +563,7 @@ $config->toArray(); // Returns ['foo' => 'foo']
 Troubleshooting
 ---------------
 
-For general help and support join our [GitHub Discussion](https://github.com/PHLAK/Config/discussions) or reach out on [Twitter](https://twitter.com/PHLAK).
+For general help and support join our [GitHub Discussion](https://github.com/PHLAK/Config/discussions) or reach out on [Bluesky](https://bsky.app/profile/phlak.dev).
 
 Please report bugs to the [GitHub Issue Tracker](https://github.com/PHLAK/Config/issues).
 
