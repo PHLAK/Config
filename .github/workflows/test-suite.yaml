@@ -1,6 +1,9 @@
 name: Config Test Suite
 on: [push, pull_request, workflow_dispatch]
 
+env:
+  PHP_VERSION: 8.5
+
 jobs:
   coding-standards:
     name: Coding Standards
@@ -9,6 +12,11 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
 
       - name: Install PHP Dependencies
         run: composer update
@@ -23,6 +31,11 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
 
       - name: Install PHP Dependencies
         run: composer update
