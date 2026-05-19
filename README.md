@@ -16,7 +16,7 @@
 <p align="center">
     PHP library for simple configuration management
     -- Created by <a href="https://www.ChrisKankiewicz.com">Chris Kankiewicz</a>
-    (<a href="https://twitter.com/PHLAK">@PHLAK</a>)
+    (<a href="https://bsky.app/profile/phlak.dev">@PHLAK.dev</a>)
 </p>
 
 ---
