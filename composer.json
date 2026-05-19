@@ -20,8 +20,8 @@
     ],
     "require": {
         "php": "^8.2 || ^8.3 || ^8.4 || ^8.5",
-        "symfony/yaml": "^7.0 || ^8.0",
-        "yosymfony/toml": "^1.0"
+        "internal/toml": "^1.1",
+        "symfony/yaml": "^7.0 || ^8.0"
     },
     "require-dev": {
         "phlak/coding-standards": "^5.0",

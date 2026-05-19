@@ -2,9 +2,9 @@
 
 namespace PHLAK\Config\Loaders;
 
+use Internal\Toml\Exception\SyntaxException;
+use Internal\Toml\Toml as TomlParser;
 use PHLAK\Config\Exceptions\InvalidFileException;
-use Yosymfony\Toml\Exception\ParseException;
-use Yosymfony\Toml\Toml as TomlParser;
 
 class Toml extends Loader
 {
@@ -18,11 +18,17 @@ class Toml extends Loader
      */
     public function getArray(): array
     {
+        $contents = file_get_contents($this->context);
+
+        if ($contents === false) {
+            throw new InvalidFileException('Unable to read TOML file at ' . $this->context);
+        }
+
         try {
-            /** @var array $parsed */
-            $parsed = TomlParser::parseFile($this->context);
-        } catch (ParseException $e) {
-            throw new InvalidFileException($e->getMessage());
+            /** @throws SyntaxException */
+            $parsed = TomlParser::parseToArray($contents);
+        } catch (SyntaxException $exception) {
+            throw new InvalidFileException($exception->getMessage());
         }
 
         return $parsed;
