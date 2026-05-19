@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PHLAK\Config\Tests\Traits;
 
 use PHLAK\Config\Config;

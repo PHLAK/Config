@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PHLAK\Config\Interfaces;
 
 interface ConfigInterface
@@ -10,7 +12,7 @@ interface ConfigInterface
      * @param array|string|null $context Raw array of configuration options or path to a
      *                                   configuration file or directory containing one or
      *                                   more configuration files
-     * @param string $prefix A key under which the loaded config will be nested
+     * @param string|null $prefix A key under which the loaded config will be nested
      */
     public function __construct(array|string|null $context = null, ?string $prefix = null);
 

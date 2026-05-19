@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PHLAK\Config\Tests;
 
 use PHLAK\Config\Tests\Traits\Initializable;
