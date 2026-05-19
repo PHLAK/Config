@@ -265,7 +265,7 @@ Config::__construct( mixed $context [, string $prefix = null ] ) : Config
 Create a new Config object from a YAML file.
 
 ```php
-$config = new Config('path/to/conifg.yaml');
+$config = new Config('path/to/config.yaml');
 ```
 
 Create a new Config object from a directory of config files.
@@ -395,7 +395,7 @@ $config->append('tags', 'baz'); // ['foo', 'bar', 'baz']
 > Prepend a value onto an existing array configuration option.
 
 ```php
-Config::append( string $key, mixed $value ) : bool
+Config::prepend( string $key, mixed $value ) : bool
 ```
 
 <dl>
@@ -412,7 +412,7 @@ Prepend `baz` to the `tags` config item array.
 
 ```php
 $config->set('tags', ['foo', 'bar'])
-$config->append('tags', 'baz'); // ['baz', 'foo', 'bar']
+$config->prepend('tags', 'baz'); // ['baz', 'foo', 'bar']
 ```
 
 ---
@@ -460,13 +460,13 @@ Config::load( string $path [, string $prefix = null [, bool $override = true ]] 
 Load a single additional file.
 
 ```php
-$conifg->load('path/to/config.php');
+$config->load('path/to/config.php');
 ```
 
 Load an additional file with a prefix.
 
 ```php
-$config->load('databaes.php', 'database');
+$config->load('database.php', 'database');
 ```
 
 Load an additional file without overriding existing values.

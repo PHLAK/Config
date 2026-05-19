@@ -10,7 +10,7 @@ use PHLAK\Config\Exceptions\InvalidFileException;
 class Xml extends Loader
 {
     /**
-     * Retrieve the contents of a .json file and convert it to an array of
+     * Retrieve the contents of a .xml file and convert it to an array of
      * configuration options.
      *
      * @throws \PHLAK\Config\Exceptions\InvalidFileException
