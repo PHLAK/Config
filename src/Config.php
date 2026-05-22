@@ -209,12 +209,21 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
     public function load(string $path, ?string $prefix = null, bool $override = true): ConfigInterface
     {
         $file = new SplFileInfo($path);
+        $extension = $file->getExtension();
 
-        $className = $file->isDir() ? 'Directory' : ucfirst(strtolower($file->getExtension()));
-        $classPath = 'PHLAK\\Config\\Loaders\\' . $className;
+        /** @var class-string<Loader> $loaderClass */
+        $loaderClass = $file->isDir() ? Loaders\Directory::class : match (strtolower($extension)) {
+            'ini' => Loaders\Ini::class,
+            'json' => Loaders\Json::class,
+            'php' => Loaders\Php::class,
+            'toml' => Loaders\Toml::class,
+            'xml' => Loaders\Xml::class,
+            'yaml', 'yml' => Loaders\Yaml::class,
+            default => throw new RuntimeException(sprintf('No loader for extension [%s]', $extension)),
+        };
 
         /** @var Loader $loader */
-        $loader = new $classPath($file->getRealPath());
+        $loader = new $loaderClass($file->getRealPath());
 
         $newConfig = $prefix ? [$prefix => $loader->getArray()] : $loader->getArray();
 

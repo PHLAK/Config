@@ -26,4 +26,12 @@ class YamlTest extends TestCase
 
         new Config(__DIR__ . '/files/yaml/bad.yaml');
     }
+
+    public function test_it_can_initialize_a_file_with_an_alternate_extension(): void
+    {
+        $config = new Config(__DIR__ . '/files/yaml/config.yml');
+
+        $this->assertInstanceOf(Config::class, $config);
+        $this->assertEquals('database.sqlite', $config->get('drivers.sqlite.database'));
+    }
 }

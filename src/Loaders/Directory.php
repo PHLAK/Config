@@ -6,6 +6,8 @@ namespace PHLAK\Config\Loaders;
 
 use DirectoryIterator;
 use PHLAK\Config\Exceptions\InvalidFileException;
+use PHLAK\Config\Loaders;
+use RuntimeException;
 
 class Directory extends Loader
 {
@@ -25,11 +27,21 @@ class Directory extends Loader
                 continue;
             }
 
-            $className = $file->isDir() ? 'Directory' : ucfirst(strtolower($file->getExtension()));
-            $classPath = 'PHLAK\\Config\\Loaders\\' . $className;
+            $extension = $file->getExtension();
+
+            /** @var class-string<Loader> $loaderClass */
+            $loaderClass = $file->isDir() ? Loaders\Directory::class : match (strtolower($extension)) {
+                'ini' => Loaders\Ini::class,
+                'json' => Loaders\Json::class,
+                'php' => Loaders\Php::class,
+                'toml' => Loaders\Toml::class,
+                'xml' => Loaders\Xml::class,
+                'yaml', 'yml' => Loaders\Yaml::class,
+                default => throw new RuntimeException(sprintf('No loader for extension [%s]', $extension)),
+            };
 
             /** @var Loader $loader */
-            $loader = new $classPath($file->getPathname());
+            $loader = new $loaderClass($file->getPathname());
 
             try {
                 $contents = array_merge($contents, $loader->getArray());
