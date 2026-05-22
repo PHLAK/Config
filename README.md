@@ -271,7 +271,7 @@ $config = new Config('path/to/config.yaml');
 Create a new Config object from a directory of config files.
 
 ```php
-$config = new Config('path/to/conifgs/');
+$config = new Config('path/to/configs/');
 ```
 
 Create a new Config object from an array.
@@ -570,4 +570,4 @@ Please report bugs to the [GitHub Issue Tracker](https://github.com/PHLAK/Config
 Copyright
 ---------
 
-This project is liscensed under the [MIT License](https://github.com/PHLAK/Config/blob/master/LICENSE).
+This project is licensed under the [MIT License](https://github.com/PHLAK/Config/blob/master/LICENSE).

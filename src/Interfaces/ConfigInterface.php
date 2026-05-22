@@ -17,7 +17,7 @@ interface ConfigInterface
     public function __construct(array|string|null $context = null, ?string $prefix = null);
 
     /**
-     * Create a new instance of a ConfigInterface objet from a directory with
+     * Create a new instance of a ConfigInterface object from a directory with
      * prefixed entries by file.
      *
      * @param string $path A path to a directory of configuration files
@@ -108,7 +108,7 @@ interface ConfigInterface
     public function merge(self $config, bool $override = true): self;
 
     /**
-     * Split a sub-array of configuration options into it's own instance of a
+     * Split a sub-array of configuration options into its own instance of a
      * ConfigInterface object.
      *
      * @param string $key Unique configuration option key
