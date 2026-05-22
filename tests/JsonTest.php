@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace PHLAK\Config\Tests;
 
+use PHLAK\Config\Loaders\Json;
 use PHLAK\Config\Tests\Traits\Initializable;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversClass(\PHLAK\Config\Loaders\Json::class)]
+#[CoversClass(Json::class)]
 class JsonTest extends TestCase
 {
     use Initializable;

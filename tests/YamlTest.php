@@ -6,11 +6,13 @@ namespace PHLAK\Config\Tests;
 
 use PHLAK\Config\Config;
 use PHLAK\Config\Exceptions\InvalidFileException;
+use PHLAK\Config\Loaders\Yaml;
 use PHLAK\Config\Tests\Traits\Initializable;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversClass(\PHLAK\Config\Loaders\Yaml::class)]
+#[CoversClass(Yaml::class)]
 class YamlTest extends TestCase
 {
     use Initializable;

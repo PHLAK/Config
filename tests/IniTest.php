@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace PHLAK\Config\Tests;
 
+use PHLAK\Config\Loaders\Ini;
 use PHLAK\Config\Tests\Traits\Initializable;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversClass(\PHLAK\Config\Loaders\Ini::class)]
+#[CoversClass(Ini::class)]
 class IniTest extends TestCase
 {
     use Initializable;

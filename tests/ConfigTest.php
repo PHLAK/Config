@@ -6,11 +6,12 @@ namespace PHLAK\Config\Tests;
 
 use PHLAK\Config\Config;
 use PHLAK\Config\Interfaces\ConfigInterface;
-use RuntimeException;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
+use RuntimeException;
 use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversClass(\PHLAK\Config\Config::class)]
+#[CoversClass(Config::class)]
 class ConfigTest extends TestCase
 {
     #[Test]

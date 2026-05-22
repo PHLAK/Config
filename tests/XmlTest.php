@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace PHLAK\Config\Tests;
 
+use PHLAK\Config\Loaders\Xml;
 use PHLAK\Config\Tests\Traits\Initializable;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversClass(\PHLAK\Config\Loaders\Xml::class)]
+#[CoversClass(Xml::class)]
 class XmlTest extends TestCase
 {
     use Initializable;

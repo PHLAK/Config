@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace PHLAK\Config\Tests;
 
 use PHLAK\Config\Config;
+use PHLAK\Config\Loaders\Directory;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversClass(\PHLAK\Config\Loaders\Directory::class)]
+#[CoversClass(Directory::class)]
 class DirectoryTest extends TestCase
 {
     #[Test]
