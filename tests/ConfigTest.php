@@ -7,19 +7,22 @@ namespace PHLAK\Config\Tests;
 use PHLAK\Config\Config;
 use PHLAK\Config\Interfaces\ConfigInterface;
 use RuntimeException;
+use PHPUnit\Framework\Attributes\Test;
 use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
 #[\PHPUnit\Framework\Attributes\CoversClass(\PHLAK\Config\Config::class)]
 class ConfigTest extends TestCase
 {
-    public function test_it_is_instantiable(): void
+    #[Test]
+    public function it_is_instantiable(): void
     {
         $config = new Config;
 
         $this->assertInstanceOf(ConfigInterface::class, $config);
     }
 
-    public function test_it_can_set_and_retrieve_an_item(): void
+    #[Test]
+    public function it_can_set_and_retrieve_an_item(): void
     {
         $config = new Config;
 
@@ -27,7 +30,8 @@ class ConfigTest extends TestCase
         $this->assertEquals('John Pinkerton', $config->get('name'));
     }
 
-    public function test_it_can_set_and_retrieve_an_item_by_dot_notation(): void
+    #[Test]
+    public function it_can_set_and_retrieve_an_item_by_dot_notation(): void
     {
         $config = new Config;
 
@@ -36,49 +40,56 @@ class ConfigTest extends TestCase
         $this->assertEquals(['baz' => 'foo-bar-baz'], $config->get('foo.bar'));
     }
 
-    public function test_it_returns_null_for_nonexistant_items(): void
+    #[Test]
+    public function it_returns_null_for_nonexistant_items(): void
     {
         $config = new Config;
 
         $this->assertNull($config->get('nonexistant-item'));
     }
 
-    public function test_it_returns_a_default_value_for_nonexistant_items(): void
+    #[Test]
+    public function it_returns_a_default_value_for_nonexistant_items(): void
     {
         $config = new Config;
 
         $this->assertFalse($config->get('nonexistant-item', false));
     }
 
-    public function test_it_returns_true_if_it_has_an_item(): void
+    #[Test]
+    public function it_returns_true_if_it_has_an_item(): void
     {
         $config = new Config(['has' => 'some-item']);
 
         $this->assertTrue($config->has('has'));
     }
 
-    public function test_it_returns_true_if_it_has_a_boolean_false(): void
+    #[Test]
+    public function it_returns_true_if_it_has_a_boolean_false(): void
     {
         $config = new Config(['false' => false]);
 
         $this->assertTrue($config->has('false'));
     }
 
-    public function test_it_returns_false_if_it_doesnt_have_an_item(): void
+    #[Test]
+    public function it_returns_false_if_it_doesnt_have_an_item(): void
     {
         $config = new Config;
 
         $this->assertFalse($config->has('nonexistant-item'));
     }
 
-    public function test_it_returns_true_if_it_has_an_item_by_dot_notation(): void
+    #[Test]
+    public function it_returns_true_if_it_has_an_item_by_dot_notation(): void
     {
         $config = new Config(['foo' => ['bar' => 'foobar']]);
 
         $this->assertTrue($config->has('foo.bar'));
     }
 
-    public function test_it_can_load_and_read_additional_files(): void
+    #[Test]
+    public function it_can_load_and_read_additional_files(): void
     {
         $config = new Config(['driver' => 'sqlite']);
 
@@ -87,7 +98,8 @@ class ConfigTest extends TestCase
         $this->assertEquals('mysql', $config->get('driver'));
     }
 
-    public function test_it_can_load_additonal_files_with_a_prefix(): void
+    #[Test]
+    public function it_can_load_additonal_files_with_a_prefix(): void
     {
         $config = new Config;
 
@@ -96,7 +108,8 @@ class ConfigTest extends TestCase
         $this->assertEquals('mysql', $config->get('database.driver'));
     }
 
-    public function test_it_can_load_additional_files_without_overriding_existing_options(): void
+    #[Test]
+    public function it_can_load_additional_files_without_overriding_existing_options(): void
     {
         $config = new Config(['driver' => 'sqlite']);
 
@@ -105,7 +118,8 @@ class ConfigTest extends TestCase
         $this->assertEquals('sqlite', $config->get('driver'));
     }
 
-    public function test_it_can_merge_a_config_object(): void
+    #[Test]
+    public function it_can_merge_a_config_object(): void
     {
         $config = new Config(['foo' => 'foo', 'baz' => 'baz']);
         $gifnoc = new Config(['bar' => 'rab', 'baz' => 'zab']);
@@ -117,7 +131,8 @@ class ConfigTest extends TestCase
         $this->assertEquals('zab', $config->get('baz'));
     }
 
-    public function test_it_can_merge_a_config_object_without_overriding_existing_values(): void
+    #[Test]
+    public function it_can_merge_a_config_object_without_overriding_existing_values(): void
     {
         $config = new Config(['foo' => 'foo', 'baz' => 'baz']);
         $gifnoc = new Config(['bar' => 'rab', 'baz' => 'zab']);
@@ -129,7 +144,8 @@ class ConfigTest extends TestCase
         $this->assertEquals('baz', $config->get('baz'));
     }
 
-    public function test_it_can_split_into_a_sub_object(): void
+    #[Test]
+    public function it_can_split_into_a_sub_object(): void
     {
         $config = new Config([
             'foo' => 'foo',
@@ -144,7 +160,8 @@ class ConfigTest extends TestCase
         $this->assertNull($bar->get('foo'));
     }
 
-    public function test_it_can_set_and_retrieve_a_closure(): void
+    #[Test]
+    public function it_can_set_and_retrieve_a_closure(): void
     {
         $config = new Config;
 
@@ -158,7 +175,8 @@ class ConfigTest extends TestCase
         $this->assertEquals('John Pinkerton', $closure('john pinkerton'));
     }
 
-    public function test_it_can_be_handled_like_an_array(): void
+    #[Test]
+    public function it_can_be_handled_like_an_array(): void
     {
         $config = new Config(['foo' => 'foo', 'bar' => 'bar']);
         $config['baz'] = 'baz';
@@ -170,7 +188,8 @@ class ConfigTest extends TestCase
         $this->assertEquals('baz', $config['baz']);
     }
 
-    public function test_it_can_be_returned_as_an_array(): void
+    #[Test]
+    public function it_can_be_returned_as_an_array(): void
     {
         $config = new Config([
             'foo' => 'foo',
@@ -187,7 +206,8 @@ class ConfigTest extends TestCase
         ], $config->toArray());
     }
 
-    public function test_it_is_foreachable(): void
+    #[Test]
+    public function it_is_foreachable(): void
     {
         $config = new Config([
             'foo' => true,
@@ -202,7 +222,8 @@ class ConfigTest extends TestCase
         }
     }
 
-    public function test_it_can_append_values_to_an_array_item(): void
+    #[Test]
+    public function it_can_append_values_to_an_array_item(): void
     {
         $config = new Config([
             'app' => [
@@ -221,7 +242,8 @@ class ConfigTest extends TestCase
         ], $config->get('app.vars'));
     }
 
-    public function test_it_throws_an_error_when_appending_to_a_non_array_item(): void
+    #[Test]
+    public function it_throws_an_error_when_appending_to_a_non_array_item(): void
     {
         $config = new Config(['foo' => 'foo']);
 
@@ -230,7 +252,8 @@ class ConfigTest extends TestCase
         $config->append('foo', 'bar');
     }
 
-    public function test_it_can_prepend_values_to_an_array_item(): void
+    #[Test]
+    public function it_can_prepend_values_to_an_array_item(): void
     {
         $config = new Config([
             'app' => [
@@ -249,7 +272,8 @@ class ConfigTest extends TestCase
         ], $config->get('app.vars'));
     }
 
-    public function test_it_throws_an_error_when_prepending_to_a_non_array_item(): void
+    #[Test]
+    public function it_throws_an_error_when_prepending_to_a_non_array_item(): void
     {
         $config = new Config(['foo' => 'foo']);
 
@@ -258,7 +282,8 @@ class ConfigTest extends TestCase
         $config->prepend('foo', 'bar');
     }
 
-    public function test_it_can_be_instantiated_with_prefixes(): void
+    #[Test]
+    public function it_can_be_instantiated_with_prefixes(): void
     {
         $config = Config::fromDirectory(__DIR__ . '/prefix_test');
 
@@ -267,7 +292,8 @@ class ConfigTest extends TestCase
         $this->assertEquals('sqlite', $config->get('baz.driver'));
     }
 
-    public function test_it_can_unset_an_option(): void
+    #[Test]
+    public function it_can_unset_an_option(): void
     {
         $config = new Config([
             'foo' => [
@@ -283,7 +309,8 @@ class ConfigTest extends TestCase
         $this->assertFalse($config->has('foo.baz'));
     }
 
-    public function test_it_can_initialize_an_array(): void
+    #[Test]
+    public function it_can_initialize_an_array(): void
     {
         $config = new Config(['foo' => ['bar' => 'foobar']]);
 
@@ -291,7 +318,8 @@ class ConfigTest extends TestCase
         $this->assertEquals('foobar', $config->get('foo.bar'));
     }
 
-    public function test_it_can_initialize_an_array_with_a_prefix(): void
+    #[Test]
+    public function it_can_initialize_an_array_with_a_prefix(): void
     {
         $config = new Config(['foo' => ['bar' => 'foobar']], 'baz');
 

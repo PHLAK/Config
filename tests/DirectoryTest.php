@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace PHLAK\Config\Tests;
 
 use PHLAK\Config\Config;
+use PHPUnit\Framework\Attributes\Test;
 use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
 #[\PHPUnit\Framework\Attributes\CoversClass(\PHLAK\Config\Loaders\Directory::class)]
 class DirectoryTest extends TestCase
 {
-    public function test_it_can_initialize_a_directory(): void
+    #[Test]
+    public function it_can_initialize_a_directory(): void
     {
         $config = new Config(__DIR__ . '/files');
 
@@ -18,7 +20,8 @@ class DirectoryTest extends TestCase
         $this->assertEquals('mysql', $config->get('driver'));
     }
 
-    public function test_it_can_initialize_an_array_with_a_prefix(): void
+    #[Test]
+    public function it_can_initialize_an_array_with_a_prefix(): void
     {
         $config = new Config(__DIR__ . '/files', 'database');
 
