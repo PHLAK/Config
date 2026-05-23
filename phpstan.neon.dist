@@ -5,10 +5,6 @@ parameters:
   tmpDir: .cache/phpstan
 
   checkFunctionNameCase: true
-
-  ignoreErrors:
-    - identifier: missingType.iterableValue
-
   reportUnmatchedIgnoredErrors: false
 
   exceptions:
@@ -22,6 +18,11 @@ parameters:
       - InvalidArgumentException
       - RuntimeException
       - PHPUnit\Framework\Exception
+
+  ignoreErrors:
+    - identifier: missingType.iterableValue
+    - message: /^Method .+ throws checked exception .+ but it's missing from the PHPDoc @throws tag.$/
+      path: tests/*
 
 includes:
   - phpstan-baseline.neon

@@ -8,6 +8,7 @@ use ArrayAccess;
 use ArrayIterator;
 use DirectoryIterator;
 use IteratorAggregate;
+use PHLAK\Config\Exceptions\InvalidFileException;
 use PHLAK\Config\Interfaces\ConfigInterface;
 use PHLAK\Config\Loaders\Loader;
 use RuntimeException;
@@ -21,7 +22,7 @@ use Traversable;
 class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
 {
     /** @var array Array of configuration options */
-    protected $config = [];
+    protected array $config = [];
 
     /**
      * Create a new Config object.
@@ -29,6 +30,8 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
      * @param array|string|null $context Raw array of configuration options or path to a configuration file
      *                                   or directory containing one or more configuration files
      * @param string|null $prefix A key under which the loaded config will be nested
+     *
+     * @throws InvalidFileException
      */
     public function __construct(array|string|null $context = null, ?string $prefix = null)
     {
@@ -44,6 +47,8 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
      *
      * @param string $path A path to a directory of configuration files
      *
+     * @throws InvalidFileException
+     *
      * @return \PHLAK\Config\Interfaces\ConfigInterface A new ConfigInterface object
      */
     public static function fromDirectory(string $path): ConfigInterface
@@ -52,10 +57,7 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
 
         foreach (new DirectoryIterator($path) as $file) {
             if ($file->isFile()) {
-                $config->load(
-                    $file->getRealPath(),
-                    pathinfo($file->getBasename(), PATHINFO_FILENAME)
-                );
+                $config->load($file->getRealPath(), pathinfo($file->getBasename(), PATHINFO_FILENAME));
             }
         }
 
@@ -203,6 +205,8 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
      * @param string|null $prefix A key under which the loaded config will be nested
      * @param bool $override Whether to override existing options with
      *                       values from the loaded file
+     *
+     * @throws InvalidFileException
      *
      * @return ConfigInterface This Config object
      */

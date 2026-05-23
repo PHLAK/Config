@@ -20,7 +20,7 @@ class Php extends Loader
     {
         $contents = include $this->context;
 
-        if (gettype($contents) != 'array') {
+        if (gettype($contents) !== 'array') {
             throw new InvalidFileException($this->context . ' does not return a valid array');
         }
 
