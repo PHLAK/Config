@@ -51,7 +51,7 @@ composer require phlak/config
 Initializing the Client
 -----------------------
 
-First, import Config:
+First, import `Config`:
 
 ```php
 use PHLAK\Config\Config;
@@ -69,7 +69,7 @@ Where `$context` is one of the following:
   - A directory path containing one or more supported file types
   - An array of configuration options
 
-And `$prefix` is a string to be used as a key prefix for options of this Config object.
+And `$prefix` is a string to be used as a key prefix for options of this `Config` object.
 
 Configuration File Formats
 --------------------------
@@ -186,8 +186,8 @@ TOML file.
 
 ### YAML
 
-A YAML configuration file must have the `.yaml` file extension, be a valid YAML
-file.
+A YAML configuration file must have the `.yaml` or `.yml` file extension and be
+a valid YAML file.
 
 <details>
   <summary>Example YAML file</summary>
@@ -246,7 +246,7 @@ Usage
 -----
 
 ### __construct
-> Create a new Config object.
+> Create a new `Config` object.
 
 ```php
 Config::__construct( mixed $context [, string $prefix = null ] ) : Config
@@ -262,19 +262,19 @@ Config::__construct( mixed $context [, string $prefix = null ] ) : Config
 
 #### Examples
 
-Create a new Config object from a YAML file.
+Create a new `Config` object from a YAML file.
 
 ```php
 $config = new Config('path/to/config.yaml');
 ```
 
-Create a new Config object from a directory of config files.
+Create a new `Config` object from a directory of config files.
 
 ```php
 $config = new Config('path/to/configs/');
 ```
 
-Create a new Config object from an array.
+Create a new `Config` object from an array.
 
 ```php
 $config = new Config([
@@ -385,7 +385,7 @@ Config::append( string $key, mixed $value ) : bool
 Append `baz` to the `tags` config item array.
 
 ```php
-$config->set('tags', ['foo', 'bar'])
+$config->set('tags', ['foo', 'bar']);
 $config->append('tags', 'baz'); // ['foo', 'bar', 'baz']
 ```
 
@@ -478,15 +478,15 @@ $config->load('additional-options.php', null, false);
 ---
 
 ### merge
-> Merge another Config object into this one.
+> Merge another `Config` object into this one.
 
 ```php
-Config::merge( Config $config [, bool $override = true ] ) : self
+Config::merge( ConfigInterface $config [, bool $override = true ] ) : self
 ```
 
 <dl>
   <dt><code>$config</code></dt>
-  <dd>Instance of Config</dd>
+  <dd>Instance of ConfigInterface</dd>
 
   <dt><code>$override</code></dt>
   <dd>Whether or not to override existing options with values from the merged config object</dd>
@@ -494,8 +494,8 @@ Config::merge( Config $config [, bool $override = true ] ) : self
 
 #### Examples
 
-Merge $anotherConfig into $config and override values in `$config` with values
-from `$anotherConfig`.
+Merge `$anotherConfig` into `$config` and override values in `$config` with
+values from `$anotherConfig`.
 
 ```php
 $anotherConfig = new Config('some/config.php');
@@ -515,7 +515,7 @@ $config->merge($anotherConfig, false);
 ---
 
 ### split
-> Split a sub-array of configuration options into it's own Config object.
+> Split a sub-array of configuration options into its own `Config` object.
 
 ```php
 Config::split( string $key ) : Config
@@ -563,7 +563,8 @@ $config->toArray(); // Returns ['foo' => 'foo']
 Troubleshooting
 ---------------
 
-For general help and support join our [GitHub Discussion](https://github.com/PHLAK/Config/discussions) or reach out on [Bluesky](https://bsky.app/profile/phlak.dev).
+For general help and support join our [GitHub Discussion](https://github.com/PHLAK/Config/discussions)
+or reach out on [Bluesky](https://bsky.app/profile/phlak.dev).
 
 Please report bugs to the [GitHub Issue Tracker](https://github.com/PHLAK/Config/issues).
 
