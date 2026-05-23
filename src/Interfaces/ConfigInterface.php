@@ -7,16 +7,6 @@ namespace PHLAK\Config\Interfaces;
 interface ConfigInterface
 {
     /**
-     * Create a new instance of a ConfigInterface object.
-     *
-     * @param array|string|null $context Raw array of configuration options or path to a
-     *                                   configuration file or directory containing one or
-     *                                   more configuration files
-     * @param string|null $prefix A key under which the loaded config will be nested
-     */
-    public function __construct(array|string|null $context = null, ?string $prefix = null);
-
-    /**
      * Create a new instance of a ConfigInterface object from a directory with
      * prefixed entries by file.
      *
