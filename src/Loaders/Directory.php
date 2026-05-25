@@ -40,6 +40,10 @@ class Directory extends Loader
                 default => throw new RuntimeException(sprintf('No loader for extension [%s]', $extension)),
             };
 
+            if (!class_exists($classPath)) {
+                continue;
+            }
+
             /** @var Loader $loader */
             $loader = new $loaderClass($file->getPathname());
 
