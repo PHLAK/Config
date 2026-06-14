@@ -26,7 +26,7 @@
     "require-dev": {
         "phlak/coding-standards": "^5.0",
         "phpstan/phpstan": "^2.1",
-        "psy/psysh": "^0.12",
+        "psy/psysh": "^0.12.23",
         "yoast/phpunit-polyfills": "^4.0"
     },
     "autoload": {
