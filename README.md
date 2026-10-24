@@ -475,9 +475,10 @@ Load an additional file without overriding existing values.
 $config->load('additional-options.php', null, false);
 ```
 
-Loaded values are merged using the same behavior as [`merge`](#merge):
-indexed arrays (lists) are replaced as a whole while associative sub-arrays
-are merged recursively.
+> [!TIP]
+> Loaded values are merged using the same behavior as [`merge`](#merge). Indexed
+> arrays (i.e. lists) are replaced as a whole while associative sub-arrays are
+> merged recursively.
 
 ---
 
@@ -516,20 +517,21 @@ $anotherConfig = new Config('some/config.php');
 $config->merge($anotherConfig, false);
 ```
 
-**Merging behavior:** Indexed arrays (lists) are treated as single values and
-are replaced as a whole, while associative sub-arrays are merged recursively.
-
-```php
-$config = new Config(['foo' => 'foo', 'list' => [1, 2, 3, 4]]);
-$anotherConfig = new Config(['foo' => 'bar', 'list' => ['baz']]);
-
-$config->merge($anotherConfig);
-
-// [
-//     'foo' => 'bar',
-//     'list' => ['baz'],
-// ]
-```
+> [!TIP]
+> Indexed arrays (i.e. lists) are treated as single values and are replaced as a whole, while associative sub-arrays are
+> merged recursively.
+>
+> ```php
+> $config = new Config(['foo' => 'foo', 'list' => [1, 2, 3, 4]]);
+> $anotherConfig = new Config(['foo' => 'bar', 'list' => ['baz']]);
+>
+> $config->merge($anotherConfig);
+>
+> // [
+> //     'foo' => 'bar',
+> //     'list' => ['baz'],
+> // ]
+> ```
 
 ---
 
