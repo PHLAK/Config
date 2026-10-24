@@ -146,6 +146,92 @@ class ConfigTest extends TestCase
     }
 
     #[Test]
+    public function it_can_merge_a_config_object_containing_indexed_arrays(): void
+    {
+        $config = new Config(['assoc_key' => 'testvalue', 'key' => [1, 2, 3, 4]]);
+        $gifnoc = new Config(['assoc_key' => 'override', 'key' => ['somevalue']]);
+
+        $config->merge($gifnoc);
+
+        $this->assertEquals('override', $config->get('assoc_key'));
+        $this->assertEquals(['somevalue'], $config->get('key'));
+    }
+
+    #[Test]
+    public function it_can_merge_a_config_object_containing_indexed_arrays_without_overriding_existing_values(): void
+    {
+        $config = new Config(['key' => [1, 2, 3, 4]]);
+        $gifnoc = new Config(['key' => ['somevalue']]);
+
+        $config->merge($gifnoc, false);
+
+        $this->assertEquals([1, 2, 3, 4], $config->get('key'));
+    }
+
+    #[Test]
+    public function it_recursively_merges_associative_sub_arrays_when_merging(): void
+    {
+        $config = new Config([
+            'database' => [
+                'server' => '192.168.0.10',
+                'port' => 3306,
+            ],
+        ]);
+
+        $gifnoc = new Config([
+            'database' => [
+                'server' => '10.10.0.5',
+            ],
+        ]);
+
+        $config->merge($gifnoc);
+
+        $this->assertEquals('10.10.0.5', $config->get('database.server'));
+        $this->assertEquals(3306, $config->get('database.port'));
+    }
+
+    #[Test]
+    public function it_replaces_nested_indexed_arrays_when_merging(): void
+    {
+        $config = new Config([
+            'database' => [
+                'servers' => ['192.168.0.10', '10.10.0.5'],
+            ],
+        ]);
+
+        $gifnoc = new Config([
+            'database' => [
+                'servers' => ['10.10.0.5'],
+            ],
+        ]);
+
+        $config->merge($gifnoc);
+
+        $this->assertEquals(['10.10.0.5'], $config->get('database.servers'));
+    }
+
+    #[Test]
+    public function it_overrides_existing_options_with_empty_arrays_when_merging(): void
+    {
+        $config = new Config(['features' => ['foo', 'bar', 'baz']]);
+        $gifnoc = new Config(['features' => []]);
+
+        $config->merge($gifnoc);
+
+        $this->assertEquals([], $config->get('features'));
+    }
+
+    #[Test]
+    public function it_replaces_indexed_arrays_when_loading_files(): void
+    {
+        $config = new Config(['features' => ['baz', 'qux']]);
+
+        $config->load(__DIR__ . '/files/php/lists.php');
+
+        $this->assertEquals(['foo', 'bar'], $config->get('features'));
+    }
+
+    #[Test]
     public function it_can_split_into_a_sub_object(): void
     {
         $config = new Config([

@@ -232,9 +232,9 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
         $newConfig = $prefix ? [$prefix => $loader->getArray()] : $loader->getArray();
 
         if ($override) {
-            $this->config = array_replace_recursive($this->config, $newConfig);
+            $this->config = $this->mergeArrays($this->config, $newConfig);
         } else {
-            $this->config = array_replace_recursive($newConfig, $this->config);
+            $this->config = $this->mergeArrays($newConfig, $this->config);
         }
 
         return $this;
@@ -252,9 +252,9 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
     public function merge(ConfigInterface $config, bool $override = true): ConfigInterface
     {
         if ($override) {
-            $this->config = array_replace_recursive($this->config, $config->toArray());
+            $this->config = $this->mergeArrays($this->config, $config->toArray());
         } else {
-            $this->config = array_replace_recursive($config->toArray(), $this->config);
+            $this->config = $this->mergeArrays($config->toArray(), $this->config);
         }
 
         return $this;
@@ -337,5 +337,29 @@ class Config implements ConfigInterface, ArrayAccess, IteratorAggregate
     public function offsetUnset(mixed $offset): void
     {
         unset($this->config[$offset]);
+    }
+
+    /**
+     * Recursively merge two arrays, replacing indexed arrays (lists) as a
+     * whole while recursively merging associative sub-arrays.
+     *
+     * @param array $base The base array into which values are merged
+     * @param array $override The array of overriding values
+     *
+     * @return array The merged array
+     */
+    private function mergeArrays(array $base, array $override): array
+    {
+        foreach ($override as $key => $value) {
+            $existing = $base[$key] ?? null;
+
+            if (is_array($value) && is_array($existing) && ! array_is_list($value) && ! array_is_list($existing)) {
+                $base[$key] = $this->mergeArrays($existing, $value);
+            } else {
+                $base[$key] = $value;
+            }
+        }
+
+        return $base;
     }
 }
